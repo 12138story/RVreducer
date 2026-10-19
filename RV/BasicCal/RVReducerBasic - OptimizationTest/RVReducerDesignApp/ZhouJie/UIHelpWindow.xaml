@@ -1,0 +1,90 @@
+﻿<Window x:Class="RVReducerDesignApp.UIHelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="帮助" Height="600" Width="900">
+    <Window.Resources>
+        <!-- 通用 Watermark TextBox 样式：将占位文字放在 Tag 中 -->
+        <Style x:Key="WatermarkTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FFABADB3"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <!-- 文本编辑区 -->
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                          Margin="0" 
+                                          VerticalAlignment="Center"/>
+                            <!-- 占位文字，从 Tag 读取 -->
+                            <TextBlock Text="{TemplateBinding Tag}"
+                                       Foreground="Gray"
+                                       Margin="4,0,0,0"
+                                       VerticalAlignment="Center"
+                                       IsHitTestVisible="False">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <!-- Text 为空或为 null 时显示占位文本 -->
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" Value=""/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </MultiDataTrigger>
+                                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                            <!-- 聚焦时隐藏占位文本 -->
+                                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0" Margin="6">
+            <!-- 使用 Tag 代替 PlaceholderText，并引用 WatermarkTextBox 样式 -->
+            <TextBox Name="SearchBox"
+                     Style="{StaticResource WatermarkTextBox}"
+                     Tag="搜索（关键词）"
+                     Margin="0,0,0,6"
+                     Height="26"
+                     DockPanel.Dock="Top"
+                     KeyDown="SearchBox_KeyDown"/>
+            <ListBox Name="TOCList" DockPanel.Dock="Bottom" SelectionChanged="TOCList_SelectionChanged"/>
+        </DockPanel>
+
+        <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+        <!-- 右侧显示区，使用 WebBrowser 兼容多数环境；可替换为 WebView2 -->
+        <Grid Grid.Column="2" Margin="6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,6">
+                <Button Name="BtnOpenExternal" Click="BtnOpenExternal_Click" Margin="4,0">在外部打开</Button>
+                <Button Name="BtnPrint" Click="BtnPrint_Click" Margin="4,0">打印</Button>
+            </StackPanel>
+            <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1">
+                <WebBrowser Name="HelpBrowser"/>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

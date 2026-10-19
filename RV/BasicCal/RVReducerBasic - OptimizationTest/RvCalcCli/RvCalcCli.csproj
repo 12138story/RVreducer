@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    RvCalcCli — 独立命令行（无业务项目依赖）。
+    用法示例见 Program.cs 的 PrintHelp，或运行 RvCalcCli 时加 help 参数。
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>RvCalcCli</RootNamespace>
+    <AssemblyName>RvCalcCli</AssemblyName>
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RvCalc\RvCalc.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 注册表 + 模板复制到输出目录（保持 RvCalc/ 相对结构，供运行时解析） -->
+    <None Include="..\RvCalc\interface-registry.json"
+          Link="RvCalc\interface-registry.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\RvCalc\templates\*.json"
+          Link="RvCalc\templates\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest"
+          Condition="Exists('..\RvCalc\templates')" />
+  </ItemGroup>
+
+</Project>

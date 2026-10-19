@@ -1,0 +1,505 @@
+{
+  "version": 1,
+  "note": "RVReducerBasic.dll 导出函数的语义化描述表。所有槽位下标来自 C++ 源码 RVReducerBasic/InterfaceForCSharp.cpp 及各 Convert* 函数；单位以 DLL 实际期望为准。新增接口只需在此登记，无需改 C# 代码。",
+  "interfaces": [
+    {
+      "name": "CalBearingLife",
+      "title": "标准轴承寿命计算",
+      "summary": "按轴承类型与轴向力 Fa、径向力 Fr 计算基本额定寿命 L10h（内部按类型选用系数与数据库）。",
+      "returns": "void",
+      "complexity": "low",
+      "note": "力矩/载荷单位以 N 为准（数据库里的 kN 值需 ×1000 后传入）。",
+      "args": [
+        { "name": "in", "type": "double", "length": 9, "direction": "in" },
+        { "name": "out", "type": "double", "length": 20, "direction": "out" }
+      ],
+      "params": [
+        { "name": "轴承类型", "alias": ["type", "BearingType"], "slot": "in[0]", "type": "enum", "required": true,
+          "options": { "深沟球轴承": 1001, "滚针轴承": 1002, "圆锥滚子轴承": 1003, "角接触球轴承": 1004 },
+          "desc": "取值来自 C++ PreDefine.h（1001/1002/1003/1004）；圆锥滚子额外用 e、Y、Y0，角接触球由 Fa/C0r 反查 e、Y" },
+        { "name": "转速", "alias": ["speed", "n", "rpm"], "slot": "in[1]", "unit": "r/min", "required": true },
+        { "name": "轴向力Fa", "alias": ["Fa", "axial"], "slot": "in[2]", "unit": "N", "default": 0 },
+        { "name": "径向力Fr", "alias": ["Fr", "radial"], "slot": "in[3]", "unit": "N", "default": 0 },
+        { "name": "额定动载荷Cr", "alias": ["Cr", "C"], "slot": "in[4]", "unit": "N", "required": true },
+        { "name": "额定静载荷C0r", "alias": ["C0r", "C0"], "slot": "in[5]", "unit": "N", "required": true },
+        { "name": "系数e", "alias": ["e"], "slot": "in[6]" },
+        { "name": "系数Y", "alias": ["Y"], "slot": "in[7]" },
+        { "name": "系数Y0", "alias": ["Yo", "Y0"], "slot": "in[8]" }
+      ],
+      "outputs": [
+        { "name": "寿命L10h", "slot": "out[0]", "unit": "h", "invalidBelow": 0,
+          "desc": "≤0 表示计算失败（转速越界、fh 超出曲线定义域等）" }
+      ]
+    },
+    {
+      "name": "CalCustomBearingLife",
+      "title": "自定义/ISO 修正轴承寿命计算",
+      "summary": "输入自定义轴承几何与工况，输出静强度、基本额定寿命与 ISO 修正寿命（37 输入 → 20 输出）。",
+      "returns": "int",
+      "complexity": "medium",
+      "note": "返回 0 成功，-1/-2 异常。类型码 0=深沟球 1=角接触 2=调心球 3=向心滚子(含圆锥/滚针/调心滚子，由 InData[13] 开关) 4..7=推力类。",
+      "args": [
+        { "name": "in", "type": "double", "length": 37, "direction": "in" },
+        { "name": "out", "type": "double", "length": 20, "direction": "out" }
+      ],
+      "params": [
+        { "name": "轴承类型码", "alias": ["typeCode"], "slot": "in[0]", "type": "enum", "required": true,
+          "options": { "深沟球轴承": 0, "角接触球轴承": 1, "调心球轴承": 2, "向心滚子轴承": 3, "90度推力球": 4, "非90度推力球": 5, "90度推力滚子": 6, "非90度推力滚子": 7 } },
+        { "name": "布置方式", "alias": ["layout"], "slot": "in[1]", "default": 0 },
+        { "name": "排列个数", "alias": ["assemblyCount"], "slot": "in[2]", "default": 1 },
+        { "name": "额定动载荷Cr", "alias": ["Cr", "C"], "slot": "in[3]", "unit": "N", "required": true },
+        { "name": "额定静载荷C0r", "alias": ["C0r", "C0"], "slot": "in[4]", "unit": "N", "required": true },
+        { "name": "节圆直径Dpw", "alias": ["Dpw"], "slot": "in[5]", "unit": "mm" },
+        { "name": "滚动体直径Dw", "alias": ["Dw"], "slot": "in[6]", "unit": "mm" },
+        { "name": "接触角", "alias": ["alpha"], "slot": "in[7]", "unit": "°" },
+        { "name": "列数", "alias": ["rows"], "slot": "in[8]", "default": 1 },
+        { "name": "滚动体个数Z", "alias": ["Z"], "slot": "in[9]" },
+        { "name": "动载荷修正系数bm", "alias": ["bm"], "slot": "in[10]", "default": 1 },
+        { "name": "滚子总长Lwe", "alias": ["L_total", "Lwe"], "slot": "in[11]", "unit": "mm" },
+        { "name": "滚子倒角r", "alias": ["r"], "slot": "in[12]", "unit": "mm" },
+        { "name": "滚子子类型", "slot": "in[13]", "type": "enum", "options": { "无": 0, "圆锥滚子": 1, "冲压滚针": 2, "调心滚子": 3 } },
+        { "name": "圆锥角", "alias": ["beta"], "slot": "in[14]", "unit": "°" },
+        { "name": "大端倒角rl", "slot": "in[15]", "unit": "mm" },
+        { "name": "小端倒角rs", "slot": "in[16]", "unit": "mm" },
+        { "name": "启用样本覆写", "slot": "in[17]", "type": "enum", "options": { "否": 0, "是": 1 } },
+        { "name": "样本e", "slot": "in[18]" },
+        { "name": "样本X1", "slot": "in[20]" },
+        { "name": "样本Y1", "slot": "in[21]" },
+        { "name": "径向力Fr", "alias": ["Fr"], "slot": "in[28]", "unit": "N", "default": 0 },
+        { "name": "轴向力Fa", "alias": ["Fa"], "slot": "in[29]", "unit": "N", "default": 0 },
+        { "name": "转速", "alias": ["n", "rpm"], "slot": "in[30]", "unit": "r/min", "required": true },
+        { "name": "润滑黏度v", "slot": "in[32]", "unit": "mm2/s" },
+        { "name": "污染等级", "slot": "in[33]", "type": "enum", "options": { "极洁净": 0, "洁净": 1, "一般": 2, "污染": 3, "严重污染": 4 } },
+        { "name": "油膜参数lambda", "slot": "in[34]" },
+        { "name": "含极压添加剂", "slot": "in[35]", "type": "enum", "options": { "否": 0, "是": 1 } },
+        { "name": "可靠度", "slot": "in[36]", "default": 0.9 }
+      ],
+      "outputs": [
+        { "name": "结果标识", "slot": "out[0]", "desc": "1=成功" },
+        { "name": "基本额定静载荷C0", "slot": "out[1]", "unit": "N" },
+        { "name": "静载荷系数f0", "slot": "out[2]" },
+        { "name": "当量静载荷P0", "slot": "out[3]", "unit": "N" },
+        { "name": "静强度安全系数S0", "slot": "out[4]", "invalidBelow": 0 },
+        { "name": "额定动载荷C", "slot": "out[5]", "unit": "N" },
+        { "name": "动载荷系数X", "slot": "out[6]" },
+        { "name": "动载荷系数Y", "slot": "out[7]" },
+        { "name": "当量动载荷P", "slot": "out[8]", "unit": "N" },
+        { "name": "基本额定寿命L10r", "slot": "out[9]", "unit": "10^6转" },
+        { "name": "基本额定寿命L10h", "slot": "out[10]", "unit": "h", "invalidBelow": 0 },
+        { "name": "黏度比kappa", "slot": "out[11]" },
+        { "name": "污染系数ec", "slot": "out[12]" },
+        { "name": "可靠度修正系数a1", "slot": "out[13]" },
+        { "name": "系统修正系数a_iso", "slot": "out[14]" },
+        { "name": "修正额定寿命Lnm", "slot": "out[15]", "unit": "10^6转" },
+        { "name": "滚子有效长度Lwe", "slot": "out[16]", "unit": "mm" },
+        { "name": "轴向力Fa", "slot": "out[17]", "unit": "N" },
+        { "name": "径向力Fr", "slot": "out[18]", "unit": "N" },
+        { "name": "转速n", "slot": "out[19]", "unit": "r/min" }
+      ]
+    },
+    {
+      "name": "RecommondBearingLife",
+      "title": "轴承推荐（按寿命挑型）",
+      "summary": "按轴承类型遍历轴承数据库，返回满足寿命要求/候选的轴承列表（含内径、外径、宽度、Cr、C0r、寿命）。",
+      "returns": "int",
+      "complexity": "medium",
+      "note": "返回值 = 命中条数；每条记录 9 个字段（圆锥滚子：d/D/B/Cr/C0r/e/Y/Yo/life），其它类型 6 个字段（d/D/B/Cr/C0r/life）。",
+      "args": [
+        { "name": "in", "type": "double", "length": 10, "direction": "in" },
+        { "name": "out", "type": "double", "length": 900, "direction": "out" },
+        { "name": "codes", "type": "strings", "direction": "out", "maxCount": 100, "maxLen": 64 }
+      ],
+      "params": [
+        { "name": "轴承类型", "alias": ["type"], "slot": "in[0]", "type": "enum", "required": true,
+          "options": { "圆锥滚子轴承": 1003, "角接触球轴承": 1004, "深沟球轴承": 1001, "滚针轴承": 1002 } },
+        { "name": "转速", "alias": ["n", "rpm"], "slot": "in[1]", "unit": "r/min", "required": true },
+        { "name": "轴向力Fa", "alias": ["Fa"], "slot": "in[2]", "unit": "N", "default": 0 },
+        { "name": "径向力Fr", "alias": ["Fr"], "slot": "in[3]", "unit": "N", "default": 0 },
+        { "name": "额定动载荷Cr", "alias": ["Cr"], "slot": "in[4]", "unit": "N", "default": 0 },
+        { "name": "额定静载荷C0r", "alias": ["C0r"], "slot": "in[5]", "unit": "N", "default": 0 },
+        { "name": "系数e", "slot": "in[6]" },
+        { "name": "系数Y", "slot": "in[7]" },
+        { "name": "系数Y0", "slot": "in[8]" }
+      ],
+      "outputs": [
+        { "name": "命中条数", "slot": "in[0]", "desc": "见返回值" }
+      ]
+    },
+    {
+      "name": "RecommondMainBearing",
+      "title": "主轴承推荐（曲轴支承轴承）",
+      "summary": "给定渐开线齿轮受力与许用弯曲/剪应力，遍历轴承库选出满足轴强度与寿命的主轴承，返回内径、轴长与轴承参数。",
+      "returns": "void",
+      "complexity": "high",
+      "note": "输入段 [0..6] 为渐开线齿轮受力/位置数据（与 AssemblyGearAndMainBearing 共用），必须由完整齿轮算例提供；输出 [0]/[1] 是先写入的应力校核值，找到解后会被 推荐内径/轴长 覆盖。",
+      "args": [
+        { "name": "in", "type": "double", "length": 16, "direction": "in" },
+        { "name": "out", "type": "double", "length": 32, "direction": "out" }
+      ],
+      "params": [
+        { "name": "轴承类型开关", "alias": ["typeFlag"], "slot": "in[7]", "type": "enum", "required": true,
+          "options": { "圆锥滚子轴承": 0, "角接触球轴承": 1 } },
+        { "name": "转速", "alias": ["n", "rpm"], "slot": "in[8]", "unit": "r/min", "required": true },
+        { "name": "许用弯曲应力", "slot": "in[9]", "unit": "MPa", "required": true },
+        { "name": "许用剪应力", "slot": "in[10]", "unit": "MPa", "required": true },
+        { "name": "设计寿命", "slot": "in[11]", "unit": "h", "required": true },
+        { "name": "齿轮位置", "slot": "in[6]", "unit": "mm" }
+      ],
+      "outputs": [
+        { "name": "推荐轴承内径d", "slot": "out[0]", "unit": "mm", "invalidBelow": 0, "desc": "-1 表示未找到合适轴承" },
+        { "name": "推荐轴长", "slot": "out[1]", "unit": "mm", "invalidBelow": 0 },
+        { "name": "轴承外径D", "slot": "out[9]", "unit": "mm" },
+        { "name": "轴承宽度T/B", "slot": "out[10]", "unit": "mm" },
+        { "name": "额定动载荷Cr", "slot": "out[13]", "unit": "N" },
+        { "name": "额定静载荷C0r", "slot": "out[14]", "unit": "N" },
+        { "name": "系数e", "slot": "out[15]" },
+        { "name": "系数Y", "slot": "out[16]" },
+        { "name": "系数Y0", "slot": "out[17]" },
+        { "name": "定位面距基准距离1", "slot": "out[3]", "unit": "mm" },
+        { "name": "定位面距基准距离2", "slot": "out[6]", "unit": "mm" },
+        { "name": "轴承类型码", "slot": "out[20]" }
+      ]
+    },
+    {
+      "name": "CalTotalTorqueAndRPM",
+      "title": "总体传动比与力矩/转速分配",
+      "summary": "由整机输出力矩/转速与各级齿数，计算一级输入力矩、一级小齿轮转速、二级输出力矩与二级轴承转速。",
+      "returns": "void",
+      "complexity": "low",
+      "args": [
+        { "name": "in", "type": "double", "length": 8, "direction": "in" },
+        { "name": "out", "type": "double", "length": 8, "direction": "out" }
+      ],
+      "params": [
+        { "name": "固定件", "alias": ["fixElem"], "slot": "in[0]", "type": "enum", "required": true,
+          "options": { "针齿壳固定": 0, "曲轴固定": 1 } },
+        { "name": "输出力矩", "alias": ["outputTorque"], "slot": "in[1]", "unit": "N·m", "required": true },
+        { "name": "输出转速", "alias": ["outputRPM"], "slot": "in[2]", "unit": "r/min", "required": true },
+        { "name": "太阳轮齿数", "slot": "in[3]", "required": true },
+        { "name": "行星轮齿数", "slot": "in[4]", "required": true },
+        { "name": "摆线轮齿数", "slot": "in[5]", "required": true },
+        { "name": "针轮齿数", "slot": "in[6]", "required": true }
+      ],
+      "outputs": [
+        { "name": "一级输入力矩", "slot": "out[0]", "unit": "N·m" },
+        { "name": "一级小齿轮转速", "slot": "out[1]", "unit": "r/min" },
+        { "name": "二级输出力矩", "slot": "out[2]", "unit": "N·m" },
+        { "name": "二级轴承转速", "slot": "out[3]", "unit": "r/min" }
+      ]
+    },
+    {
+      "name": "RecommondPara",
+      "title": "整机齿轮参数推荐",
+      "summary": "由固定件、总传动比、输出力矩/转速、目标接触应力、寿命、使用系数、许用应力与行星轮个数，推荐渐开线齿轮副 + 摆线针轮副的全部主要参数。",
+      "returns": "void",
+      "complexity": "medium",
+      "note": "输出 0..8 为齿轮副公共参数，9..39 太阳轮 31 字段，40..70 行星轮 31 字段，71..76 针轮，77..88 两个摆线轮，89/90 一级输入力矩/转速。",
+      "args": [
+        { "name": "in", "type": "double", "length": 12, "direction": "in" },
+        { "name": "out", "type": "double", "length": 91, "direction": "out" }
+      ],
+      "params": [
+        { "name": "固定件", "alias": ["fixElem"], "slot": "in[0]", "type": "enum", "required": true,
+          "options": { "针齿壳固定": 0, "曲轴固定": 1 } },
+        { "name": "总传动比", "alias": ["totalRatio", "ratio"], "slot": "in[1]", "required": true },
+        { "name": "输出力矩", "alias": ["outputTorque"], "slot": "in[2]", "unit": "N·m", "required": true },
+        { "name": "输出转速", "alias": ["outputRPM"], "slot": "in[3]", "unit": "r/min", "required": true },
+        { "name": "目标接触应力", "alias": ["targetStress"], "slot": "in[4]", "unit": "MPa", "default": 1000 },
+        { "name": "设计寿命", "alias": ["life"], "slot": "in[5]", "unit": "h", "default": 50000 },
+        { "name": "使用系数", "alias": ["usageFactor"], "slot": "in[6]", "default": 1.2 },
+        { "name": "许用极限接触应力", "alias": ["allowableStress"], "slot": "in[7]", "unit": "MPa", "default": 1500 },
+        { "name": "行星轮个数", "alias": ["planetCount"], "slot": "in[8]", "default": 3 },
+        { "name": "摆线轮最小齿宽", "alias": ["cycloidMinWidth"], "slot": "in[9]", "unit": "mm" },
+        { "name": "摆线轮最大齿宽", "alias": ["cycloidMaxWidth"], "slot": "in[10]", "unit": "mm" },
+        { "name": "启用齿宽约束", "alias": ["enableWidthConstraint"], "slot": "in[11]", "type": "enum",
+          "options": { "否": 0, "是": 1 }, "desc": "不启用时摆线轮宽度可能过窄，导致后续轴推荐失败" }
+      ],
+      "outputs": [
+        { "name": "法向模数mn", "slot": "out[0]", "unit": "mm" },
+        { "name": "压力角αn", "slot": "out[1]", "unit": "°" },
+        { "name": "螺旋角β", "slot": "out[2]", "unit": "°" },
+        { "name": "中心距a_w", "slot": "out[3]", "unit": "mm" },
+        { "name": "齿轮副类型", "slot": "out[4]" },
+        { "name": "行星轮个数n_P", "slot": "out[5]" },
+        { "name": "驱动齿轮", "slot": "out[6]" },
+        { "name": "触点间隙j_bn", "slot": "out[7]" },
+        { "name": "主动轮转速n0", "slot": "out[8]", "unit": "r/min" },
+        { "name": "太阳轮齿数Z", "slot": "out[9]" },
+        { "name": "太阳轮设计齿宽b", "slot": "out[11]", "unit": "mm" },
+        { "name": "太阳轮变位系数x", "slot": "out[13]" },
+        { "name": "行星轮齿数Z", "slot": "out[40]" },
+        { "name": "行星轮设计齿宽b", "slot": "out[42]", "unit": "mm" },
+        { "name": "针轮齿数Z", "slot": "out[71]" },
+        { "name": "滚针半径rz", "slot": "out[72]", "unit": "mm" },
+        { "name": "针轮设计齿宽", "slot": "out[73]", "unit": "mm" },
+        { "name": "针轮分度圆半径Rzf", "slot": "out[74]", "unit": "mm" },
+        { "name": "使用系数Kp", "slot": "out[76]" },
+        { "name": "摆线轮1齿数", "slot": "out[77]" },
+        { "name": "偏心距ee", "slot": "out[78]", "unit": "mm" },
+        { "name": "摆线轮1齿宽", "slot": "out[79]", "unit": "mm" },
+        { "name": "摆线轮传递总力矩", "slot": "out[83]", "unit": "N·m" },
+        { "name": "一级输入力矩", "slot": "out[89]", "unit": "N·m" },
+        { "name": "一级小齿轮转速", "slot": "out[90]", "unit": "r/min" }
+      ]
+    },
+    {
+      "name": "CalInvGearStress2",
+      "title": "渐开线齿轮副几何与强度计算（ISO 6336）",
+      "summary": "输入 174 字段齿轮副全参数（几何/材料/加工/应用/公差/载荷/装配/定位），输出太阳轮与行星轮各 142 字段（应力、几何、重合度、载荷系数等）。",
+      "returns": "void",
+      "complexity": "medium",
+      "note": "长度 174 输入 + 34 分割索引；模板见 templates/invGearStress2.json（由 InvGearInput 生成，与已有算例一致）。压力角/螺旋角按角度输入，内部自动转弧度。",
+      "args": [
+        { "name": "div", "type": "int", "length": 34, "direction": "in" },
+        { "name": "in", "type": "double", "length": 174, "direction": "in" },
+        { "name": "out", "type": "double", "length": 284, "direction": "out" }
+      ],
+      "templateFile": "templates/invGearStress2.json",
+      "outRowWidth": 142,
+      "rowLabels": ["太阳轮", "行星轮"],
+      "params": [
+        { "name": "太阳轮齿数", "alias": ["sunTeeth", "z1"], "slot": "in[0]", "required": true },
+        { "name": "太阳轮设计齿宽", "alias": ["sunWidth", "b1"], "slot": "in[2]", "unit": "mm" },
+        { "name": "太阳轮变位系数", "alias": ["x1"], "slot": "in[4]" },
+        { "name": "太阳轮齿厚偏差上限", "alias": ["Esns1"], "slot": "in[15]", "unit": "mm" },
+        { "name": "太阳轮齿厚偏差下限", "alias": ["Esni1"], "slot": "in[16]", "unit": "mm" },
+        { "name": "行星轮齿数", "alias": ["planetTeeth", "z2"], "slot": "in[31]", "required": true },
+        { "name": "行星轮设计齿宽", "alias": ["planetWidth", "b2"], "slot": "in[33]", "unit": "mm" },
+        { "name": "行星轮变位系数", "alias": ["x2"], "slot": "in[35]" },
+        { "name": "法向模数", "alias": ["module", "mn"], "slot": "in[62]", "unit": "mm", "required": true },
+        { "name": "压力角", "alias": ["pressureAngle", "alpha"], "slot": "in[63]", "unit": "°", "convert": "deg2rad", "default": 20 },
+        { "name": "螺旋角", "alias": ["helixAngle", "beta"], "slot": "in[64]", "unit": "°", "convert": "deg2rad", "default": 0 },
+        { "name": "中心距", "alias": ["centerDistance"], "slot": "in[65]", "unit": "mm",
+          "desc": "缺省时建议按 (z1+z2)·mn/(2·cosβ) 计算后显式传入" },
+        { "name": "齿轮副类型", "alias": ["gearPairType"], "slot": "in[66]", "type": "enum", "options": { "一般外啮合": 1, "内啮合": 0 }, "default": 1 },
+        { "name": "行星轮个数", "alias": ["planetCount"], "slots": ["in[67]", "in[129]", "in[137]", "in[166]"], "default": 3 },
+        { "name": "驱动齿轮", "alias": ["drivingGear"], "slot": "in[68]", "type": "enum", "options": { "太阳轮": 0, "行星轮": 1 } },
+        { "name": "触点间隙", "alias": ["jb_n"], "slot": "in[69]", "unit": "mm" },
+        { "name": "转速", "alias": ["speed", "n0"], "slots": ["in[70]", "in[162]"], "unit": "r/min" },
+        { "name": "太阳轮接触疲劳极限", "alias": ["sigmaHlim1"], "slot": "in[97]", "unit": "MPa" },
+        { "name": "太阳轮弯曲疲劳极限", "alias": ["sigmaFlim1"], "slot": "in[98]", "unit": "MPa" },
+        { "name": "太阳轮表面硬度", "alias": ["sunHardness"], "slot": "in[103]", "unit": "HRC" },
+        { "name": "行星轮接触疲劳极限", "alias": ["sigmaHlim2"], "slot": "in[113]", "unit": "MPa" },
+        { "name": "行星轮弯曲疲劳极限", "alias": ["sigmaFlim2"], "slot": "in[114]", "unit": "MPa" },
+        { "name": "使用系数", "alias": ["KA"], "slot": "in[141]" },
+        { "name": "太阳轮精度等级", "alias": ["toleranceClass1"], "slot": "in[149]" },
+        { "name": "行星轮精度等级", "alias": ["toleranceClass2"], "slot": "in[155]" },
+        { "name": "扭矩", "alias": ["torque", "T1"], "slot": "in[161]", "unit": "N·m" },
+        { "name": "预期寿命", "alias": ["life", "Lh"], "slot": "in[163]", "unit": "h" }
+      ],
+      "outputs": [
+        { "name": "名义接触应力σH0", "slot": "out[0]", "unit": "MPa", "invalidAbove": 1e9 },
+        { "name": "计算接触应力σH", "slot": "out[1]", "unit": "MPa", "invalidAbove": 1e9 },
+        { "name": "许用接触应力σHP", "slot": "out[2]", "unit": "MPa" },
+        { "name": "名义弯曲应力σF0", "slot": "out[3]", "unit": "MPa" },
+        { "name": "计算弯曲应力σF", "slot": "out[4]", "unit": "MPa", "invalidAbove": 1e9 },
+        { "name": "许用弯曲应力σFP", "slot": "out[5]", "unit": "MPa" },
+        { "name": "传动比i", "slot": "out[6]" },
+        { "name": "齿数比u", "slot": "out[7]" },
+        { "name": "端面模数mt", "slot": "out[8]", "unit": "mm" },
+        { "name": "变位系数x", "slot": "out[9]" },
+        { "name": "端面压力角αt", "slot": "out[10]", "unit": "°" },
+        { "name": "端面啮合角αwt", "slot": "out[11]", "unit": "°" },
+        { "name": "基圆螺旋角βb", "slot": "out[12]", "unit": "°" },
+        { "name": "实际中心距a_w", "slot": "out[13]", "unit": "mm" },
+        { "name": "齿顶高h_aP", "slot": "out[18]", "unit": "mm" },
+        { "name": "齿根高h_fx", "slot": "out[19]", "unit": "mm" },
+        { "name": "分度圆直径d", "slot": "out[21]", "unit": "mm" },
+        { "name": "基圆直径db", "slot": "out[22]", "unit": "mm" },
+        { "name": "齿顶圆直径da", "slot": "out[23]", "unit": "mm" },
+        { "name": "齿根圆直径d_Ff", "slot": "out[32]", "unit": "mm" },
+        { "name": "全齿高h", "slot": "out[46]", "unit": "mm" },
+        { "name": "端面基节p_bt", "slot": "out[49]", "unit": "mm" },
+        { "name": "重合度εα", "slot": "out[62]" },
+        { "name": "纵向重合度εβ", "slot": "out[63]" },
+        { "name": "总重合度εγ", "slot": "out[64]" },
+        { "name": "跨棒距Wk", "slot": "out[92]", "unit": "mm" }
+      ]
+    },
+    {
+      "name": "CalCycloidGearStressByObj",
+      "title": "摆线针轮副计算",
+      "summary": "输入针轮/摆线轮几何与力矩，输出最大接触应力、全齿高、短幅系数 K1、齿顶距、跨棒距与四项精度公差。",
+      "returns": "void",
+      "complexity": "low",
+      "note": "力矩单位为 N·m，内部按 ×1000 转换为 N·mm（DLL 公式量纲要求）。精度等级默认 5 级。四项精度公差（out[5..8]）来自 MySQL 精度表（localhost:3729 / bearings）；查库失败或某等级无数据时 DLL 已改为优雅返回 -1（不再崩溃），此时该四项输出会被标记为无效。",
+      "args": [
+        { "name": "div", "type": "int", "length": 5, "direction": "in" },
+        { "name": "in", "type": "double", "length": 60, "direction": "in" },
+        { "name": "out", "type": "double", "length": 9, "direction": "out" }
+      ],
+      "templateFile": "templates/cycloid.json",
+      "params": [
+        { "name": "针轮齿数", "alias": ["pinionZ", "zb"], "slot": "in[0]", "required": true },
+        { "name": "滚针半径", "alias": ["rollerRadius", "rz"], "slot": "in[1]", "unit": "mm", "required": true },
+        { "name": "针轮分度圆半径", "alias": ["pitchCircleRadius", "Rzf"], "slot": "in[2]", "unit": "mm", "required": true },
+        { "name": "针轮弹性模量", "slot": "in[3]", "unit": "MPa" },
+        { "name": "针轮设计齿宽", "alias": ["pinionWidth"], "slot": "in[4]", "unit": "mm" },
+        { "name": "使用系数", "alias": ["Kp"], "slot": "in[5]" },
+        { "name": "摆线轮1齿数", "alias": ["cycloid1Z"], "slot": "in[20]" },
+        { "name": "摆线轮1齿宽", "alias": ["cycloid1Width"], "slot": "in[21]", "unit": "mm" },
+        { "name": "摆线轮1偏心距", "alias": ["cycloid1Eccentricity", "ee"], "slot": "in[23]", "unit": "mm" },
+        { "name": "摆线轮总力矩", "alias": ["torque"], "slots": ["in[25]", "in[45]"], "unit": "N·m", "convert": "nm2nmm",
+          "desc": "按 N·m 传入，内部 ×1000 转 N·mm（模板默认 764.4 N·m）" },
+        { "name": "量棒直径", "slot": "in[28]", "unit": "mm" },
+        { "name": "量棒公差", "slot": "in[29]", "unit": "μm" },
+        { "name": "精度等级", "alias": ["precGrade"], "slot": "in[30]", "default": 5 },
+        { "name": "摆线轮2偏心距", "alias": ["cycloid2Eccentricity"], "slot": "in[43]", "unit": "mm" }
+      ],
+      "outputs": [
+        { "name": "接触应力", "slot": "out[0]", "unit": "MPa", "invalidAbove": 1e9, "invalidBelow": 0,
+          "desc": "≥1e9 为 DLL 失败标记（常见于力矩单位错误）" },
+        { "name": "全齿高h", "slot": "out[1]", "unit": "mm" },
+        { "name": "短幅系数K1", "slot": "out[2]" },
+        { "name": "齿顶距D_T", "slot": "out[3]", "unit": "mm" },
+        { "name": "跨棒距M_Mf", "slot": "out[4]", "unit": "mm" },
+        { "name": "单个齿距偏差f_pt", "slot": "out[5]", "unit": "μm", "invalidBelow": 0 },
+        { "name": "齿距累积总偏差F_p", "slot": "out[6]", "unit": "μm", "invalidBelow": 0 },
+        { "name": "齿向偏差F_β", "slot": "out[7]", "unit": "μm", "invalidBelow": 0 },
+        { "name": "径向跳动F_r", "slot": "out[8]", "unit": "μm", "invalidBelow": 0 }
+      ]
+    },
+    {
+      "name": "CalGeometry",
+      "title": "渐开线齿轮副几何计算",
+      "summary": "仅计算几何（不涉强度）：啮合角、重合度、节圆、渐开线起止点、弦齿厚等（71 输入 → 231 输出）。",
+      "returns": "void",
+      "complexity": "medium",
+      "note": "输入段与 CalInvGearStress2 的 [0..70] 相同（太阳轮 31 + 行星轮 31 + 公共 9），压力角/螺旋角按角度传入（函数内部自行转弧度）。",
+      "args": [
+        { "name": "in", "type": "double", "length": 71, "direction": "in" },
+        { "name": "out", "type": "double", "length": 231, "direction": "out" }
+      ],
+      "templateFile": "templates/calGeometry.json",
+      "params": [
+        { "name": "太阳轮齿数", "alias": ["sunTeeth", "z1"], "slot": "in[0]", "required": true },
+        { "name": "太阳轮设计齿宽", "alias": ["sunWidth", "b1"], "slot": "in[2]", "unit": "mm" },
+        { "name": "太阳轮变位系数", "alias": ["x1"], "slot": "in[4]" },
+        { "name": "行星轮齿数", "alias": ["planetTeeth", "z2"], "slot": "in[31]", "required": true },
+        { "name": "行星轮设计齿宽", "alias": ["planetWidth", "b2"], "slot": "in[33]", "unit": "mm" },
+        { "name": "行星轮变位系数", "alias": ["x2"], "slot": "in[35]" },
+        { "name": "法向模数", "alias": ["module", "mn"], "slot": "in[62]", "unit": "mm", "required": true },
+        { "name": "压力角", "alias": ["pressureAngle"], "slot": "in[63]", "unit": "°", "default": 20, "desc": "本接口按角度传入（DLL 内部转弧度）" },
+        { "name": "螺旋角", "alias": ["helixAngle"], "slot": "in[64]", "unit": "°", "default": 0, "desc": "本接口按角度传入（DLL 内部转弧度）" },
+        { "name": "中心距", "alias": ["centerDistance"], "slot": "in[65]", "unit": "mm" }
+      ],
+      "outputs": [
+        { "name": "端面啮合角αwt", "slot": "out[0]", "unit": "°" },
+        { "name": "传动比i", "slot": "out[1]" },
+        { "name": "齿数比u", "slot": "out[2]" },
+        { "name": "端面压力角αt", "slot": "out[3]", "unit": "°" },
+        { "name": "实际中心距a_w", "slot": "out[4]", "unit": "mm" },
+        { "name": "齿顶高h_w", "slot": "out[5]", "unit": "mm" },
+        { "name": "重合度εα", "slot": "out[9]" },
+        { "name": "纵向重合度εβ", "slot": "out[10]" },
+        { "name": "总重合度εγ", "slot": "out[12]" },
+        { "name": "最大滑动率l_max", "slot": "out[13]" },
+        { "name": "太阳轮分度圆直径d", "slot": "out[39]", "unit": "mm" },
+        { "name": "太阳轮基圆直径db", "slot": "out[44]", "unit": "mm" },
+        { "name": "行星轮分度圆直径d", "slot": "out[135]", "unit": "mm" },
+        { "name": "行星轮基圆直径db", "slot": "out[140]", "unit": "mm" }
+      ]
+    },
+    {
+      "name": "CalInvGearTolerence",
+      "title": "渐开线齿轮公差反查",
+      "summary": "由精度等级、模数、齿宽、齿数、螺旋角，按公式计算 f_pt、f_fα、f_Hβ 三项公差。",
+      "returns": "void",
+      "complexity": "low",
+      "args": [
+        { "name": "in", "type": "double", "length": 5, "direction": "in" },
+        { "name": "out", "type": "double", "length": 3, "direction": "out" }
+      ],
+      "params": [
+        { "name": "精度等级", "alias": ["toleranceClass"], "slot": "in[0]", "required": true },
+        { "name": "法向模数", "alias": ["module", "mn"], "slot": "in[1]", "unit": "mm", "required": true },
+        { "name": "设计齿宽", "alias": ["width", "b"], "slot": "in[2]", "unit": "mm", "required": true },
+        { "name": "齿数", "alias": ["teeth", "z"], "slot": "in[3]", "required": true },
+        { "name": "螺旋角", "alias": ["helixAngle", "beta"], "slot": "in[4]", "unit": "°", "default": 0 }
+      ],
+      "outputs": [
+        { "name": "单个齿距偏差f_pt", "slot": "out[0]", "unit": "μm" },
+        { "name": "齿廓总偏差f_fα", "slot": "out[1]", "unit": "μm" },
+        { "name": "螺旋线总偏差f_Hβ", "slot": "out[2]", "unit": "μm" }
+      ]
+    },
+    {
+      "name": "CalCrankShaftSystem2",
+      "title": "曲轴系完整计算",
+      "summary": "整机级联计算：总体力矩/转速 → 渐开线齿轮 → 摆线针轮 → 轴承受力 → 曲轴轴系应力与变形。",
+      "returns": "void",
+      "complexity": "high",
+      "note": "需要 4 组数组：int 分割索引 div（6×3 展平，div[5*3+1]=输入总量、div[5*3+2]=输出总量）、int 数据 idata（零部件分割索引）、double 数据 ddata（总体+渐开线174+摆线60+轴承+轴段）、double 输出 out。用整机快照驱动：--args '{\"arraysFile\":\"wholeMachine-snapshot.json\"}'。未设计曲轴时快照 meta.partial=true，调用会因轴段数据缺失而失败（已优雅报错，不会杀进程）。",
+      "args": [
+        { "name": "div", "type": "int", "length": 18, "direction": "in" },
+        { "name": "idata", "type": "int", "length": 6, "direction": "in" },
+        { "name": "ddata", "type": "double", "length": 100, "direction": "in" },
+        { "name": "out", "type": "double", "length": 10, "direction": "out" }
+      ],
+      "templateFile": "templates/crankShaftSystem2.json",
+      "params": [],
+      "outputs": []
+    },
+    {
+      "name": "RecommondShaftPara",
+      "title": "曲轴轴径与轴长推荐",
+      "summary": "按渐开线齿轮/摆线轮/轴承数据与设计寿命，推荐曲轴直径与轴长（成功时 out[0]=轴径, out[1]=轴长）。",
+      "returns": "void",
+      "complexity": "high",
+      "note": "数组与 CalCrankShaftSystem2 相同。⚠ 第 4 个数组 output 在 DLL 实现中未被使用（仅占位）；第 5 个数组 out 同时充当输入与输出：out[4]=轴承设计寿命（输入），out[0]=推荐轴径、out[1]=推荐轴长（输出，-1 表示未找到合适轴承）。",
+      "args": [
+        { "name": "div", "type": "int", "length": 18, "direction": "in" },
+        { "name": "idata", "type": "int", "length": 6, "direction": "in" },
+        { "name": "ddata", "type": "double", "length": 184, "direction": "in" },
+        { "name": "output", "type": "double", "length": 44, "direction": "in" },
+        { "name": "out", "type": "double", "length": 21, "direction": "inout" }
+      ],
+      "templateFile": "templates/recommondShaftPara.json",
+      "params": [
+        { "name": "设计寿命", "alias": ["life"], "slot": "out[4]", "unit": "h", "default": 50000,
+          "desc": "写入第 5 个数组（DLL 实现读 OutData[4] 作为设计寿命）" }
+      ],
+      "outputs": [
+        { "name": "推荐轴径", "slot": "out[0]", "unit": "mm", "invalidBelow": 0, "desc": "-1 表示未找到合适轴承组合" },
+        { "name": "推荐轴长", "slot": "out[1]", "unit": "mm", "invalidBelow": 0 },
+        { "name": "轴承1定位面", "slot": "out[2]" },
+        { "name": "轴承1偏离基准距离", "slot": "out[3]", "unit": "mm" },
+        { "name": "轴承2定位面", "slot": "out[5]" },
+        { "name": "轴承2偏离基准距离", "slot": "out[6]", "unit": "mm" },
+        { "name": "轴承内径d", "slot": "out[8]", "unit": "mm" },
+        { "name": "轴承外径D", "slot": "out[9]", "unit": "mm" },
+        { "name": "轴承宽度", "slot": "out[10]", "unit": "mm" },
+        { "name": "额定动载荷Cr", "slot": "out[13]", "unit": "N" },
+        { "name": "额定静载荷C0r", "slot": "out[14]", "unit": "N" },
+        { "name": "轴承类型码", "slot": "out[20]" }
+      ]
+    },
+    {
+      "name": "GetForceAndForceLocation",
+      "title": "读取曲轴应力分布",
+      "summary": "在 CalCrankShaftSystem2 之后调用，取回轴系节点坐标与弯曲/剪切应力分布（Y 前 n 为弯曲、后 n 为剪切；X 每节点重复两次）。",
+      "returns": "void",
+      "complexity": "low",
+      "note": "本接口依赖同一进程内先执行过曲轴系计算，单独调用返回全 0。",
+      "args": [
+        { "name": "coordNum", "type": "int", "length": 1, "direction": "inout" },
+        { "name": "outX", "type": "double", "length": 400, "direction": "out" },
+        { "name": "outY", "type": "double", "length": 400, "direction": "out" }
+      ],
+      "params": [],
+      "outputs": [
+        { "name": "节点数", "slot": "coordNum[0]", "desc": "为 0 表示未先执行曲轴系计算" }
+      ]
+    },
+    {
+      "name": "Testfunc",
+      "title": "空桩函数（联调用）",
+      "summary": "不执行任何计算，仅用于验证 DLL 加载与导出解析。",
+      "returns": "void",
+      "complexity": "low",
+      "args": [],
+      "params": [],
+      "outputs": []
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="aaa" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+            <RowDefinition Height="4*"> </RowDefinition>
+            <RowDefinition Height="10*"> </RowDefinition>
+            </Grid.RowDefinitions>
+            <TreeView x:Name="ExampleTreeView" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0" Grid.Row="0" Grid.Column="0">
+                <TreeViewItem Header="系统设置" >
+                <TreeViewItem Header="个人信息设置"/>
+                <TreeViewItem Header="密码管理"/>
+                <TreeViewItem Header="意见反馈"/>
+            </TreeViewItem>
+            <TreeViewItem Header="店铺管理" >
+                <TreeViewItem Header="店员管理"/>
+                <TreeViewItem Header="商品管理"/>
+            </TreeViewItem>
+        </TreeView>
+        </Grid>
+        <Button Name="RightBtn" Grid.Column="1" Content="Button" HorizontalAlignment="Left" Margin="426,205,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Name="LeftBtn" Grid.Column="1" Content="Button" HorizontalAlignment="Left" Margin="225,234,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="195,152,0,0" TextWrapping="Wrap" Text="TextBox1" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+
+</Window>

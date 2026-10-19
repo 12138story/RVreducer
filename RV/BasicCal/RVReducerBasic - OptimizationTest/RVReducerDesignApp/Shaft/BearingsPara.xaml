@@ -1,0 +1,36 @@
+﻿<Window x:Class="RWPF.BearingsPara"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RWPF"
+        mc:Ignorable="d"
+        xmlns:hc ="https://handyorg.github.io/handycontrol"
+        Title="添加轴承" Height="200" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="选择轴承:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <ComboBox x:Name="bearingsselectcombobox" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" SelectionChanged="bearingsselectcombobox_SelectionChanged" DisplayMemberPath="mTreeViewItem.Header" SelectedItem="{Binding SelectedBearing, Mode=TwoWay}" >
+
+        </ComboBox>
+        <TextBlock Text="基准距离:" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBox x:Name="distancetextbox" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Text="{Binding Distance, Mode=TwoWay}" Width="40" />
+        <TextBlock Text="mm" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="102,0,0,0" />
+        <TextBlock Text="基准面:" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <ComboBox x:Name="lcrcobobox" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" SelectionChanged="lcrcobobox_SelectionChanged">
+            <ComboBoxItem Content="左端面" />
+            <ComboBoxItem Content="中心基准面" />
+            <ComboBoxItem Content="右端面" />
+        </ComboBox>
+        <Button Content="确定" Grid.Row="3" Grid.ColumnSpan="2"  Click="Button_Click"/>
+    </Grid>
+</Window>

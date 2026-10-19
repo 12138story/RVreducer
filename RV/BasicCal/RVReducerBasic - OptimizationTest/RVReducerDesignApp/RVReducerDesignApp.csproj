@@ -1,0 +1,108 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resource\Figure\Bearing\AngularContactBallBearing.png" />
+    <None Remove="Resource\Figure\Bearing\DeepGrooveBallBearing.png" />
+    <None Remove="Resource\Figure\Bearing\DeepGrooveBallBearing0.png" />
+    <None Remove="Resource\Figure\Bearing\NeedleBearing.png" />
+    <None Remove="Resource\Figure\Bearing\NeedleBearing0.png" />
+    <None Remove="Resource\Figure\Bearing\TaperedRollerBearing.png" />
+    <None Remove="Resource\Figure\Bearing\TaperedRollerBearing0.png" />
+    <None Remove="Resource\Figure\Gear\CycloidalWheel.png" />
+    <None Remove="Resource\Figure\Gear\InvoluteGear.png" />
+    <None Remove="Resource\Figure\Gear\Pinwheel.png" />
+    <None Remove="Resource\Figure\Shaft\1.png" />
+    <None Remove="Resource\Figure\Shaft\2.png" />
+    <None Remove="Resource\Figure\Shaft\centerLine.png" />
+    <None Remove="ZhouJie\GettingStarted.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\Figure\Bearing\AngularContactBallBearing.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Figure\Bearing\DeepGrooveBallBearing0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Figure\Bearing\NeedleBearing0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Figure\Bearing\TaperedRollerBearing0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Figure\Gear\CycloidalWheel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Figure\Gear\InvoluteGear.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Figure\Gear\Pinwheel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Figure\Shaft\2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 通用计算层（独立类库：注册表 + 动态调用器），Agent 工具 rv_calc 使用 -->
+    <ProjectReference Include="..\RvCalc\RvCalc.csproj" />
+    <None Include="..\RvCalc\interface-registry.json"
+          Link="RvCalc\interface-registry.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\RvCalc\templates\*.json"
+          Link="RvCalc\templates\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest"
+          Condition="Exists('..\RvCalc\templates')" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HandyControl" Version="3.5.1" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.4" />
+    <PackageReference Include="LibVLCSharp.WinForms" Version="3.9.3" />
+    <PackageReference Include="Markdig" Version="0.43.0" />
+    <PackageReference Include="MySql.Data" Version="9.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="NPOI" Version="2.7.5" />
+    <PackageReference Include="OpenAI" Version="2.12.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="VTKBridge">
+      <HintPath>..\Lib\VTKBridge.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\WindowsFormsIntegration.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\Figure\Bearing\DeepGrooveBallBearing.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Figure\Bearing\NeedleBearing.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Figure\Bearing\TaperedRollerBearing.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Figure\Shaft\1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Figure\Shaft\centerLine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

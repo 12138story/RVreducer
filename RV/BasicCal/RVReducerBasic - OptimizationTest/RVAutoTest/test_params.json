@@ -1,0 +1,26 @@
+{
+  "gearRecommend": {
+    "fixElemNotation": 1,
+    "totalRatio": 153,
+    "outputTorque": -784,
+    "outputRPM": 15,
+    "targetStress": 1000,
+    "designLife": 50000,
+    "usageFactor": 1.2,
+    "allowableStress": 1500,
+    "planetCount": 3,
+    "cycloidMinWidth": 40,
+    "cycloidMaxWidth": 80
+  },
+  "cycloidGear": {
+    "precGrade": 5
+  },
+  "invGear": {
+    "planetCount": 3
+  },
+  "shaftRecommend": {
+    "allowableBendStress": 4,
+    "allowableShearStress": 12,
+    "bearingDesignLife": 6700
+  }
+}

@@ -1,0 +1,55 @@
+﻿    <!--<Grid.RowDefinitions>
+            <RowDefinition Height="1*">            </RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TreeView x:Name="treeView" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0" Grid.Row="0" Grid.Column="0" Width="1*">
+            <TreeViewItem Header="系统设置" >
+                <!--<TreeViewItem Header="个人信息设置"  Selected="userInfoSet"/>
+            <TreeViewItem Header="密码管理"   Selected="passwordSet"/>--><!--
+                <TreeViewItem Header="个人信息设置"/>
+                <TreeViewItem Header="密码管理"/>
+                <TreeViewItem Header="意见反馈"/>
+            </TreeViewItem>
+            <TreeViewItem Header="店铺管理" >
+                <TreeViewItem Header="店员管理"/>
+                <TreeViewItem Header="商品管理"/>
+            </TreeViewItem>
+        </TreeView>-->
+
+    <!--<TreeView x:Name="treeView" HorizontalAlignment="Left" Height="436" Margin="0,0,0,0" VerticalAlignment="Top" Width="179">-->
+
+    <!--<Grid>-->
+        <!--<Menu>
+            <MenuItem Header="File">
+
+            </MenuItem>
+        </Menu>-->
+        <!--<DockPanel>
+            <Button DockPanel.Dock="Top">菜单栏区域
+            </Button>
+            <Button DockPanel.Dock="Top">工具条区域
+            </Button>
+            <Button DockPanel.Dock="Left">文件夹区域
+
+            </Button>
+
+            <Button DockPanel.Dock="Bottom">状态栏区域
+            </Button>
+            <Button DockPanel.Dock="Bottom">详细列表区域
+            </Button>
+        </DockPanel>-->
+        <!--<TreeView>
+            <TreeViewItem Header="Level 1" IsExpanded="True" Width="120">
+                <TreeViewItem Header="Level 2.1" />
+                <TreeViewItem Header="Level 2.2" IsExpanded="True">
+                    <TreeViewItem Header="Level 3.1" />
+                    <TreeViewItem Header="Level 3.2" />
+                </TreeViewItem>
+                <TreeViewItem Header="Level 2.3" />
+            </TreeViewItem>
+        </TreeView>-->
+    <!--</Grid>-->

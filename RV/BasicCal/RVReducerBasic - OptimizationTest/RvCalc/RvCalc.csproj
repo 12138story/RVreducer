@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    RvCalc —— 注册表驱动的 RVReducerBasic.dll 通用调用层（独立类库）。
+    不依赖 RVReducerDesignApp；它与 RvCalcCli 都以 ProjectReference 方式引用本工程。
+      · RvInterfaceRegistry.cs  注册表模型 + JSON 加载
+      · DynamicDllCaller.cs     运行时按导出名解析并调用（无需 [DllImport] 声明）
+      · RvCalcRunner.cs         语义参数 → 数组槽位映射、单位换算、输出体检
+      · InvGearInput.cs         渐开线 174 字段输入构建器（模板来源）
+      · CycloidGearInput.cs     摆线 60 字段输入构建器（模板来源）
+      · AngleUtil.cs            角度/弧度换算
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>RvCalc</RootNamespace>
+    <AssemblyName>RvCalc</AssemblyName>
+    <Version>1.0.0</Version>
+    <Description>RVReducerBasic.dll 注册表驱动的通用调用层</Description>
+  </PropertyGroup>
+
+</Project>

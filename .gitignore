@@ -1,0 +1,120 @@
+# ============================================================
+# RVreducer 仓库忽略规则
+# 原则：只纳入源码、工程文件与必要资源；排除构建产物、IDE 缓存、
+#       第三方运行库发行包、超大二进制及密钥类敏感文件。
+# ============================================================
+
+# ---------- 构建产物 ----------
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+*.exe
+*.dll
+*.lib
+*.exp
+*.ilk
+*.pdb
+*.obj
+*.o
+*.a
+*.so
+*.dylib
+*.mod
+*.smod
+*.tlog
+*.idb
+*.pch
+*.ipch
+*.res
+*.rsp
+*.lastbuildstate
+*.build
+*.exe.intermediate.manifest
+BuildLog.htm
+__genmod*
+*__genmod.f90
+*.fdz
+*.u2d
+*.brk
+*.nupkg
+
+# ---------- Visual Studio / IDE 缓存 ----------
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.opendb
+*.opensdf
+*.sdf
+*.cache
+*.psess
+*.vsp
+*.vspx
+*.dbmdl
+ipch/
+_ReSharper*/
+*.DotSettings.user
+*.pubxml.user
+TestResults/
+
+# ---------- 第三方运行库发行包（体积过大，自行下载） ----------
+**/mysql-8.0.36-winx64/
+**/mysql-8.0.37-winx64/
+**/InstallRVFileALL/*.exe
+**/InstallRVFileALL/*.msi
+**/InstallRVFileALL/*.cab
+**/新建文件夹/
+
+# ---------- 安装包与压缩包 ----------
+*.msi
+*.cab
+*.iso
+*.zip
+*.7z
+*.rar
+
+# ---------- 敏感文件 ----------
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*.p12
+*.keystore
+*.jks
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+*credential*
+*secret*
+*.cnf
+auto.cnf
+*.ovpn
+*.ppk
+
+# ---------- 临时文件 / 系统文件 ----------
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*.swp
+*.swo
+*~
+~$*
+Thumbs.db
+ehthumbs.db
+desktop.ini
+.DS_Store
+*.stackdump

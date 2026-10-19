@@ -1,0 +1,104 @@
+﻿<Window x:Class="RVReducerDesignApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RVReducerDesignApp"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="摆线针轮行星减速器设计系统" Height="630" Width="1120">
+    <Grid Name="MainWindowGridTop" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26">
+            </RowDefinition>
+            <RowDefinition>
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        <hc:Drawer Name="DrawerTopInContainer" Dock="Top" ShowMode="Press">
+            <Border Background="{DynamicResource RegionBrush}" Height="350" BorderBrush="{DynamicResource BorderBrush}">
+                <!-- 直接用 ScrollViewer 包裹，不需要外层 Grid -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                      HorizontalScrollBarVisibility="Disabled"
+                      Padding="8">
+                    <ContentControl x:Name="DrawerContentHost"/>
+                </ScrollViewer>
+            </Border>
+        </hc:Drawer>
+        <hc:Drawer Name="DrawerTopInContainerShaft" Dock="Top" ShowMode="Press">
+            <Border Background="{DynamicResource RegionBrush}" Height="300" BorderBrush="{DynamicResource BorderBrush}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <!-- 这里放置动态内容宿主（我们会在 code-behind 把 SetWindow 的 mInputPageGrid 放到这里） -->
+                    <ContentControl x:Name="DrawerContentHostShaft" Grid.Row="0" Margin="8"/>
+                </Grid>
+            </Border>
+        </hc:Drawer>
+        <ToolBar Name="MyToolbar" Width="481" HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Column="0" Height="26" Background="AliceBlue">
+            <Button Content="打开" Name="OpenButton" ToolBar.OverflowMode="AsNeeded" Click ="OpenButton_Click" Background="AliceBlue"/>
+            <Button Content="保存" Name="SaveButton" ToolBar.OverflowMode="AsNeeded" Click="SaveButton_Click" Background="AliceBlue"/>
+            <Button Content="退出" Name="ExitButton" ToolBar.OverflowMode="AsNeeded" Click="ExitButton_Click" Background="AliceBlue"/>
+            <Button Content="计算" Name="CalButton" ToolBar.OverflowMode="AsNeeded" Click="CalButton_Click" hc:FloatingBlock.Content="计算" Background="AliceBlue"/>
+            <!--<Button Content="齿轮推荐" Name="TestButton" ToolBar.OverflowMode="AsNeeded" Click="TestButton_Click"/>-->
+            <ToggleButton Content="齿轮推荐" Background="AliceBlue" ToolBar.OverflowMode="AsNeeded" IsChecked="{Binding IsOpen,ElementName=DrawerTopInContainer}" Checked="UIZHOURecommend_Toggle_Checked" Unchecked="UIZHOURecommend_Toggle_Unchecked"/>
+            <ToggleButton Content="轴推荐"  Background="AliceBlue" ToolBar.OverflowMode="AsNeeded" IsChecked="{Binding IsOpen,ElementName=DrawerTopInContainerShaft}" Checked="ShaftButton_Checked" Unchecked="ShaftButton_Unchecked"/>
+            <!--<Button Content="轴推荐" Name="ShaftButton" ToolBar.OverflowMode="AsNeeded" Click="ShaftButton_Click"/>-->
+            <Button Content="轴承数据库" Name="BearingDataButton" ToolBar.OverflowMode="AsNeeded" Click="BearingDataBtn_Click" Background="AliceBlue"/>
+            <Button Content="帮助" Name="Help" ToolBar.OverflowMode="AsNeeded" Click="Help_Click" Background="AliceBlue"/>
+            <Button Content="AI 助手" Name="AIButton" ToolBar.OverflowMode="AsNeeded" Click="AIButton_Click" Background="AliceBlue"/>
+        </ToolBar>
+        <hc:TransitioningContentControl HorizontalAlignment="Right" VerticalAlignment="Center"  Grid.Column="0" >
+            <Viewbox MaxWidth="520">
+                <hc:FlipClock Margin="32"/>
+            </Viewbox>
+        </hc:TransitioningContentControl>
+        <Grid Name="MainWindowContentLayOutGrid" Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Name="MainWindowIndexGrid" Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Grid Name="ContentGrid" Grid.Row="0" Grid.Column="1">
+                <TabControl Name="mContentTab">
+                    <TabItem Header="参数输入" Name="mInputTab">
+                        <!--<Grid Background="#FFE5E5E5"/>-->
+                    </TabItem>
+                    <TabItem Header="计算结果" Name="mOutputTab">
+                        <!--<Grid Background="#FFE5E5E5"/>-->
+                    </TabItem>
+                    <TabItem Header="2D图例" Name="mExampleTab">
+                        <!--<Grid Background="#FFE5E5E5"/>-->
+                    </TabItem>
+                    <TabItem Header="3D模型" Name="m3DTab">
+                        <!--<Grid Background="#FFE5E5E5"/>-->
+                    </TabItem>
+                    <TabItem Header="AI 助手" Name="mAITab">
+                    </TabItem>
+                </TabControl>
+                <!--<Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>-->
+                <!--<ScrollViewer  VerticalScrollBarVisibility="Visible" Grid.RowSpan="2">
+                    <Frame x:Name="myFrame" NavigationUIVisibility="Hidden" Grid.Row="0" Grid.Column="0"/>
+                </ScrollViewer>-->
+
+            </Grid>
+
+
+
+        </Grid>
+    </Grid>
+
+
+</Window>

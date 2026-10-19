@@ -1,0 +1,63 @@
+﻿<Window x:Class="RVReducerDesignApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RVReducerDesignApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid Name="MainWindowGridTop" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="46"></RowDefinition>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ToolBar Name="MyToolbar"  Width="280"  HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Column="0" Height="26">
+            <Button Content="Open" Name="OpenButton" ToolBar.OverflowMode="AsNeeded"/>
+            <Button Content="Close" Name="CloseButton" ToolBar.OverflowMode="AsNeeded"/>
+            <Button Content="Exit" Name="ExitButton" ToolBar.OverflowMode="AsNeeded"/>
+            <Button Content="计算" Name="CalButton" ToolBar.OverflowMode="AsNeeded" Click="CalButton_Click"/>
+            <Button Content="测试" Name="TestButton" ToolBar.OverflowMode="AsNeeded" Click="TestButton_Click"/>
+        </ToolBar>
+
+        <Grid Name="MainWindowContentLayOutGrid" Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Name="MainWindowIndexGrid" Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Grid Name="ContentGrid" Grid.Row="0" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TabControl Grid.Column="1" Name="TestControl">
+
+                    <TabItem Header="TabItem" Name="TestTab1">
+                        
+                  
+                    </TabItem>
+                    <TabItem Header="TabItem">
+                    </TabItem>
+                </TabControl>
+                <Frame x:Name="myFrame" NavigationUIVisibility="Hidden" Grid.Row="0" Grid.Column="0"/>
+
+            </Grid>
+
+
+
+
+        </Grid>
+    </Grid>
+
+
+
+
+</Window>

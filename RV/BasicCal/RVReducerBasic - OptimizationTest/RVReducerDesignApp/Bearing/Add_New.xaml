@@ -1,0 +1,179 @@
+﻿<Window x:Class="WPFBearings.Add_New"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFBearings"
+        mc:Ignorable="d"
+        Title="新建" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="kk"
+            TargetType="TextBox" >
+            <Setter Property="Width" Value="200"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="IsEnabled" Value="True"></Setter>
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+           
+        
+        </Style>
+        <Style x:Key="kkk" TargetType="TextBox">
+            <!-- 外观属性设置 -->
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="16"/>
+          
+
+            <!-- 触发器定义 -->
+            <Style.Triggers>
+         
+                 <!--文本触发器--> 
+                <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="0">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value=" ">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+
+            </Style.Triggers>
+
+        </Style>
+        
+        <Style x:Key="kkkk" TargetType="TextBox">
+            <!-- 外观属性设置 -->
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="16"/>
+            <!-- 触发器定义 -->
+            <Style.Triggers>
+               
+
+                 <!--文本触发器--> 
+                <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="0">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value=" ">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+         <Grid.ColumnDefinitions>
+     <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+ <Grid.RowDefinitions>
+     <RowDefinition/>
+     <RowDefinition/>
+     <RowDefinition/>
+     <RowDefinition/>
+     <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="X1"    Text="0"  Grid.Row="1"  Grid.Column="1"  Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X2"      Text="0"  Grid.Row="2" Grid.Column="1"  Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X3"     Text="0"  Grid.Row="3" Grid.Column="1" Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X4"      Text="0"  Grid.Row="4" Grid.Column="1" Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X5"    Text="0"  Grid.Row="5" Grid.Column="1" Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X6"    Text="0"  Grid.Row="6" Grid.Column="1"  Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X7"    Text="0"  Grid.Row="7" Grid.Column="1" Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X8"     Text="0"  Grid.Row="8" Grid.Column="1" Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X9"     Text="0"  Grid.Row="9" Grid.Column="1" Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X10"   Text="0"  Grid.Row="1" Grid.Column="3" Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X11"     Text="0"  Grid.Row="2" Grid.Column="3" Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X12"      Text="0"  Grid.Row="3" Grid.Column="3" Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X13"    Text="0"  Grid.Row="4" Grid.Column="3" Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X14"      Text="0"  Grid.Row="5" Grid.Column="3" Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X15"     Text="0"  Grid.Row="6" Grid.Column="3" Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X16"    Text="0"  Grid.Row="7" Grid.Column="3" Style="{StaticResource kkk}"/>
+        <TextBox x:Name="X17"     Text="0"  Grid.Row="8" Grid.Column="3" Style="{StaticResource kkk}"/>
+         <TextBox x:Name="X18"     Text="0"  Grid.Row="9" Grid.Column="3" Style="{StaticResource kkk}"/>
+        <TextBox x:Name="XX1"     Text="0"  Grid.Row="1" Grid.Column="1"  Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX2"      Text="0"  Grid.Row="2" Grid.Column="1"  Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX3"     Text="0"  Grid.Row="3" Grid.Column="1" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX4"     Text="0"  Grid.Row="4" Grid.Column="1" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX5"      Text="0"  Grid.Row="5" Grid.Column="1" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX6"     Text="0"  Grid.Row="6" Grid.Column="1"  Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX7"      Text="0"  Grid.Row="7" Grid.Column="1" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX8"      Text="0"  Grid.Row="8" Grid.Column="1" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX9"      Text="0"  Grid.Row="9" Grid.Column="1" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX10"     Text="0"  Grid.Row="1" Grid.Column="3" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX11"      Text="0"  Grid.Row="2" Grid.Column="3" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX12"    Text="0"  Grid.Row="3" Grid.Column="3" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX13"      Text="0"  Grid.Row="4" Grid.Column="3" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX14"     Text="0"  Grid.Row="5" Grid.Column="3" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX15"     Text="0"  Grid.Row="6" Grid.Column="3" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX16"     Text="0"  Grid.Row="7" Grid.Column="3" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX17"     Text="0"  Grid.Row="8" Grid.Column="3" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="XX18"      Text="0"  Grid.Row="9" Grid.Column="3" Style="{StaticResource kkkk}"/>
+        <TextBox x:Name="T1" Text="null"  Grid.Row="1" Grid.Column="2" Style="{StaticResource kk}"  Visibility="{Binding ElementName=X1, Path=Visibility}"    />
+        <TextBox x:Name="T2" Text="null" Grid.Row="2" Grid.Column="2" Style="{StaticResource kk}" Visibility="{Binding ElementName=X2, Path=Visibility}"/>
+        <TextBox x:Name="T3"  Text="null"  Grid.Row="3" Grid.Column="2" Style="{StaticResource kk}" Visibility="{Binding ElementName=X3, Path=Visibility}"/>
+        <TextBox x:Name="T4"    Text="null"  Grid.Row="4" Grid.Column="2" Style="{StaticResource kk}" Visibility="{Binding ElementName=X4, Path=Visibility}"/>
+        <TextBox x:Name="T5"    Text="null"  Grid.Row="5" Grid.Column="2" Style="{StaticResource kk}" Visibility="{Binding ElementName=X5, Path=Visibility}"/>
+        <TextBox x:Name="T6"    Text="null"  Grid.Row="6" Grid.Column="2"  Style="{StaticResource kk}" Visibility="{Binding ElementName=X6, Path=Visibility}"/>
+        <TextBox x:Name="T7"    Text="null"  Grid.Row="7" Grid.Column="2" Style="{StaticResource kk}" Visibility="{Binding ElementName=X7, Path=Visibility}"/>
+        <TextBox x:Name="T8"    Text="null"  Grid.Row="8" Grid.Column="2" Style="{StaticResource kk}" Visibility="{Binding ElementName=X8, Path=Visibility}"/>
+        <TextBox x:Name="T9"    Text="null"  Grid.Row="9" Grid.Column="2" Style="{StaticResource kk}" Visibility="{Binding ElementName=X9, Path=Visibility}"/>
+        <TextBox x:Name="T10"    Text="null"  Grid.Row="1" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=X10, Path=Visibility}"/>
+        <TextBox x:Name="T11"    Text="null"  Grid.Row="2" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=X11, Path=Visibility}"/>
+        <TextBox x:Name="T12"    Text="null"  Grid.Row="3" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=X12, Path=Visibility}"/>
+        <TextBox x:Name="T13"    Text="null"  Grid.Row="4" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=X13, Path=Visibility}"/>
+        <TextBox x:Name="T14"    Text="null"  Grid.Row="5" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=X14, Path=Visibility}"/>
+        <TextBox x:Name="T15"    Text="null"  Grid.Row="6" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=X15, Path=Visibility}"/>
+        <TextBox x:Name="T16"    Text="null"  Grid.Row="7" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=X16, Path=Visibility}"/>
+        <TextBox x:Name="T17"    Text="null"  Grid.Row="8" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=X17, Path=Visibility}"/>
+        <TextBox x:Name="T18"    Text="null"  Grid.Row="9" Grid.Column="4"  Style="{StaticResource kk}" Visibility="{Binding ElementName=X18, Path=Visibility}"/>
+        <TextBox x:Name="TT1" Text="null"  Grid.Row="1" Grid.Column="2" Style="{StaticResource kk}"  Visibility="{Binding ElementName=XX1, Path=Visibility}"    />
+        <TextBox x:Name="TT2" Text="null" Grid.Row="2" Grid.Column="2" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX2, Path=Visibility}"/>
+        <TextBox x:Name="TT3"  Text="null"  Grid.Row="3" Grid.Column="2" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX3, Path=Visibility}"/>
+        <TextBox x:Name="TT4"    Text="null"  Grid.Row="4" Grid.Column="2" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX4, Path=Visibility}"/>
+        <TextBox x:Name="TT5"    Text="null"  Grid.Row="5" Grid.Column="2" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX5, Path=Visibility}"/>
+        <TextBox x:Name="TT6"    Text="null"  Grid.Row="6" Grid.Column="2"  Style="{StaticResource kk}" Visibility="{Binding ElementName=XX6, Path=Visibility}"/>
+        <TextBox x:Name="TT7"    Text="null"  Grid.Row="7" Grid.Column="2" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX7, Path=Visibility}"/>
+        <TextBox x:Name="TT8"    Text="null"  Grid.Row="8" Grid.Column="2" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX8, Path=Visibility}"/>
+        <TextBox x:Name="TT9"    Text="null"  Grid.Row="9" Grid.Column="2" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX9, Path=Visibility}"/>
+        <TextBox x:Name="TT10"    Text="null"  Grid.Row="1" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX10, Path=Visibility}"/>
+        <TextBox x:Name="TT11"    Text="null"  Grid.Row="2" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX11, Path=Visibility}"/>
+        <TextBox x:Name="TT12"    Text="null"  Grid.Row="3" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX12, Path=Visibility}"/>
+        <TextBox x:Name="TT13"    Text="null"  Grid.Row="4" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX13, Path=Visibility}"/>
+        <TextBox x:Name="TT14"    Text="null"  Grid.Row="5" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX14, Path=Visibility}"/>
+        <TextBox x:Name="TT15"    Text="null"  Grid.Row="6" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX15, Path=Visibility}"/>
+        <TextBox x:Name="TT16"    Text="null"  Grid.Row="7" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX16, Path=Visibility}"/>
+        <TextBox x:Name="TT17"    Text="null"  Grid.Row="8" Grid.Column="4" Style="{StaticResource kk}" Visibility="{Binding ElementName=XX17, Path=Visibility}"/>
+        <TextBox x:Name="TT18"    Text="null"  Grid.Row="9" Grid.Column="4"  Style="{StaticResource kk}" Visibility="{Binding ElementName=XX18, Path=Visibility}"/>
+        <Button x:Name="YES" Content="确定" Grid.Column="2" Grid.Row="10" Width="70" Height="40" Click="YES_Click"   Foreground="Black" BorderBrush=" LightGray" BorderThickness="1"/>
+        <Button x:Name="NO" Content="取消" Grid.Column="4" Grid.Row="10" Width="70" Height="40" Click="No_Click"   Foreground="Black" BorderBrush="LightGray" BorderThickness="1"/>
+        <Button x:Name="NEXT" Content="下一页" Grid.Column="5" Grid.Row="5" Width="50" Height="40" Click="NEXT_Click"  FontSize="10" Foreground="Black" BorderBrush=" LightGray" BorderThickness="1"/>
+        <Button x:Name="BEFORE" Visibility="Hidden" Content="上一页" Grid.Column="5" Grid.Row="4" Width="50" Height="40" Click="BEFORE_Click"  FontSize="10" Foreground="Black" BorderBrush=" LightGray" BorderThickness="1"/>
+    </Grid>
+    
+    
+    
+</Window>

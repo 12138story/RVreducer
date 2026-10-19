@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    RVAgentCli — 终端 AI 计算助手（控制台 REPL）。
+    复用 RVReducerDesignApp 的 Agent 基础设施（AgentRunner / AgentRvCalcTool 等），
+    以自然语言驱动 RVReducerBasic.dll 计算，无 WPF 窗口。
+    用法：dotnet run，项目参数 RVAgentCli（示例见 AGENTS.md）。
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>RVAgentCli</RootNamespace>
+    <AssemblyName>RVAgentCli</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RVReducerDesignApp\RVReducerDesignApp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 复用 RvCalcCli 的 DLL 引导（工作区定位 + 整目录复制 MKL/VTK 依赖） -->
+    <Compile Include="..\RvCalcCli\DllBootstrap.cs" Link="DllBootstrap.cs" />
+
+    <!-- 注册表 + 模板复制到输出目录（AgentRvCalcTool 运行时解析） -->
+    <None Include="..\RvCalc\interface-registry.json"
+          Link="RvCalc\interface-registry.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\RvCalc\templates\*.json"
+          Link="RvCalc\templates\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest"
+          Condition="Exists('..\RvCalc\templates')" />
+  </ItemGroup>
+
+</Project>

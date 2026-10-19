@@ -1,0 +1,84 @@
+{
+  "_来源": "MAIN-Optimization.cpp DefineGearPairGeometryZJ（36-38 行）— kisssoft 优化输入",
+  "_说明": "kisssoft 优化参数：大轮变位 x2=0.0275、齿顶修形 Ca=2μm、分齿轮齿厚偏差 E_sns/E_sni、d_y=0（kisssoft 明确输入，DLL 已验证可处理）。对比 ISO/TR 6336-30:2022 Annex A Example 1 detailed calculation。",
+  "input": {
+    "geometry": {
+      "z1": 17,
+      "z2": 103,
+      "mn": 8.0,
+      "αn": 20.0,
+      "β": 15.8,
+      "b1": 100.0,
+      "b2": 100.0,
+      "a": 500.0,
+      "Wk1": 38.196,
+      "Wk2": 307.943,
+      "k1": 2,
+      "k2": 13,
+      "x1": 0.1178,
+      "x2": 0.0275,
+      "da1": 159.66,
+      "da2": 872.35,
+      "hfP_mn": 11.2,
+      "ρfP_mn": 3.12,
+      "Ca": 2,
+      "Cf": 0,
+      "cx": 0.4,
+      "E_sns1": -0.0670,
+      "E_sni1": -0.0926,
+      "E_sns2": -0.0617,
+      "E_sni2": -0.0947,
+      "d_y": 0
+    },
+    "quality": {
+      "Q": 5,
+      "fpt1": 8.5,
+      "fpt2": 9.0,
+      "ffα": 9.5,
+      "fHβ1": 8.0,
+      "fHβ2": 9.0,
+      "RaH": 1.0,
+      "RaF": 3.0
+    },
+    "material": {
+      "E": 206000,
+      "ν": 0.3,
+      "σS": 500,
+      "ρ": 7830,
+      "σHlim": 1500,
+      "σFlim": 500,
+      "HRC": 60,
+      "HRC_core": 30
+    },
+    "application": {
+      "KA": 1.0,
+      "Kγ": 1.0,
+      "l": 125.0,
+      "s": 0.0,
+      "dsh": 100.0,
+      "SHmin": 1.0,
+      "SFmin": 1.0,
+      "ν40": 320,
+      "fcp": 0,
+      "hm": 0,
+      "pmc": 1
+    },
+    "load": {
+      "T1": 9000,
+      "n1": 360.0,
+      "Lh": 50000
+    }
+  },
+  "expectedOutput": {
+    "σH": 1299,
+    "σH0": 1207,
+    "σHP": { "pinion": 1338, "wheel": 1415 },
+    "σF": { "pinion": 395, "wheel": 382 },
+    "σF0": { "pinion": 350, "wheel": 339 },
+    "σFP": { "pinion": 824, "wheel": 860 },
+    "d": { "pinion": 141.34, "wheel": 856.35 },
+    "da": { "pinion": 159.66, "wheel": 872.35 },
+    "db": { "pinion": 132.20, "wheel": 800.97 },
+    "dw": { "pinion": 141.67, "wheel": 858.33 }
+  }
+}

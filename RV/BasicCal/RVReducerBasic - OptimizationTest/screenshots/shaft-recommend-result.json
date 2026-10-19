@@ -1,0 +1,18 @@
+{
+  "Scenario": "shaft-recommend",
+  "Timestamp": "2026-09-12T17:20:50.4828426+08:00",
+  "Input": {
+    "AllowableBendStress": 4,
+    "AllowableShearStress": 12,
+    "BearingDesignLife": 6700
+  },
+  "RecommendedDiameter": 60,
+  "RecommendedLength": 138.6637,
+  "CrankShaftCount": 3,
+  "ErrorMessage": null,
+  "Screenshots": [
+    "D:\\Workspace\\softdevelop\\RV\\BasicCal\\RVReducerBasic - OptimizationTest\\screenshots\\03-shaft-recommend-input.png",
+    "D:\\Workspace\\softdevelop\\RV\\BasicCal\\RVReducerBasic - OptimizationTest\\screenshots\\05-crankshaft-drawing.png",
+    "D:\\Workspace\\softdevelop\\RV\\BasicCal\\RVReducerBasic - OptimizationTest\\screenshots\\04-shaft-recommend-output.png"
+  ]
+}

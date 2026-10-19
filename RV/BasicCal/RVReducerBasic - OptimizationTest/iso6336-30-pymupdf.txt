@@ -1,0 +1,12238 @@
+===PAGE 0===
+Calculation of load capacity of spur 
+and helical gears —
+Part 30:
+Calculation examples for the 
+application of ISO 6336 parts 1,2,3,5
+Calcul de la capacité de charge des engrenages cylindriques à 
+dentures droite et hélicoïdale —
+Partie 30: Exemples d'application de l'ISO 6336 parties 1, 2, 3, 5
+TECHNICAL 
+REPORT
+ISO/TR
+6336-30
+Second edition
+2022-12
+Reference number 
+ISO/TR 6336-30:2022(E)
+© ISO 2022
+
+===PAGE 1===
+ii
+ISO/TR 6336-30:2022(E)
+COPYRIGHT PROTECTED DOCUMENT
+©  ISO 2022
+All rights reserved. Unless otherwise specified, or required in the context of its implementation, no part of this publication may 
+be reproduced or utilized otherwise in any form or by any means, electronic or mechanical, including photocopying, or posting on 
+the internet or an intranet, without prior written permission. Permission can be requested from either ISO at the address below 
+or ISO’s member body in the country of the requester.
+ISO copyright office
+CP 401 • Ch. de Blandonnet 8
+CH-1214 Vernier, Geneva
+Phone: +41 22 749 01 11
+Email: copyright@iso.org
+Website: www.iso.org
+Published in Switzerland
+	
+﻿
+© ISO 2022 – All rights reserved
+
+
+===PAGE 2===
+ISO/TR 6336-30:2022(E)
+Foreword........................................................................................................................................................................................................................................iv
+Introduction..................................................................................................................................................................................................................................v
+1	
+Scope..................................................................................................................................................................................................................................1
+2	
+Normative references......................................................................................................................................................................................1
+3 
+Terms, definitions, symbols and units..........................................................................................................................................1
+3.1	
+Terms and definitions.......................................................................................................................................................................1
+3.2	
+Symbols and units................................................................................................................................................................................1
+4	
+Worked examples................................................................................................................................................................................................6
+4.1	
+General...........................................................................................................................................................................................................6
+4.2	
+Qualifying comments........................................................................................................................................................................6
+4.2.1	
+Calculation of base pitch deviation, fpb...........................................................................................................6
+4.2.2	
+Calculation of running-in allowance, yα, for the transverse load factors KHα 
+and KFα.........................................................................................................................................................................................7
+4.2.3	
+Calculation of mesh stiffness, cγ............................................................................................................................ 7
+4.2.4	
+Application of lubricant film ZL, Zv and ZR, hardness ZW and size ZX 
+influence factors.................................................................................................................................................................. 7
+4.2.5	
+Calculation of the permissible contact stress in the limited life range (ZN 
+and ZNT)......................................................................................................................................................................................7
+4.2.6	
+Application of work hardening factor, ZW.....................................................................................................8
+4.2.7	
+Determination of Rz......................................................................................................................................................... 8
+4.2.8	
+Facewidth for calculations involving double helical gears............................................................8
+4.2.9	
+Calculation of εβ for double helical gears......................................................................................................8
+4.2.10	 Calculation of fHβ5 and fHβ.......................................................................................................................................... 8
+4.2.11	 Helix tolerance fHβ5 and fHβ for double helical gears..........................................................................8
+4.2.12	 Calculation of root diameter, df.............................................................................................................................. 8
+4.2.13	 Calculations for internal gears............................................................................................................................... 8
+4.2.14	 Rounding of values............................................................................................................................................................8
+4.2.15	 Deviations of values......................................................................................................................................................... 8
+4.2.16	 Nominal and generated values............................................................................................................................... 9
+4.2.17	 ISO 1328-1:2013..................................................................................................................................................................9
+4.2.18	 Values for reference only.............................................................................................................................................9
+4.3	
+Example 1: Single helical case carburized gear pair.............................................................................................9
+4.4	
+Example 2: Single helical through-hardened gear pair.................................................................................... 14
+4.5	
+Example 3: Spur through-hardened gear pair.........................................................................................................18
+4.6	
+Example 4: Spur case carburized gear pair................................................................................................................22
+4.7	
+Example 5: Spur gear pair with an induction hardened pinion and through-
+hardened cast gear...........................................................................................................................................................................26
+4.8	
+Example 6: Spur internal through-hardened gear pair...................................................................................30
+4.9	
+Example 7: Double helical through-hardened wrought gear pair..........................................................34
+4.10	
+Example 8: Single helical case carburized gear pair..........................................................................................38
+Annex A (informative) Example 1 detailed calculation................................................................................................................43
+Bibliography.............................................................................................................................................................................................................................63
+iii
+© ISO 2022 – All rights reserved	
+﻿
+Contents
+Page
+
+===PAGE 3===
+ISO/TR 6336-30:2022(E)
+Foreword
+ISO (the International Organization for Standardization) is a worldwide federation of national standards 
+bodies (ISO member bodies). The work of preparing International Standards is normally carried out 
+through ISO technical committees. Each member body interested in a subject for which a technical 
+committee has been established has the right to be represented on that committee. International 
+organizations, governmental and non-governmental, in liaison with ISO, also take part in the work. 
+ISO collaborates closely with the International Electrotechnical Commission (IEC) on all matters of 
+electrotechnical standardization.
+The procedures used to develop this document and those intended for its further maintenance are 
+described in the ISO/IEC Directives, Part 1. In particular, the different approval criteria needed for the 
+different types of ISO documents should be noted. This document was drafted in accordance with the 
+editorial rules of the ISO/IEC Directives, Part 2 (see www.iso.org/directives).
+Attention is drawn to the possibility that some of the elements of this document may be the subject of 
+patent rights. ISO shall not be held responsible for identifying any or all such patent rights. Details of 
+any patent rights identified during the development of the document will be in the Introduction and/or 
+on the ISO list of patent declarations received (see www.iso.org/patents).
+Any trade name used in this document is information given for the convenience of users and does not 
+constitute an endorsement. 
+For an explanation of the voluntary nature of standards, the meaning of ISO specific terms and 
+expressions related to conformity assessment, as well as information about ISO's adherence to 
+the World Trade Organization (WTO) principles in the Technical Barriers to Trade (TBT), see 
+www.iso.org/iso/foreword.html.
+This document was prepared by Technical Committee ISO/TC 60, Gears, Subcommittee SC 2, Gear 
+capacity calculation.
+This second edition cancels and replaces the first edition (ISO  6336-30:2017), which has been 
+technically revised according to ISO 6336-1:2019, ISO 6336-2:2019, ISO 6336-3:2019.
+The main changes are as follows:
+—	 introduction of tooth flank correction factor (auxiliary factor, see ISO 6336-2:2019) fZCa;
+—	 introduction of load distribution influence factor fε;
+—	 modification of the helix angle factor Yβ;
+—	 calculation of tooth form factor YF and stress correction factor YS generated with a shaper cutter;
+—	 update to the qualifying comments in 4.2;
+—	 update to the input variables (additional values, modified values).
+A list of all parts in the ISO 6336 series can be found on the ISO website.
+Any feedback or questions on this document should be directed to the user’s national standards body. A 
+complete listing of these bodies can be found at www.iso.org/members.html.
+iv
+	
+﻿
+© ISO 2022 – All rights reserved
+
+
+===PAGE 4===
+ISO/TR 6336-30:2022(E)
+Introduction
+The ISO 6336 series consists of International Standards, Technical Specifications (TS) and Technical 
+Reports (TR) under the general title Calculation of load capacity of spur and helical gears (see Table 1).
+—	 International Standards contain calculation methods that are based on widely accepted practices 
+and have been validated.
+—	 TS contain calculation methods that are still subject to further development.
+—	 TR contain data that is informative, such as example calculations.
+The procedures specified in ISO 6336-1 to ISO 6336-19 cover fatigue analyses for gear rating.  The 
+procedures described in ISO  6336-20 to ISO  6336-29 are predominantly related to the tribological 
+behaviour of the lubricated flank surface contact. ISO  6336-30 to ISO  6336-39 include example 
+calculations. The ISO 6336 series allows the addition of new parts under appropriate numbers to reflect 
+knowledge gained in the future.
+Requesting standardized calculations according to ISO 6336 without referring to specific parts requires 
+the use of only those parts that are designated as International Standards (see Table 1 for listing). 
+When requesting further calculations, the relevant part or parts of ISO 6336 need to be specified. Use 
+of a Technical Specification as acceptance criteria for a specific design needs to be agreed in advance 
+between manufacturer and purchaser.
+Table 1 — Overview of ISO 6336
+Calculation of load capacity of spur and helical gears
+Internation­
+al
+Standard
+Technical
+Specifica­
+tion
+Technical
+Report
+Part 1: Basic principles, introduction and general influence factors
+X
+Part 2: Calculation of surface durability (pitting)
+X
+Part 3: Calculation of tooth bending strength
+X
+Part 4: Calculation of tooth flank fracture load capacity
+X
+Part 5: Strength and quality of materials
+X
+Part 6: Calculation of service life under variable load
+X
+Part 20: Calculation of scuffing load capacity — Flash temperature 
+method
+X
+Part 21: Calculation of scuffing load capacity — Integral temperature 
+method
+X
+Part 22: Calculation of micropitting load capacity
+(replaces: ISO/TR 15144-1)
+X
+Part 30: Calculation examples for the application of ISO 6336‑1, 
+ISO 6336‑2, ISO 6336‑3 and, ISO 6336‑5
+X
+Part 31: Calculation examples of micropitting load capacity
+(replaces: ISO/TR 15144-2)
+X
+NOTE   At the time of publication of this document, some of the parts listed here were under development. Consult the ISO 
+website.
+This document provides worked examples for the application of the calculation procedures defined in 
+ISO 6336-1, ISO 6336-2, ISO 6336-3 and ISO 6336-5. The example calculations cover the application to 
+spur, helical and double helical, external and internal cylindrical involute gears for both high speed 
+and low speed operating conditions, determining the ISO safety factors against tooth flank pitting and 
+tooth root bending strength for each gear set. The calculation procedures used are consistent with 
+those presented in ISO 6336-1, ISO 6336-2, ISO 6336-3 and ISO 6336-5, unless qualifying comments are 
+provided. Where qualifying comments have been included in this document, they reflect areas of the 
+calculation procedures presented in the current standards where points of clarification are required 
+or editorial errors have been identified. The changes defined within the qualifying comments will be 
+v
+© ISO 2022 – All rights reserved	
+﻿
+
+===PAGE 5===
+ISO/TR 6336-30:2022(E)
+implemented in future revisions of ISO 6336-1, ISO 6336-2, ISO 6336-3 and ISO 6336-5. No additional 
+calculations are presented here that are outside of the referenced documents.
+Eight worked examples are presented with the necessary input data for each gear set provided at the 
+beginning of the calculation. Calculation details are presented in full for one worked example, with all 
+following examples having summarized results data presented in tabular format.
+For all calculations in this document, the flank tolerance classes according to ISO  1328-1:2013 are 
+applied.
+vi
+	
+﻿
+© ISO 2022 – All rights reserved
+
+
+===PAGE 6===
+TECHNICAL REPORT
+ISO/TR 6336-30:2022(E)
+Calculation of load capacity of spur and helical gears —
+Part 30:
+Calculation examples for the application of ISO 6336 parts 
+1,2,3,5
+1	 Scope
+This document presents worked examples that apply exclusively the approximation methods for the 
+determination of specific influential factors, such as the dynamic factor, Kv, and the load distributions 
+factors KHα, KHβ, etc., where full analytical calculation procedures are provided within the referenced 
+parts of ISO 6336.
+Worked examples covering the more advanced analysis techniques and methods are not applicable to 
+this document.
+The example calculations presented in this document are provided for guidance on the application 
+of ISO 6336-1:2019, ISO 6336-2:2019, ISO 6336-3:2019 and ISO 6336-5:2016. Any of the values, safety 
+factors or the data presented do not represent recommended criteria for real gearing. Data presented 
+within this document are for the purpose of aiding the application of the calculation procedures of 
+ISO 6336-1, ISO 6336-2, ISO 6336-3 and ISO 6336-5.
+2	 Normative references
+The following documents are referred to in the text in such a way that some or all of their content 
+constitutes requirements of this document. For dated references, only the edition cited applies. For 
+undated references, the latest edition of the referenced document (including any amendments) applies.
+ISO 1122-1, Vocabulary of gear terms — Part 1: Definitions related to geometry
+ISO 6336 (all parts), Calculation of load capacity of spur and helical gears
+3 Terms, definitions, symbols and units
+3.1 Terms and definitions
+For the purposes of this document, the terms and definitions given in ISO 1122-1 and ISO 6336 (all parts) 
+apply.
+ISO and IEC maintain terminology databases for use in standardization at the following addresses:
+—	 ISO Online browsing platform: available at https://​www​.iso​.org/​obp
+—	 IEC Electropedia: available at https://​www​.electropedia​.org/​
+3.2 Symbols and units
+The units of length metre, millimetre and micrometre are chosen in accordance with common practice. 
+The conversions of the units are already included in the given formulae. All symbols used in this 
+document are given in Table 2.
+1
+© ISO 2022 – All rights reserved	
+﻿
+
+===PAGE 7===
+ISO/TR 6336-30:2022(E)
+Symbol
+Description
+Unit
+E
+Young's modulus
+N/mm2
+E1,2
+Auxiliary value (for form factor for pinion or wheel)
+—
+Fm
+Mean transverse tangential load
+N
+Ft
+Nominal tangential load at the reference cylinder
+N
+FtH
+Determinant tangential load
+N
+Fβx
+Initial equivalent misalignment
+μm
+Fβy
+Effective equivalent misalignment (after running-in)
+μm
+ffαeff
+Effective profile deviation after running-in
+μm
+ffα
+Profile form deviation (see ISO 1328-1:2013)
+μm
+fHβ
+Helix slope deviation (see ISO 1328-1:2013)
+μm
+fma
+Mesh misalignment
+μm
+fpb
+Transverse base pitch deviation (the values of fpT may be used for calculations 
+in accordance with the ISO 6336 series, using tolerances according to ISO 1328-
+1:2013)
+μm
+fpbeff
+Effective transverse base pitch deviation after running-in
+μm
+fpT
+Single pitch tolerance (see ISO 1328-1:2013, ISO 6336 refers to fpT as fpt)
+μm
+fsh
+Equivalent misalignment
+μm
+fsh0
+Shaft deformation under specific load
+μm
+fZCa
+Tooth flank correction factor (auxiliary factor, see ISO 6336-2:2019)
+—
+fε
+Load distribution influence factor
+—
+G
+Auxiliary value (for form factor)
+—
+H
+Auxiliary value (for form factor)
+—
+h
+Tooth depth
+mm
+hFe
+Bending moment arm
+mm
+hfP
+Basic rack dedendum
+mm
+hK
+Tip chamfer
+mm
+K
+Constant
+—
+KA
+Application factor
+—
+KFα
+Transverse load factor
+—
+KFβ
+Face load factor
+—
+KHα
+Transverse load factor
+—
+KHβ
+Face load factor
+—
+Kv
+Dynamic factor
+—
+Kγ
+Mesh load factor
+—
+k
+Number of teeth spanned
+—
+L
+Auxiliary notch parameter
+—
+l
+Bearing span
+mm
+MdK
+Dimension between balls
+mm
+mn
+Normal module
+mm
+mred
+Reduced gear pair mass per unit facewidth
+kg/mm
+N
+Resonance ratio
+—
+NF
+Exponent
+—
+NL
+Number of load cycles
+—
+NM
+Number of meshes
+—
+Table 2 (continued)
+Table 2 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+3
+
+===PAGE 8===
+ISO/TR 6336-30:2022(E)
+Symbol
+Description
+Unit
+n1,2
+Rotation speed of pinion (or wheel)
+min−1
+nE1
+Resonance speed
+min−1
+pbn
+Virtual base pitch
+mm
+pr
+As cut basic rack undercut
+mm
+q
+Material allowance for finishing
+mm
+qs
+Notch parameter
+—
+qsT
+Notch parameter of standard reference test piece
+—
+q′
+Flexibility of pair of meshing teeth
+(mm·μm)/N
+Ra
+Arithmetic mean roughness value, Ra = 1/6 Rz
+μm
+Rz
+Mean peak-to-valley roughness (ISO 4287:1997a including ISO 4287:1997/
+Cor 1:1998, ISO 4287:1997/Cor 2:2005, ISO 4287:1997/Amd 1:2009 and 
+ISO 4288:1996b)
+μm
+Rz10
+Mean relative peak-to-valley roughness for gear pair
+μm
+SF
+Safety factor for bending
+—
+SH
+Safety factor for surface durability
+—
+s
+Bearing span offset
+mm
+sFn
+Tooth root normal chord
+mm
+spr
+Residual fillet undercut, s
+pr
+q
+pr =
+−
+mm
+T1,2
+Nominal torque at pinion/wheel
+Nm
+v
+Circumferential velocity at the reference cylinder
+m/s
+vw
+Pitch line velocity
+m/s
+Wk
+Span measurement
+mm
+x
+Nominal profile shift coefficient
+—
+xE
+Generating profile shift coefficient
+—
+xE,V
+Generating profile shift coefficient (pre-finishing)
+—
+x0
+Pinion cutter profile shift coefficient
+—
+YB
+Rim thickness factor
+—
+YDT
+Deep tooth factor
+—
+YF
+Tooth form factor
+—
+YN
+Life factor (tooth root stress)
+—
+YNT
+Life factor for reference test conditions (tooth root stress)
+—
+YRrelT
+Relative surface factor
+—
+YS
+Stress correction factor
+—
+YST
+Stress correction factor, relevant to the dimensions of the reference test gears
+—
+YX
+Size factor
+—
+Yβ
+Helix angle factor
+—
+YδrelT
+Relative notch sensitivity factor for reference stress
+—
+yf
+Running-in allowance
+μm
+yα
+Running-in allowance
+μm
+yβ
+Running-in allowance
+μm
+ZB
+Single pair tooth contact factor
+—
+ZD
+Single pair tooth contact factor
+—
+ZE
+Elasticity factor
+N
+mm
+/
+2
+ZH
+Zone factor
+—
+Table 2 (continued)
+Table 2 (continued)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+4
+
+===PAGE 9===
+ISO/TR 6336-30:2022(E)
+Symbol
+Description
+Unit
+ZL
+Lubricant factor
+—
+ZN
+Life factor (contact stress)
+—
+ZNT
+Life factor for reference test conditions (contact stress)
+—
+ZR
+Roughness factor
+—
+ZW
+Work hardening factor
+—
+ZX
+Size factor
+—
+Zv
+Velocity factor
+—
+Zβ
+Helix angle factor
+—
+Zε
+Contact ratio factor
+—
+z
+Number of teeth
+—
+zn
+Virtual number of teeth
+—
+z0
+Pinion cutter number of teeth
+—
+αn
+Normal pressure angle
+°
+αen
+Virtual form factor pressure angle
+°
+αFen
+Virtual load direction angle
+°
+αt
+Transverse pressure angle
+°
+αwt
+Transverse working pressure angle
+°
+β
+Helix angle (without subscript, at reference cylinder)
+°
+γ
+Auxiliary angle
+°
+εα
+Transverse contact ratio
+—
+εαn
+Virtual contact ratio
+—
+εβ
+Overlap ratio
+—
+εγ
+Total contact ratio
+—
+θ
+Auxiliary value (for form factor)
+rad
+ν
+Poisson's ratio
+—
+ν40
+Lubrication viscosity
+mm2/s
+ρ
+Material density
+kg/m3
+ρ
+Radius of curvature
+mm
+ρaP0
+Pinion cutter tip radius coefficient
+—
+ρF
+Radius of root fillet
+mm
+ρfP
+Root fillet radius of the basic rack for cylindrical gears
+mm
+ρred
+Relative radius of curvature
+mm
+ρ′
+Slip layer thickness
+mm
+σF0
+Nominal tooth root stress
+N/mm2
+σF
+Tooth root stress
+N/mm2
+σF lim
+Allowable stress number (bending)
+N/mm2
+σFP
+Permissible bending stress
+N/mm2
+σFPlonglife
+Permissible bending stress (long life)
+N/mm2
+σFPref
+Permissible bending stress (reference condition)
+N/mm2
+σH
+Contact stress
+N/mm2
+σH lim
+Allowable stress number (surface)
+N/mm2
+σH0
+Nominal contact stress at pitch point
+N/mm2
+σHP
+Permissible contact stress
+N/mm2
+σHPlonglife
+Permissible contact stress (long life)
+N/mm2
+Table 2 (continued)
+Table 2 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+5
+
+===PAGE 10===
+ISO/TR 6336-30:2022(E)
+Symbol
+Description
+Unit
+σHPref
+Permissible contact stress (reference)
+N/mm2
+σs
+Yield stress
+N/mm2
+σ0,2
+Proof stress
+N/mm2
+χ*
+Relative stress gradient in root of a notch
+mm-1
+χP
+*
+Stress gradient – smooth, polished test piece
+mm-1
+χT
+*
+Stress gradient for reference test piece
+mm-1
+a   Cancelled and replaced by ISO 21920-2:2021.
+b   Cancelled and replaced by ISO 21920-3:2021.
+4	 Worked examples
+4.1	 General
+Clause 4 presents examples for the calculation of the safety factor for surface durability, SH, and safety 
+factor for tooth breakage, SF. For all examples, where various calculation methods are presented for the 
+determination of specific influencing factors, the approximate methods detailed in the ISO 6336 series 
+are applied. Where a specific method is used to calculate an influence parameter, the method used is 
+denoted as a subscript to that factor (as defined in ISO 6336-1).
+The calculations results in specific aspects of the rating procedure to highlight the influence of specific 
+gear pair geometry, quality or application.
+For example  1 in 4.3, the full calculation procedure is presented including the formulae. For all 
+subsequent calculations, only the tabulated input and results data are provided.
+In a number of areas, points of clarification of the procedure or specific criteria that differ slightly from 
+the definitions provided in ISO 6336-1, ISO 6336-2 and ISO 6336-3 are incorporated within the example 
+calculations. The points reflect the true intention of the procedures of ISO  6336-1, ISO  6336-2 and 
+ISO 6336-3 and are defined in 4.2.
+NOTE 1	
+The calculations and results presented were performed using computer-based procedures. If the 
+calculations are performed manually, it is possible that small differences between the results appear.
+NOTE 2	
+In the presented results, all values for K factors are presented with rounding to two decimal places 
+(X,XX); however, for the actual calculations, the results for each factor have been used with unrounded values.
+4.2	 Qualifying comments
+4.2.1 
+Calculation of base pitch deviation, fpb
+The value calculated for fpb is by means of Formula (1), and is applied without rounding:
+f
+f
+t
+pb
+pT cos
+=
+⋅
+(
+)
+α
+	
+(1)
+where fpT is provided by ISO 1328-1:2013.
+Table 2 (continued)
+Table 2 (continued)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+6
+
+===PAGE 11===
+ISO/TR 6336-30:2022(E)
+4.2.2	
+Calculation of running-in allowance, yα, for the transverse load factors KHα and KFα
+The following criteria defined in ISO 6336-1:2019, 8.3.1, are applied only for the calculation of KHα and 
+KFα:
+—	 The base pitch deviation, fpb, accounts for the total effect of all gear tooth deviations which affect 
+the transverse load factor. If, nevertheless, the profile form deviation, ffα, is greater than the base 
+pitch deviation, the profile form deviation ffα is used instead of the base pitch deviation fpb.
+—	 If profile modifications compensate for the deflections of the teeth at the actual load level, 50 % of 
+the base pitch deviation fpb and its corresponding running-in value yα(fpb) respectively the profile 
+form deviation ffα and its corresponding running-in value yα(ffα) is used for the calculation of KHα. 
+This reduction applies for examples 1 and 4 of this document.
+The criteria listed above do not apply for determining fpb and ffα for the calculation of Kv according to 
+ISO 6336-1:2019, 6.5.4.
+4.2.3	
+Calculation of mesh stiffness, cγ
+The calculation of mesh stiffness, cγ, in accordance with method B of ISO 6336-1:2019, 9.3.3, is applied 
+for all example calculations. For all cγ calculations, the use of the nominal profile shift coefficient, x, and 
+nominal basic rack dedendum, hfP, is applied. The generating profile shift coefficient, xE, is not used, 
+even where xE is used for other strength calculations associated with the tooth root. Virtual number of 
+teeth of helical gears were calculated with Formula (16) of ISO 6336-3:2019 rather than approximate 
+formula given in Formula (81) of ISO 6336-1:2019.
+4.2.4 
+Application of lubricant film ZL, Zv and ZR, hardness ZW and size ZX influence factors
+According to the ISO  6336  series, the permissible contact stress numbers for static and reference 
+condition, including all relevant influence factors as defined, will be calculated. For limited life, linear 
+interpolation on a log–log scale, following the procedure of ZNT, between these two values is applied. 
+The linear interpolation on a log-log-scale for limited life leads to a value ZN, which can be different to 
+the value ZNT.
+The displayed values of ZL, Zv, ZR, ZW and ZX in the output tables of this document show the interpolated 
+values of each Z-factor.
+4.2.5 
+Calculation of the permissible contact stress in the limited life range (ZN and ZNT)
+For the calculation of the permissible contact stress in the limited life range, the following procedure is 
+considered according to ISO 6336-2:2019:
+—	 Calculation of the permissible contact stress for static stress σHP,stat and for reference stress σHP,stat 
+according to ISO 6336-2:2019, 5.4.3 with the use of ZNT.
+—	 Calculation of the permissible contact stress for the limited life range σHP,lim by applying the formulae 
+in ISO 6336-2:2019, 5.4.4.3. The application of the formulae results in the calculation and usage of ZN 
+(e. g. for case hardened or through hardened material) with no pitting permissible:
+Z
+N
+N
+L
+ 
+HP stat
+HP ref
+=
+⋅
+
+
+
+
+
+
+⋅
+5 107
+0 3 705
+,
+log
+,
+,
+σ
+σ
+—	 The obtained permissible contact stress for the limited life range σHP,lim is equal to the permissible 
+contact stress σHP, which is subsequently used to calculate the pitting stress limit σHG according 
+to ISO 6336-2:2019, 5.4.3 and eventually the safety against pitting SH according to ISO 6336-2:2019, 
+5.2.
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+7
+
+===PAGE 12===
+ISO/TR 6336-30:2022(E)
+4.2.6	
+Application of work hardening factor, ZW
+In example 5 in 4.7, a surface-hardened pinion is used with a through-hardened cast iron wheel. 
+According to ISO 6336-2:2019, 13.3.2, the calculation method is only valid for through-hardened steel, 
+not through-hardened cast iron. To be on the conservative side, the work hardening factor for the 
+wheel is set to ZW2 = 1,0. For all other cases where both gears are either through-hardened or surface-
+hardened, ZW1,2 = 1 for both pinion and wheel applies.
+4.2.7	
+Determination of Rz
+The determination of Rz from the specified Ra values is determined by the approximation suggested in 
+ISO 6336-2:2019, 12.3.2.3.1, footnote 2, where Rz = 6 ⋅ Ra.
+4.2.8 
+Facewidth for calculations involving double helical gears
+For calculations involving double helical gears (such as example 7), and for the application of 
+ISO 6336-2:2019, Formula (40) bB is used instead of b.
+4.2.9	
+Calculation of εβ for double helical gears
+For the calculation of εβ for double helical gears, the value applies for only one helix. For example, the 
+value for facewidth, b, is replaced by bB.
+4.2.10	 Calculation of fHβ5 and fHβ
+The calculation of fHβ5 for use in the determination of the initial equivalent misalignment, Fβx, in 
+ISO 6336-1:2019, 7.5.3.4 is performed in accordance with ISO 1328-1:2013 for flank tolerance class 5 
+with the as required rounding applied.
+4.2.11	 Helix tolerance fHβ5 and fHβ for double helical gears
+When calculating the helix tolerance value fHβ5 and fHβ for double helical gears, the facewidth of one 
+helix is used, i.e. bB.
+4.2.12	 Calculation of root diameter, df
+For all calculations presented within this document, the calculation of the root diameter, df, is performed 
+with the generating profile shift coefficient, xE, and not the nominal profile shift coefficient, x (see also 
+4.2.16).
+4.2.13	 Calculations for internal gears
+For all calculations involving internal gears (example 6), the input data uses negative values for 
+diameters as defined in the ISO 6336 series.
+4.2.14	 Rounding of values
+The calculations within this document have been conducted with unrounded values. The values 
+documented in the table are rounded.
+4.2.15	 Deviations of values
+Numeric calculations and different programming of calculation programs can lead to slight deviations 
+of the values when recalculating. The calculated values documented in this document were achieved by 
+different calculation programs. Deviations were accepted in a defined range, as the basic statement of 
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+8
+
+===PAGE 13===
+ISO/TR 6336-30:2022(E)
+the calculation remains. The range of acceptable deviations for the calculations in this document was 
+defined as the following:
+—	 Absolute deviation: 0,01.
+—	 Relative deviation: 0,5 %.
+Values for the calculations were within the absolute and relative deviation range.
+4.2.16	 Nominal and generated values
+The values were calculated with nominal values if not otherwise stated in this document (e.g. in 4.2.12) 
+or the corresponding standard (e.g. bending geometry according to ISO 6336-3:2019).
+4.2.17	 ISO 1328-1:2013
+ISO 1328-1:2013 was used for the calculation of the allowable values of deviations.
+4.2.18	 Values for reference only
+Values in the input table (e.g. nominal profile shift coefficient x) are put in parenthesis when they are 
+calculated and for reference only.
+4.3 Example 1: Single helical case carburized gear pair
+For example 1, input values and output values are given in Tables 3 and 4, respectively.
+A full calculation description is provided in Annex A.
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+9
+
+===PAGE 14===
+ISO/TR 6336-30:2022(E)
+Table 3 — Example 1 input values
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Geometry
+Number of teeth
+—
+z
+17
+103
+Normal module
+mm
+mn
+8,00
+Normal pressure angle
+°
+αn
+20,00
+Helix angle
+°
+β
+15,80
+Hand of helix
+—
+—
+Left
+Right
+Facewidth (total)
+mm
+b
+100,00
+100,00
+Gap width
+mm
+—
+0
+0
+Edge chamfer
+mm
+—
+0,00
+0,00
+Contact facewidth (total)
+mm
+beff
+100,00
+Centre distance
+mm
+a
+500,000
+Span measurement
+mm
+Wk
+38,196
+307,943
+Number of teeth spanned
+—
+k
+2
+13
+Dimension between balls
+mm
+MdK
+—
+—
+Ball diameter
+mm
+DM
+—
+—
+Nominal profile shift coefficient
+—
+x
+(0,145)
+0,000
+Tip diameter
+mm
+da
+159,66
+872,35
+Basic rack dedendum coefficient
+—
+hfP/mn
+1,400
+1,400
+Tip chamfer
+mm
+hK
+0,00
+0,00
+Basic rack fillet root radius coefficient
+—
+ρfP/mn
+0,39
+0,39
+As cut basic rack undercut
+mm
+pr
+0,00
+0,00
+Material allowance for finishing
+mm
+q
+0,00
+0,00
+Residual fillet undercut, s
+pr
+q
+pr =
+−
+mm
+spr
+0,00
+0,00
+Pinion cutter number of teeth
+—
+z0
+—
+—
+Pinion cutter profile shift (ref)
+—
+x0
+—
+—
+Flank finishing process
+—
+—
+As cut
+As cut
+Root finishing process
+—
+—
+As cut
+As cut
+Tip relief
+μm
+Ca
+70
+70
+Root relief
+µm
+Cf
+0
+0
+Profile modification compensate for the deflections
+—
+—
+Yes
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+fZCa
+based on 3D load
+distribution program
+Quality
+Flank tolerance class
+—
+A
+5
+5
+Single pitch tolerance according to ISO 1328-1:2013
+μm
+ƒpT
+8,5
+9,0
+Profile form deviation according to ISO 1328-1:2013
+μm
+ƒfα
+9,5
+9,5
+Helix slope deviation according to ISO 1328-1:2013
+μm
+fHβ
+8,0
+9,0
+Surface roughness – flank Ra (Rz)
+μm
+—
+1,0 (6,0)
+1,0 (6,0)
+Surface roughness – fillet Ra (Rz)
+μm
+—
+3,0 (18,0)
+3,0 (18,0)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+10
+
+===PAGE 15===
+ISO/TR 6336-30:2022(E)
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Material
+Material
+—
+—
+Eh
+Eh
+Material quality
+—
+—
+MQ
+MQ
+Case hardness
+—
+—
+60 HRC
+60 HRC
+Core hardness
+—
+—
+30 HRC
+30 HRC
+Young’s modulus
+N/mm2
+E
+206 000
+206 000
+Poisson’s ratio
+—
+v
+0,3
+0,3
+Yield/proof stress
+N/mm2
+σS/σ0,2
+—
+—
+Material density
+kg/m3
+ρ
+7 830
+7 830
+Shot peen
+—
+—
+No
+No
+Limited pitting allowable
+—
+—
+No
+No
+Application Application factor
+—
+KA-A
+1,00
+Mesh load factor
+—
+Kγ
+1,00
+Reverse bending
+—
+—
+No
+No
+Favourable contact position
+—
+No
+No
+Helix modification (ISO 6336-1:2019, Table 12)
+—
+—
+None (No. 1)
+Dynamic factor, Kv, calculation method
+—
+—
+Method B
+Face load distribution factor, KHβ and KFβ, 
+calculation method
+—
+—
+Method C
+Number of meshes
+—
+NM
+1
+1
+Gear blank type
+—
+—
+Solid
+Solid
+Web thickness
+mm
+bs
+—
+—
+Inside diameter
+mm
+—
+—
+—
+Number of webs
+—
+—
+—
+—
+Arrangement (ISO 6336-1:2019, Figure 13)
+—
+—
+a
+Bearing span
+mm
+l
+125,00
+—
+Bearing span offset
+mm
+s
+0,00
+—
+External shaft diameter
+mm
+dsh
+100,00
+—
+Internal shaft diameter
+mm
+dshi
+0,00
+—
+Equivalent misalignment
+μm
+ƒsh
+As Formula (59)
+Mesh misalignment
+μm
+ƒma
+As Formula (66)
+Minimum safety factor pitting
+—
+SH min
+1,00
+Minimum safety factor tooth breakage
+—
+SF min
+1,00
+Lubrication viscosity
+mm2/s
+ν40
+320
+Load
+Torque
+kNm
+T1
+9,000
+Speed
+min-1
+n1
+360,0
+Required life
+h
+—
+50 000
+Life factor for contact stress, ZNT, at 1010 cycles
+—
+—
+0,85
+0,85
+Life factor for tooth root stress, YNT, at 1010 cycles
+—
+—
+0,85
+0,85
+Table 3 (continued)
+Table 3 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+11
+
+===PAGE 16===
+ISO/TR 6336-30:2022(E)
+Table 4 — Example 1 output values
+Symbol
+Description
+Unit
+Pinion
+Gear
+d
+Reference diameter
+mm
+141,34
+856,35
+da
+Tip diameter
+mm
+159,66
+872,35
+db
+Base circle diameter
+mm
+132,20
+800,97
+xE
+Generating profile shift coefficient
+—
+0,117 8
+- 0,027 5
+df
+Root diameter (based on xE)
+mm
+120,82
+833,52
+dFf
+Root form diameter (based on xE)
+mm
+132,25
+839,08
+dNf
+Start of active profile diameter
+mm
+132,92
+845,23
+dw
+Working pitch diameter
+mm
+141,67
+858,33
+Ft
+Nominal tangential load at the reference cylinder
+N
+127 352
+KFα-B
+Transverse load factor (root stress)
+—
+1,00
+KFβ-C
+Face load factor (root stress)
+—
+1,13
+KHα-B
+Transverse load factor (contact stress)
+—
+1,00
+KHβ-C
+Face load factor (contact stress)
+—
+1,16
+Kv-B
+Dynamic factor
+—
+1,00
+SF
+Tooth root breakage safety factor
+—
+2,09
+2,25
+SH
+Pitting safety factor
+—
+1,03
+1,09
+vw
+Pitch line velocity
+m/s
+2,67
+YB
+Rim thickness factor
+—
+1,00
+1,00
+YDT
+Deep tooth factor
+—
+1,00
+YF
+Tooth form factor
+—
+1,26
+1,07
+YNT
+Life factor for reference test conditions (tooth root stress)
+—
+0,89
+0,92
+YN
+Life factor (tooth root stress)
+—
+0,89
+0,92
+YRrelT
+Relative surface factor
+—
+0,96
+0,96
+YS
+Stress correction factor
+—
+1,79
+2,05
+YST
+Stress correction factor for reference gears
+—
+2,00
+YX
+Size factor
+—
+0,97
+0,97
+Yβ
+Helix angle factor
+—
+0,97
+YδrelT
+Relative notch sensitivity factor
+—
+0,99
+1,00
+ZB
+Single pair tooth contact factor, pinion
+—
+1,00
+Zβ
+Helix angle factor (pitting)
+—
+1,02
+ZD
+Single pair tooth contact factor, wheel
+—
+1,00
+ZE
+Elasticity factor
+N
+mm
+/
+2
+189,81
+Zε
+Contact ratio factor
+—
+0,80
+ZH
+Zone factor
+—
+2,40
+ZL
+Lubricant factor
+—
+1,05
+1,05
+ZNT
+Life factor for reference test conditions (contact stress)
+—
+0,91
+0,96
+ZN
+Life factor (contact stress)
+—
+0,91
+0,96
+ZR
+Roughness factor
+—
+0,97
+0,97
+Zv
+Velocity factor
+—
+0,97
+0,97
+ZW
+Work hardening factor
+—
+1,00
+1,00
+ZX
+Size factor
+—
+1,00
+1,00
+εα
+Transverse contact ratio
+—
+1,55
+εβ
+Overlap ratio
+—
+1,08
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+12
+
+===PAGE 17===
+ISO/TR 6336-30:2022(E)
+Symbol
+Description
+Unit
+Pinion
+Gear
+εγ
+Total contact ratio
+—
+2,63
+σF0
+Nominal tooth root stress
+N/mm2
+350
+339
+σF
+Tooth root stress
+N/mm2
+395
+382
+σF lim
+Limiting tooth root stress
+N/mm2
+500
+500
+σFP
+Permissible tooth root stress
+N/mm2
+824
+860
+σH
+Contact stress
+N/mm2
+1 299
+1 299
+σH lim
+Limiting contact stress
+N/mm2
+1 500
+1 500
+σH0
+Nominal contact stress
+N/mm2
+1 207
+σHP
+Permissible contact stress
+N/mm2
+1 338
+1 415
+Intermediate calculation values
+Kv-B intermediate calculation values
+cγα
+Mean value of mesh stiffness per unit facewidth (used for Kv-B, 
+KHα-B, KFα-B)
+N/(mm·μm)
+17,5
+c′
+Maximum tooth stiffness per unit facewidth (single stiffness) of 
+a tooth pair
+N/(mm·μm)
+12,4
+mred
+Reduced gear pair mass per unit facewidth referenced to the line 
+of action
+kg/mm
+0,067
+N
+Resonance ratio
+—
+0,04
+KHβ-C intermediate calculation values
+cγβ
+Mean value of mesh stiffness per unit facewidth (used for KHβ-C, 
+KFβ-C)
+N/(mm·μm)
+14,8
+fsh0
+Shaft deformation under specific load
+μm
+0,012
+Fβx
+Initial equivalent misalignment (before 
+running-in)
+μm
+31,6
+Fβy
+Effective equivalent misalignment (after 
+running-in)
+μm
+26,9
+yα
+Running-in allowance for a gear pair for the calculation of KHα 
+(calculated with 50 % of max(fpb, ffα))
+μm
+0,356
+yβ
+Running-in allowance (equivalent 
+misalignment)
+μm
+4,7
+fpb
+Transverse base pitch deviation
+μm
+8,4
+fHβ5
+Tolerance on helix slope deviation for flank tolerance class 5
+μm
+9,0
+fsh
+Component of equivalent misalignment due to deformations of 
+pinion and wheel shafts
+μm
+14,7
+fma
+Mesh misalignment due to manufacturing deviations
+μm
+12,0
+Auxiliary values
+fZCa
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+1,00
+fε
+Load distribution influence factor
+—
+0,78
+Table 4 (continued)
+Table 4 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+13
+
+===PAGE 18===
+ISO/TR 6336-30:2022(E)
+4.4	 Example 2: Single helical through-hardened gear pair
+For example 2, input values are given in Tables 5 and 6.
+Table 5 — Example 2 input values
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Geometry
+Number of teeth
+—
+z
+17
+103
+Normal module
+mm
+mn
+8,00
+Normal pressure angle
+°
+αn
+20,00
+Helix angle
+°
+β
+15,80
+Hand of helix
+—
+—
+Left
+Right
+Facewidth (total)
+mm
+b
+100,00
+100,00
+Gap width
+mm
+—
+—
+—
+Edge chamfer
+mm
+—
+0,00
+0,00
+Contact facewidth (total)
+mm
+beff
+100,00
+Centre distance
+mm
+a
+500,000
+Span measurement
+mm
+Wk
+38,196
+307,943
+Number of teeth spanned
+—
+k
+2
+13
+Dimension between balls
+mm
+MdK
+—
+—
+Ball diameter
+mm
+DM
+—
+—
+Nominal profile shift coefficient
+—
+x
+(0,145)
+0,000
+Tip diameter
+mm
+da
+159,66
+872,35
+Basic rack dedendum coefficient
+—
+hfP/mn
+1,250
+1,250
+Tip chamfer
+mm
+hK
+0,00
+0,00
+Basic rack fillet root radius coefficient
+—
+ρfP/mn
+0,39
+0,39
+As cut basic rack undercut
+mm
+pr
+0,00
+0,00
+Material allowance for finishing
+mm
+q
+0,00
+0,00
+Residual fillet undercut, s
+pr
+q
+pr =
+−
+mm
+spr
+0,00
+0,00
+Pinion cutter number of teeth
+—
+z0
+—
+—
+Pinion cutter profile shift (ref)
+—
+x0
+—
+—
+Flank finishing process
+—
+—
+As cut
+As cut
+Root finishing process
+—
+—
+As cut
+As cut
+Tip relief
+μm
+Ca
+70
+70
+Root relief
+µm
+Cf
+0
+0
+Profile modification compensate for the deflections
+—
+—
+No
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+fZCa
+No modification
+Quality
+Flank tolerance class
+—
+A
+8
+6
+Single pitch tolerance according to ISO 1328-1:2013
+μm
+ƒpT
+24,0
+13,0
+Profile form deviation according to ISO 1328-1:2013
+μm
+ƒfα
+27,0
+13,0
+Helix slope deviation according to ISO 1328-1:2013
+μm
+fHβ
+23,0
+13,0
+Surface roughness – flank Ra (Rz)
+μm
+—
+3,0 (18,0)
+3,0 (18,0)
+Surface roughness – fillet Ra (Rz)
+μm
+—
+3,0 (18,0)
+3,0 (18,0)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+14
+
+===PAGE 19===
+ISO/TR 6336-30:2022(E)
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Material
+Material
+—
+—
+V (alloy
+steel)
+V (alloy
+steel)
+Material quality
+—
+—
+MQ
+MQ
+Case hardness
+—
+—
+310 HV
+260 HV
+Core hardness
+—
+—
+—
+—
+Young’s modulus
+N/mm2
+E
+206 000
+206 000
+Poisson’s ratio
+—
+v
+0,3
+0,3
+Yield/proof stress
+N/mm2
+σS/σ0,2
+500,0
+500,0
+Material density
+kg/m3
+ρ
+7 830
+7 830
+Shot peen
+—
+—
+No
+No
+Limited pitting allowable
+—
+—
+No
+No
+Application Application factor
+—
+KA-A
+1,00
+Mesh load factor
+—
+Kγ
+1,00
+Reverse bending
+—
+—
+No
+No
+Favourable contact position
+—
+—
+No
+No
+Helix modification (ISO 6336-1:2019, Table 12)
+—
+—
+None (No. 1)
+Dynamic factor, Kv, calculation method
+—
+—
+Method B
+Face load distribution factor, KHβ and KFβ,
+calculation method
+—
+—
+Method C
+Number of meshes
+—
+NM
+1
+1
+Gear blank type
+—
+—
+Solid
+Solid
+Web thickness
+mm
+bs
+—
+—
+Inside diameter
+mm
+—
+—
+—
+Number of webs
+—
+—
+—
+—
+Arrangement (ISO 6336-1:2019, Figure 13)
+—
+—
+a
+Bearing span
+mm
+l
+125,00
+—
+Bearing span offset
+mm
+s
+0,00
+—
+External shaft diameter
+mm
+dsh
+100,00
+—
+Internal shaft diameter
+mm
+dshi
+0,00
+—
+Equivalent misalignment
+μm
+ƒsh
+15,0
+Mesh misalignment
+μm
+ƒma
+5,0
+Minimum safety factor pitting
+—
+SH min
+1,00
+Minimum safety factor tooth breakage
+—
+SF min
+1,00
+Lubrication viscosity
+mm2/s
+ν40
+320
+Load
+Torque
+kNm
+T1
+1,000
+Speed
+min-1
+n1
+360,0
+Required life
+h
+—
+100 00
+Life factor for contact stress, YNT, at 1010 cycles
+—
+—
+0,85
+0,85
+Life factor for tooth root stress, YNT, at 1010 cycles
+—
+—
+0,85
+0,85
+Table 5 (continued)
+Table 5 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+15
+
+===PAGE 20===
+ISO/TR 6336-30:2022(E)
+Table 6 — Example 2 output values
+Symbol
+Description
+Unit
+Pinion
+Gear
+d
+Reference diameter
+mm
+141,34
+856,35
+da
+Tip diameter
+mm
+159,66
+872,35
+db
+Base circle diameter
+mm
+132,20
+800,97
+xE
+Generating profile shift coefficient
+—
+0,117 8
+- 0,027 5
+df
+Root diameter (based on xE)
+mm
+123,22
+835,92
+dFf
+Root form diameter (based on xE)
+mm
+132,61
+841,13
+dNf
+Start of active profile diameter
+mm
+132,92
+845,23
+dw
+Working pitch diameter
+mm
+141,67
+858,33
+Ft
+Nominal tangential load at the reference cylinder
+N
+14 150
+KFα-B
+Transverse load factor (root stress)
+—
+1,58
+KFβ-C
+Face load factor (root stress)
+—
+1,61
+KHα-B
+Transverse load factor (contact stress)
+—
+1,58
+KHβ-C
+Face load factor (contact stress)
+—
+1,78
+Kv-B
+Dynamic factor
+—
+1,04
+SF
+Tooth root breakage safety factor
+—
+5,57
+5,42
+SH
+Pitting safety factor
+—
+0,80
+0,79
+vw
+Pitch line velocity
+m/s
+2,67
+YB
+Rim thickness factor
+—
+1,00
+1,00
+YDT
+Deep tooth factor
+—
+1,00
+YF
+Tooth form factor
+—
+1,11
+1,02
+YNT
+Life factor for reference test conditions (tooth root stress)
+—
+0,92
+0,95
+YN
+Life factor (tooth root stress)
+—
+0,92
+0,95
+YRrelT
+Relative surface factor
+—
+0,96
+0,96
+YS
+Stress correction factor
+—
+1,93
+2,12
+YST
+Stress correction factor for reference gears
+—
+2,00
+YX
+Size factor
+—
+0,98
+0,98
+Yβ
+Helix angle factor
+—
+0,97
+YδrelT
+Relative notch sensitivity factor
+—
+0,98
+1,00
+ZB
+Single pair tooth contact factor, pinion
+—
+1,10
+Zβ
+Helix angle factor (pitting)
+—
+1,02
+ZD
+Single pair tooth contact factor, wheel
+—
+1,10
+ZE
+Elasticity factor
+N
+mm
+/
+2
+189,81
+Zε
+Contact ratio factor
+—
+0,80
+ZH
+Zone factor
+—
+2,40
+ZL
+Lubricant factor
+—
+1,09
+1,08
+ZNT
+Life factor for reference test conditions (contact stress)
+—
+0,96
+1,03
+ZN
+Life factor (contact stress)
+—
+0,96
+1,04
+ZR
+Roughness factor
+—
+0,79
+0,80
+Zv
+Velocity factor
+—
+0,93
+0,94
+ZW
+Work hardening factor
+—
+1,00
+1,00
+ZX
+Size factor
+—
+1,00
+1,00
+εα
+Transverse contact ratio
+—
+1,55
+εβ
+Overlap ratio
+—
+1,08
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+16
+
+===PAGE 21===
+ISO/TR 6336-30:2022(E)
+Symbol
+Description
+Unit
+Pinion
+Gear
+εγ
+Total contact ratio
+—
+2,63
+σF0
+Nominal tooth root stress
+N/mm2
+37
+37
+σF
+Tooth root stress
+N/mm2
+98
+99
+σF lim
+Limiting tooth root stress
+N/mm2
+319
+298
+σFP
+Permissible tooth root stress
+N/mm2
+544
+535
+σH
+Contact stress
+N/mm2
+754
+754
+σH lim
+Limiting contact stress
+N/mm2
+780
+714
+σH0
+Nominal contact stress
+N/mm2
+402
+σHP
+Permissible contact stress
+N/mm2
+603
+600
+Intermediate calculation values
+Kv-B intermediate calculation values
+cγα
+Mean value of mesh stiffness per unit facewidth (used for Kv-B, 
+KHα-B, KFα-B)
+N/(mm·μm)
+18,9
+c′
+Maximum tooth stiffness per unit facewidth (single stiffness) of 
+a tooth pair
+N/(mm·μm)
+13,4
+mred
+Reduced gear pair mass per unit facewidth referenced to the line 
+of action
+kg/mm
+0,069
+N
+Resonance ratio
+—
+0,04
+KHβ-C intermediate calculation values
+cγβ
+Mean value of mesh stiffness per unit facewidth (used for KHβ-C, 
+KFβ-C)
+N/(mm·μm)
+16,1
+fsh0
+Shaft deformation under specific load
+μm
+0,102
+Fβx
+Initial equivalent misalignment (before 
+running-in)
+μm
+25,0
+Fβy
+Effective equivalent misalignment (after 
+running-in)
+μm
+14,2
+yα
+Running-in allowance for a gear pair
+(calculated with max(fpb, ffα))
+μm
+5,793
+yβ
+Running-in allowance (equivalent 
+misalignment)
+μm
+10,7
+fpb
+Transverse base pitch deviation
+μm
+22,4
+fHβ5
+Tolerance on helix slope deviation for flank tolerance class 5
+μm
+9,0
+fsh
+Component of equivalent misalignment due to deformations of 
+pinion and wheel shafts
+μm
+15,0
+fma
+Mesh misalignment due to manufacturing deviations
+μm
+5,0
+Auxiliary values
+fZCa
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+1,20
+fε
+Load distribution influence factor
+—
+0,78
+Table 6 (continued)
+Table 6 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+17
+
+===PAGE 22===
+ISO/TR 6336-30:2022(E)
+4.5	 Example 3: Spur through-hardened gear pair
+For example 3, input values and output values are given in Tables 7 and 8, respectively.
+Table 7 — Example 3 input values
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Geometry
+Number of teeth
+—
+z
+17
+108
+Normal module
+mm
+mn
+8,00
+Normal pressure angle
+°
+αn
+20,00
+Helix angle
+°
+β
+0,00
+Hand of helix
+—
+—
+Left
+Right
+Facewidth (total)
+mm
+b
+100,00
+100,00
+Gap width
+mm
+—
+0,00
+0,00
+Edge chamfer
+mm
+—
+0,00
+0,00
+Contact facewidth (total)
+mm
+beff
+100,00
+Centre distance
+mm
+a
+500,000
+Span measurement
+mm
+Wk
+37,728
+283,000
+Number of teeth spanned
+—
+k
+2
+12
+Dimension between balls
+mm
+MdK
+—
+—
+Ball diameter
+mm
+DM
+—
+—
+Nominal profile shift coefficient
+—
+x
+0,100
+(−0,100)
+Tip diameter
+mm
+da
+153,60
+878,40
+Basic rack dedendum coefficient
+—
+hfP/mn
+1,250
+1,250
+Tip chamfer
+mm
+hK
+0,00
+0,00
+Basic rack fillet root radius coefficient
+—
+ρfP/mn
+0,45
+0,40
+As cut basic rack undercut
+mm
+pr
+0,000
+0,000
+Material allowance for finishing
+mm
+q
+0,000
+0,000
+Residual fillet undercut, s
+pr
+q
+pr =
+−
+mm
+spr
+0,000
+0,000
+Pinion cutter number of teeth
+—
+z0
+—
+—
+Pinion cutter profile shift (ref)
+—
+x0
+—
+—
+Flank finishing process
+—
+—
+As cut
+As cut
+Root finishing process
+—
+—
+As cut
+As cut
+Tip relief
+μm
+Ca
+70
+70
+Root relief
+µm
+Cf
+0
+0
+Profile modification compensate for the 
+deflections
+—
+—
+No
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+fZCa
+—
+Quality
+Flank tolerance class
+—
+A
+8
+6
+Single pitch tolerance according 
+to ISO 1328-1:2013
+μm
+ƒpT
+24,0
+13,0
+Profile form deviation according 
+to ISO 1328-1:2013
+μm
+ƒfα
+27,0
+13,0
+Helix slope deviation according 
+to ISO 1328-1:2013
+μm
+fHβ
+23,0
+13,0
+Surface roughness – flank Ra (Rz)
+μm
+—
+3,0 (18,0)
+3,0 (18,0)
+Surface roughness – fillet Ra (Rz)
+μm
+—
+3,0 (18,0)
+3,0 (18,0)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+18
+
+===PAGE 23===
+ISO/TR 6336-30:2022(E)
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Material
+Material
+—
+—
+V (alloy steel)
+V (alloy steel)
+Material quality
+—
+—
+MQ
+MQ
+Case hardness
+—
+—
+310 HV
+260 HV
+Core hardness
+—
+—
+—
+—
+Young’s modulus
+N/mm2
+E
+206 000
+206 000
+Poisson’s ratio
+—
+v
+0,3
+0,3
+Yield/proof stress
+N/mm2
+σS/σ0,2
+500,0
+500,0
+Material density
+kg/m3
+ρ
+7 830
+7 830
+Shot peen
+—
+—
+No
+No
+Limited pitting allowable
+—
+—
+No
+No
+Application Application factor
+—
+KA-A
+1,000
+Mesh load factor
+—
+Kγ
+1,00
+Reverse bending
+—
+—
+No
+No
+Favourable contact position
+—
+—
+No
+No
+Helix modification (ISO 6336-1:2019, 
+Table 12)
+—
+—
+None (No. 1)
+Dynamic factor, Kv, calculation method
+—
+—
+Method B
+Face load distribution factor, KHβ and KFβ, 
+calculation method
+—
+—
+Method C
+Number of meshes
+—
+NM
+1
+1
+Gear blank type
+—
+—
+Solid
+Solid
+Web thickness
+mm
+bs
+—
+—
+Inside diameter
+mm
+—
+—
+—
+Number of webs
+—
+—
+—
+—
+Arrangement (ISO 6336-1:2019, Fig­
+ure 13)
+—
+—
+a
+Bearing span
+mm
+l
+100,0
+—
+Bearing span offset
+mm
+s
+0,00
+—
+External shaft diameter
+mm
+dsh
+100,00
+—
+Internal shaft diameter
+mm
+dshi
+0,00
+—
+Equivalent misalignment
+μm
+ƒsh
+As Formula (59)
+Mesh misalignment
+μm
+ƒma
+As Formula (66)
+Minimum safety factor pitting
+—
+SH min
+1,00
+Minimum safety factor tooth breakage
+—
+SF min
+1,00
+Lubrication viscosity
+mm2/s
+ν40
+320
+Load
+Torque
+kNm
+T1
+1,000
+Speed
+min-1
+n1
+360,0
+Required life
+h
+—
+10 000
+Life factor for contact stress, ZNT, at 
+1010 cycles
+—
+—
+0,85
+0,85
+Life factor for tooth root stress, YNT, at 
+1010 cycles
+—
+—
+0,85
+0,85
+Table 7 (continued)
+Table 7 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+19
+
+===PAGE 24===
+ISO/TR 6336-30:2022(E)
+Table 8 — Example 3 output values
+Symbol
+Description
+Unit
+Pinion
+Gear
+d
+Reference diameter
+mm
+136,00
+864,00
+da
+Tip diameter
+mm
+153,60
+878,40
+db
+Base circle diameter
+mm
+127,80
+811,89
+xE
+Generating profile shift coefficient
+—
+0,072 7
+- 0,127 3
+df
+Root diameter (based on xE)
+mm
+117,16
+841,96
+dFf
+Root form diameter (based on xE)
+mm
+127,91
+847,59
+dNf
+Start of active profile diameter
+mm
+127,98
+851,54
+dw
+Working pitch diameter
+mm
+136,00
+864,00
+Ft
+Nominal tangential load at the reference cylinder
+N
+14 706
+KFα-B
+Transverse load factor (root stress)
+—
+1,23
+KFβ-C
+Face load factor (root stress)
+—
+1,71
+KHα-B
+Transverse load factor (contact stress)
+—
+1,23
+KHβ-C
+Face load factor (contact stress)
+—
+1,92
+Kv-B
+Dynamic factor
+—
+1,05
+SF
+Tooth root breakage safety factor
+—
+4,91
+4,80
+SH
+Pitting safety factor
+—
+0,75
+0,82
+v
+Pitch line velocity
+m/s
+2,56
+YB
+Rim thickness factor
+—
+1,00
+1,00
+YDT
+Deep tooth factor
+—
+1,00
+YF
+Tooth form factor
+—
+1,50
+1,33
+YNT
+Life factor for reference test conditions (tooth root stress)
+—
+0,92
+0,95
+YN
+Life factor (tooth root stress)
+—
+0,92
+0,95
+YRrelT
+Relative surface factor
+—
+0,96
+0,96
+YS
+Stress correction factor
+—
+1,82
+2,06
+YST
+Stress correction factor for reference gears
+—
+2,00
+YX
+Size factor
+—
+0,98
+0,98
+Yβ
+Helix angle factor
+—
+1,00
+YδrelT
+Relative notch sensitivity factor
+—
+0,98
+0,99
+ZB
+Single pair tooth contact factor, pinion
+—
+1,09
+Zβ
+Helix angle factor (pitting)
+—
+1,00
+ZD
+Single pair tooth contact factor, wheel
+—
+1,00
+ZE
+Elasticity factor
+N
+mm
+/
+2
+189,81
+Zε
+Contact ratio factor
+—
+0,88
+ZH
+Zone factor
+—
+2,49
+ZL
+Lubricant factor
+—
+1,09
+1,08
+ZNT
+Life factor for reference test conditions (contact stress)
+—
+0,96
+1,03
+ZN
+Life factor (contact stress)
+—
+0,96
+1,04
+ZR
+Roughness factor
+—
+0,79
+0,80
+Zv
+Velocity factor
+—
+0,93
+0,94
+ZW
+Work hardening factor
+—
+1,00
+1,00
+ZX
+Size factor
+—
+1,00
+1,00
+εα
+Transverse contact ratio
+—
+1,66
+εβ
+Overlap ratio
+—
+0,00
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+20
+
+===PAGE 25===
+ISO/TR 6336-30:2022(E)
+Symbol
+Description
+Unit
+Pinion
+Gear
+εγ
+Total contact ratio
+—
+1,66
+σF0
+Nominal tooth root stress
+N/mm2
+50
+50
+σF
+Tooth root stress
+N/mm2
+110
+111
+σF lim
+Limiting tooth root stress
+N/mm2
+319
+298
+σFP
+Permissible tooth root stress
+N/mm2
+540
+533
+σH
+Contact stress
+N/mm2
+802
+735
+σH lim
+Limiting contact stress
+N/mm2
+780
+714
+σH0
+Nominal contact stress
+N/mm2
+468
+σHP
+Permissible contact stress
+N/mm2
+600
+599
+Intermediate calculation values
+Kv-B intermediate calculation values
+cγα
+Mean value of mesh stiffness per unit facewidth (used for Kv-B, 
+KHα-B, KFα-B)
+N/(mm·μm)
+20,1
+c′
+Maximum tooth stiffness per unit facewidth (single stiffness) of 
+a tooth pair
+N/(mm·μm)
+13,5
+mred
+Reduced gear pair mass per unit facewidth referenced to the line 
+of action
+kg/mm
+0,062
+N
+Resonance ratio
+—
+0,04
+KHβ-C intermediate calculation values
+cγβ
+Mean value of mesh stiffness per unit facewidth 
+(used for KHβ-C, KFβ-C)
+N/(mm·μm)
+17,1
+fsh0
+Shaft deformation under specific load
+μm
+0,012
+Fβx
+Initial equivalent misalignment (before 
+running-in)
+μm
+29,0
+Fβy
+Effective equivalent misalignment (after 
+running-in)
+μm
+16,5
+yα
+Running-in allowance for a gear pair
+(calculated with max(fpb, ffα))
+μm
+5,793
+yβ
+Running-in allowance (equivalent 
+misalignment)
+μm
+12,4
+fpb
+Transverse base pitch deviation
+μm
+22,6
+fHβ5
+Tolerance on helix slope deviation for 
+flank tolerance class 5
+μm
+9,0
+fsh
+Component of equivalent misalignment due to 
+deformations of pinion and wheel shafts
+μm
+1,9
+fma
+Mesh misalignment due to manufacturing deviations
+μm
+26,4
+Auxiliary values
+fZCa
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+—
+fε
+Load distribution influence factor
+—
+1,00
+Table 8 (continued)
+Table 8 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+21
+
+===PAGE 26===
+ISO/TR 6336-30:2022(E)
+4.6 Example 4: Spur case carburized gear pair
+For example 4, input values and output values are given in Tables 9 and 10, respectively.
+Table 9 — Example 4 input values
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Geometry
+Number of teeth
+—
+z
+17
+108
+Normal module
+mm
+mn
+8,00
+Normal pressure angle
+°
+αn
+20,00
+Helix angle
+°
+β
+0,00
+Hand of helix
+—
+—
+Left
+Right
+Facewidth (total)
+mm
+b
+100,00
+100,00
+Gap width
+mm
+—
+0,00
+0,00
+Edge chamfer
+mm
+—
+0,00
+0,00
+Contact facewidth (total)
+mm
+beff
+100,00
+Centre distance
+mm
+a
+500,000
+Span measurement
+mm
+Wk
+37,728
+283,000
+Number of teeth spanned
+—
+k
+2
+12
+Dimension between balls
+mm
+MdK
+—
+—
+Ball diameter
+mm
+DM
+—
+—
+Nominal profile shift coefficient
+—
+x
+0,100
+(−0,100)
+Tip diameter
+mm
+da
+154,60
+878,40
+Basic rack dedendum coefficient
+—
+hfP/mn
+1,400
+1,400
+Tip chamfer
+mm
+hK
+0,00
+0,00
+Basic rack fillet root radius coefficient
+—
+ρfP/mn
+0,39
+0,39
+As cut basic rack undercut
+mm
+pr
+0,000
+0,000
+Material allowance for finishing
+mm
+q
+0,000
+0,000
+Residual fillet undercut, s
+pr
+q
+pr =
+−
+mm
+spr
+0,000
+0,000
+Pinion cutter number of teeth
+—
+z0
+—
+—
+Pinion cutter profile shift (ref)
+—
+x0
+—
+—
+Flank finishing process
+—
+—
+As cut
+As cut
+Root finishing process
+—
+—
+As cut
+As cut
+Tip relief
+μm
+Ca
+70
+70
+Root relief
+µm
+Cf
+0
+0
+Profile modification compensate for the deflections
+—
+—
+Yes
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019
+—
+fZCa
+—
+Quality
+Flank tolerance class
+—
+A
+5
+5
+Single pitch tolerance according to ISO 1328-1:2013
+μm
+ƒpT
+8,5
+9,0
+Profile form deviation according to ISO 1328-1:2013
+μm
+ƒfα
+9,5
+9,5
+Helix slope deviation according to ISO 1328-1:2013
+μm
+fHβ
+8,0
+9,0
+Surface roughness – flank Ra (Rz)
+μm
+—
+1,0 (6,0)
+1,0 (6,0)
+Surface roughness – fillet Ra (Rz)
+μm
+3,0 (18,0)
+3,0 (18,0)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+22
+
+===PAGE 27===
+ISO/TR 6336-30:2022(E)
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Material
+Material
+—
+—
+Eh
+Eh
+Material quality
+—
+—
+MQ
+MQ
+Case hardness
+—
+—
+60 HRC
+60 HRC
+Core hardness
+—
+—
+30 HRC
+30 HRC
+Young’s modulus
+N/mm2
+E
+206 000
+206 000
+Poisson’s ratio
+—
+v
+0,3
+0,3
+Yield/proof stress
+N/mm2
+σS/σ0,2
+—
+—
+Material density
+kg/m3
+ρ
+7 830
+7 830
+Shot peen
+—
+—
+No
+No
+Limited pitting allowable
+—
+—
+No
+No
+Application Application factor
+—
+KA-A
+1,000
+Mesh load factor
+—
+Kγ
+1,00
+Reverse bending
+—
+—
+No
+No
+Favourable contact position
+—
+—
+No
+No
+Helix modification (ISO 6336-1:2019, Table 12)
+—
+—
+None (No. 1)
+Dynamic factor, Kv, calculation method
+—
+—
+Method B
+Face load distribution factor, KHβ and KFβ,
+calculation method
+—
+—
+Method C
+Number of meshes
+—
+NM
+1
+1
+Gear blank type
+—
+—
+Solid
+Solid
+Web thickness
+mm
+bs
+—
+—
+Inside diameter
+mm
+—
+—
+—
+Number of webs
+—
+—
+—
+—
+Arrangement (ISO 6336-1:2019, Figure 13)
+—
+—
+a
+Bearing span
+mm
+l
+100,0
+—
+Bearing span offset
+mm
+s
+0,00
+—
+External shaft diameter
+mm
+dsh
+100,00
+—
+Internal shaft diameter
+mm
+dshi
+0,00
+—
+Equivalent misalignment
+μm
+ƒsh
+As Formula (59)
+Mesh misalignment
+μm
+ƒma
+As Formula (66)
+Minimum safety factor pitting
+—
+SH min
+1,00
+Minimum safety factor tooth breakage
+—
+SF min
+1,00
+Lubrication viscosity
+mm2/s
+ν40
+320
+Load
+Torque
+kNm
+T1
+9,000
+Speed
+min-1
+n1
+360,0
+Required life
+h
+—
+50 000
+Life factor for contact stress, ZNT, at 1010 cycles
+—
+—
+0,85
+0,85
+Life factor for tooth root stress, YNT, at 1010 cycles
+—
+—
+0,85
+0,85
+Table 9 (continued)
+Table 9 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+23
+
+===PAGE 28===
+ISO/TR 6336-30:2022(E)
+Table 10 — Example 4 output values
+Symbol
+Description
+Unit
+Pinion
+Gear
+d
+Reference diameter
+mm
+136,00
+864,00
+da
+Tip diameter
+mm
+154,60
+878,40
+db
+Base circle diameter
+mm
+127,80
+811,89
+xE
+Generating profile shift coefficient
+—
+0,072 7
+- 0,127 3
+df
+Root diameter (based on xE)
+mm
+114,76
+839,56
+dFf
+Root form diameter (based on xE)
+mm
+127,81
+845,52
+dNf
+Start of active profile diameter
+mm
+127,98
+851,00
+dw
+Working pitch diameter
+mm
+136,00
+864,00
+Ft
+Nominal tangential load at the reference cylinder
+N
+132 353
+KFα-B
+Transverse load factor (root stress)
+—
+1,00
+KFβ-C
+Face load factor (root stress)
+—
+1,14
+KHα-B
+Transverse load factor (contact stress)
+—
+1,00
+KHβ-C
+Face load factor (contact stress)
+—
+1,18
+Kv-B
+Dynamic factor
+—
+1,00
+SF
+Tooth root breakage safety factor
+—
+1,43
+1,66
+SH
+Pitting safety factor
+—
+0,83
+0,93
+vw
+Pitch line velocity
+m/s
+2,56
+YB
+Rim thickness factor
+—
+1,00
+1,00
+YDT
+Deep tooth factor
+—
+1,00
+YF
+Tooth form factor
+—
+1,77
+1,36
+YNT
+Life factor for reference test conditions (tooth root stress)
+—
+0,89
+0,92
+YN
+Life factor (tooth root stress)
+—
+0,89
+0,92
+YRrelT
+Relative surface factor
+—
+0,96
+0,96
+YS
+Stress correction factor
+—
+1,72
+2,01
+YST
+Stress correction factor for reference gears
+—
+2,00
+YX
+Size factor
+—
+0,97
+0,97
+Yβ
+Helix angle factor
+—
+1,00
+YδrelT
+Relative notch sensitivity factor
+—
+0,99
+1,00
+ZB
+Single pair tooth contact factor, pinion
+—
+1,07
+Zβ
+Helix angle factor (pitting)
+—
+1,00
+ZD
+Single pair tooth contact factor, wheel
+—
+1,00
+ZE
+Elasticity factor
+N
+mm
+/
+2
+189,81
+Zε
+Contact ratio factor
+—
+0,88
+ZH
+Zone factor
+—
+2,49
+ZL
+Lubricant factor
+—
+1,05
+1,05
+ZNT
+Life factor for test reference conditions (contact stress)
+—
+0,91
+0,96
+ZN
+Life factor (contact stress)
+—
+0,91
+0,96
+ZR
+Roughness factor
+—
+0,96
+0,96
+Zv
+Velocity factor
+—
+0,97
+0,97
+ZW
+Work hardening factor
+—
+1,00
+1,00
+ZX
+Size factor
+—
+1,00
+1,00
+εα
+Transverse contact ratio
+—
+1,70
+εβ
+Overlap ratio
+—
+0,00
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+24
+
+===PAGE 29===
+ISO/TR 6336-30:2022(E)
+Symbol
+Description
+Unit
+Pinion
+Gear
+εγ
+Total contact ratio
+—
+1,70
+σF0
+Nominal tooth root stress
+N/mm2
+502
+452
+σF
+Tooth root stress
+N/mm2
+574
+518
+σF lim
+Limiting tooth root stress
+N/mm2
+500
+500
+σFP
+Permissible tooth root stress
+N/mm2
+823
+860
+σH
+Contact stress
+N/mm2
+1 617
+1 512
+σH lim
+Limiting contact stress
+N/mm2
+1 500
+1 500
+σH0
+Nominal contact stress
+N/mm2
+1 392
+σHP
+Permissible contact stress
+N/mm2
+1 335
+1 412
+Intermediate calculation values
+Kv-B intermediate calculation values
+cγα
+Mean value of mesh stiffness per unit facewidth (used for Kv-B, 
+KHα-B, KFα-B)
+N/(mm·μm)
+18,9
+c′
+Maximum tooth stiffness per unit facewidth (single stiffness) of 
+a tooth pair
+N/(mm·μm)
+12,4
+mred
+Reduced gear pair mass per unit facewidth referenced to the line 
+of action
+kg/mm
+0,061
+N
+Resonance ratio
+—
+0,04
+KHβ-C intermediate calculation values
+cγβ
+Mean value of mesh stiffness per unit facewidth (used for KHβ-C, 
+KFβ-C)
+N/(mm·μm)
+16,1
+fsh0
+Shaft deformation under specific load
+μm
+0,012
+Fβx
+Initial equivalent misalignment (before 
+running-in)
+μm
+34,0
+Fβy
+Effective equivalent misalignment (after 
+running-in)
+μm
+28,9
+yα
+Running-in allowance for a gear pair for the calculation of KHα 
+(calculated with 50 % of max(fpb, ffα))
+μm
+0,356
+yβ
+Running-in allowance (equivalent 
+misalignment)
+μm
+5,1
+fpb
+Transverse base pitch deviation
+μm
+8,5
+fHβ5
+Tolerance on helix slope deviation for flank tolerance class 5
+μm
+9,0
+fsh
+Component of equivalent misalignment due to deformations of 
+pinion and wheel shafts
+μm
+16,5
+fma
+Mesh misalignment due to manufacturing deviations
+μm
+12,0
+Auxiliary values
+fZCa
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+—
+fε
+Load distribution influence factor
+—
+1,00
+Table 10 (continued)
+Table 10 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+25
+
+===PAGE 30===
+ISO/TR 6336-30:2022(E)
+4.7	 Example 5: Spur gear pair with an induction hardened pinion and through-
+hardened cast gear
+For example 5, input values and output values are given in Tables 11 and 12, respectively.
+Table 11 — Example 5 input values
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Geometry
+Number of teeth
+—
+z
+27
+192
+Normal module
+mm
+mn
+32,00
+Normal pressure angle
+°
+αn
+20,00
+Helix angle
+°
+β
+0,00
+Hand of helix
+—
+—
+—
+—
+Facewidth (total)
+mm
+b
+500,00
+500,00
+Gap width
+mm
+—
+0,00
+0,00
+Edge chamfer
+mm
+—
+0,00
+0,00
+Contact facewidth (total)
+mm
+beff
+500,00
+Centre distance
+mm
+a
+3 504,000
+Span measurement
+mm
+Wk
+247,771
+2 022,148
+Number of teeth spanned
+—
+k
+3
+21
+Dimension between balls
+mm
+MdK
+—
+—
+Ball diameter
+mm
+DM
+—
+—
+Nominal profile shift coefficient
+—
+x
+0,000
+(0,000)
+Tip diameter
+mm
+da
+928,00
+6 208,00
+Basic rack dedendum coefficient
+—
+hfP/mn
+1,250
+1,250
+Tip chamfer
+mm
+hK
+0,00
+0,00
+Basic rack fillet root radius coefficient
+—
+ρfP/mn
+0,39
+0,39
+As cut basic rack undercut
+mm
+pr
+0,000
+0,000
+Material allowance for finishing
+mm
+q
+0,000
+0,000
+Residual fillet undercut, s
+pr
+q
+pr =
+−
+mm
+spr
+0,000
+0,000
+Pinion cutter number of teeth
+—
+z0
+—
+—
+Pinion cutter profile shift (ref)
+—
+x0
+—
+—
+Flank finishing process
+—
+—
+As cut
+As cut
+Root finishing process
+—
+—
+As cut
+As cut
+Tip relief
+μm
+Ca
+0
+0
+Root relief
+µm
+Cf
+0
+0
+Profile modification compensate for the deflections
+—
+—
+No
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+fZCa
+—
+Quality
+Flank tolerance class
+—
+A
+6
+9
+Single pitch tolerance according to ISO 1328-1:2013
+μm
+ƒpT
+26,0
+96,0
+Profile form deviation according to ISO 1328-1:2013
+μm
+ƒfα
+32,0
+90,0
+Helix slope deviation according to ISO 1328-1:2013
+μm
+fHβ
+19,0
+63,0
+Surface roughness – flank Ra (Rz)
+μm
+—
+2,5 (15,0)
+3,0 (18,0)
+Surface roughness – fillet Ra (Rz)
+μm
+—
+3,0 (18,0)
+3,0 (18,0)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+26
+
+===PAGE 31===
+ISO/TR 6336-30:2022(E)
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Material
+Material
+—
+—
+IF
+St (cast)
+Material quality
+—
+—
+ML
+MQ
+Case hardness
+—
+—
+550 HV
+200 HBW
+Core hardness
+—
+—
+166 HV
+Young’s modulus
+N/mm2
+E
+206 000
+202 000
+Poisson’s ratio
+—
+v
+0,3
+0,3
+Yield/proof stress
+N/mm2
+σS/σ0,2
+400,0
+Material density
+kg/m3
+ρ
+7 830
+7 830
+Shot peen
+—
+—
+No
+No
+Limited pitting allowable
+—
+—
+No
+No
+Application Application factor
+—
+KA-A
+1,00
+Mesh load factor
+—
+Kγ
+1,00
+Reverse bending
+—
+—
+No
+No
+Favourable contact position
+—
+—
+No
+No
+Helix modification (ISO 6336-1:2019, Table 12)
+—
+—
+None (No. 1)
+Dynamic factor, Kv, calculation method
+—
+—
+Method B
+Face load distribution factor, KHβ and KFβ,
+calculation method
+—
+—
+Method C
+Number of meshes
+—
+NM
+1
+1
+Gear blank type
+—
+—
+Solid
+Solid
+Web thickness
+mm
+bs
+—
+—
+Inside diameter
+mm
+—
+—
+—
+Number of webs
+—
+—
+—
+—
+Arrangement (ISO 6336-1:2019, Figure 13)
+—
+—
+a
+Bearing span
+mm
+l
+1 000,00
+—
+Bearing span offset
+mm
+s
+0,00
+—
+External shaft diameter
+mm
+dsh
+400,00
+—
+Internal shaft diameter
+mm
+dshi
+0,00
+—
+Equivalent misalignment
+μm
+ƒsh
+As Formula (59)
+Mesh misalignment
+μm
+ƒma
+As Formula (66)
+Minimum safety factor pitting
+—
+SH min
+1,00
+Minimum safety factor tooth breakage
+—
+SF min
+1,00
+Lubrication viscosity
+mm2/s
+ν40
+160
+Load
+Torque
+kNm
+T1
+120,000
+Speed
+min-1
+n1
+200,0
+Required life
+h
+—
+25 000
+Life factor for contact stress, ZNT, at 1010 cycles
+—
+—
+0,85
+0,85
+Life factor for tooth root stress, YNT, at 1010 cycles
+—
+—
+0,85
+0,85
+Table 11 (continued)
+Table 11 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+27
+
+===PAGE 32===
+ISO/TR 6336-30:2022(E)
+Table 12 — Example 5 output values
+Symbol
+Description
+Unit
+Pinion
+Gear
+d
+Reference diameter
+mm
+864,00
+6 144,00
+da
+Tip diameter
+mm
+928,00
+6 208,00
+db
+Base circle diameter
+mm
+811,89
+5 773,47
+xE
+Generating profile shift coefficient
+—
+- 0,022 9
+-0,022 9
+df
+Root diameter (based on xE)
+mm
+782,54
+6 062,54
+dFf
+Root form diameter (based on xE)
+mm
+818,70
+6 081,59
+dNf
+Start of active profile diameter
+mm
+820,02
+6 093,06
+dw
+Working pitch diameter
+mm
+864,00
+6 144,00
+Ft
+Nominal tangential load at the reference cylinder
+N
+277 778
+KFα-B
+Transverse load factor (root stress)
+—
+1,33
+KFβ-C
+Face load factor (root stress)
+—
+1,39
+KHα-B
+Transverse load factor (contact stress)
+—
+1,33
+KHβ-C
+Face load factor (contact stress)
+—
+1,47
+Kv-B
+Dynamic factor
+—
+1,26
+SF
+Tooth root breakage safety factor
+—
+3,27
+1,85
+SH
+Pitting safety factor
+—
+1,44
+0,53
+vw
+Pitch line velocity
+m/s
+9,05
+YB
+Rim thickness factor
+—
+1,00
+1,00
+YDT
+Deep tooth factor
+—
+1,00
+YF
+Tooth form factor
+—
+1,33
+1,15
+YNT
+Life factor for reference test conditions (tooth root stress)
+—
+0,91
+0,95
+YN
+Life factor (tooth root stress)
+—
+0,91
+0,95
+YRrelT
+Relative surface factor
+—
+0,96
+0,98
+YS
+Stress correction factor
+—
+1,94
+2,30
+YST
+Stress correction factor for reference gears
+—
+2,00
+YX
+Size factor
+—
+0,80
+0,85
+Yβ
+Helix angle factor
+—
+1,00
+YδrelT
+Relative notch sensitivity factor
+—
+0,99
+1,00
+ZB
+Single pair tooth contact factor, pinion
+—
+1,06
+Zβ
+Helix angle factor (pitting)
+—
+1,00
+ZD
+Single pair tooth contact factor, wheel
+—
+1,00
+ZE
+Elasticity factor
+N
+mm
+/
+2
+188,88
+Zε
+Contact ratio factor
+—
+0,86
+ZH
+Zone factor
+—
+2,49
+ZL
+Lubricant factor
+—
+0,99
+0,99
+ZNT
+Life factor for reference test conditions (contact stress)
+—
+0,95
+1,01
+ZN
+Life factor (contact stress)
+—
+0,95
+1,01
+ZR
+Roughness factor
+—
+0,88
+0,88
+Zv
+Velocity factor
+—
+0,99
+0,99
+ZW
+Work hardening factor (only applicable for through hardened 
+steel, not cast iron)
+—
+1,00
+1,00
+ZX
+Size factor
+—
+1,00
+1,00
+εα
+Transverse contact ratio
+—
+1,77
+εβ
+Overlap ratio
+—
+0,00
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+28
+
+===PAGE 33===
+ISO/TR 6336-30:2022(E)
+Symbol
+Description
+Unit
+Pinion
+Gear
+εγ
+Total contact ratio
+—
+1,77
+σF0
+Nominal tooth root stress
+N/mm2
+45
+46
+σF
+Tooth root stress
+N/mm2
+104
+107
+σF lim
+Limiting tooth root stress
+N/mm2
+244
+125
+σFP
+Permissible tooth root stress
+N/mm2
+340
+197
+σH
+Contact stress
+N/mm2
+577
+546
+σH lim
+Limiting contact stress
+N/mm2
+1 009
+328
+σH0
+Nominal contact stress
+N/mm2
+348
+σHP
+Permissible contact stress
+N/mm2
+830
+290
+Intermediate calculation values
+Kv-B intermediate calculation values
+cγα
+Mean value of mesh stiffness per unit facewidth (used for Kv-B, 
+KHα-B, KFα-B)
+N/(mm·μm)
+22,4
+c′
+Maximum tooth stiffness per unit facewidth (single stiffness) of 
+a tooth pair
+N/(mm·μm)
+14,2
+mred
+Reduced gear pair mass per unit facewidth referenced to the 
+line of action
+kg/mm
+2,457
+N
+Resonance ratio
+—
+0,19
+KHβ-C intermediate calculation values
+cγβ
+Mean value of mesh stiffness per unit facewidth (used for KHβ-C, 
+KFβ-C)
+N/(mm·μm)
+19,1
+fsh0
+Shaft deformation under specific load
+μm
+0,008
+Fβx
+Initial equivalent misalignment (before 
+running-in)
+μm
+73,0
+Fβy
+Effective equivalent misalignment (after 
+running-in)
+μm
+34,4
+yα
+Running-in allowance for a gear pair
+(calculated with max(fpb, ffα))
+μm
+21,0
+yβ
+Running-in allowance (equivalent 
+misalignment)
+μm
+38,6
+fpb
+Transverse base pitch deviation
+μm
+90,2
+fHβ5
+Tolerance on helix slope deviation for flank tolerance class 5
+μm
+16,0
+fsh
+Component of equivalent misalignment due to deformations of 
+pinion and wheel shafts
+μm
+5,4
+fma
+Mesh misalignment due to manufacturing deviations
+μm
+65,8
+Auxiliary values
+fZCa
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+—
+fε
+Load distribution influence factor
+—
+1,00
+Table 12 (continued)
+Table 12 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+29
+
+===PAGE 34===
+ISO/TR 6336-30:2022(E)
+4.8	 Example 6: Spur internal through-hardened gear pair
+For example 6, input values and output values are given in Tables 13 and 14, respectively.
+Table 13 — Example 6 input values
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Geometry
+Number of teeth
+—
+z
+15
+−99
+Normal module
+mm
+mn
+12,00
+Normal pressure angle
+°
+αn
+20,00
+Helix angle
+°
+β
+0,00
+Hand of helix
+—
+—
+—
+—
+Facewidth (total)
+mm
+b
+125,00
+125,00
+Gap width
+mm
+—
+0,00
+0,00
+Edge chamfer
+mm
+—
+0,00
+0,00
+Contact facewidth (total)
+mm
+beff
+125,00
+Centre distance
+mm
+a
+−500,000
+Span measurement
+mm
+Wk
+58,161
+—
+Number of teeth spanned
+—
+k
+2
+—
+Dimension between balls
+mm
+MdK
+—
+1 154,900
+Ball diameter
+mm
+DM
+—
+21,60
+Nominal profile shift coefficient
+—
+x
+(0,323)
+0,000
+Tip diameter
+mm
+da
+211,75
+−1 166,00
+Basic rack dedendum coefficient
+—
+hfP/mn
+1,250
+1,250
+Tip chamfer
+mm
+hK
+0,00
+0,00
+Basic rack fillet root radius coefficient
+—
+ρfP/mn
+0,39
+—
+As cut basic rack undercut
+mm
+pr
+0,000
+0,000
+Material allowance for finishing
+mm
+q
+0,000
+0,000
+Residual fillet undercut, s
+pr
+q
+pr =
+−
+mm
+spr
+0,000
+0,000
+Pinion cutter number of teeth
+—
+z0
+—
+20
+Pinion cutter profile shift (ref)
+—
+x0
+—
+0,00
+Pinion cutter tip radius coefficient
+—
+ρaP0
+—
+0,001
+Flank finishing process
+—
+—
+As cut
+As cut
+Root finishing process
+—
+—
+As cut
+As cut
+Tip relief
+μm
+Ca
+70
+70
+Root relief
+µm
+Cf
+0
+0
+Profile modification compensate for the deflections
+—
+—
+No
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+fZCa
+—
+Quality
+Flank tolerance class
+—
+A
+6
+8
+Single pitch tolerance according to ISO 1328-1:2013
+μm
+ƒpT
+14,0
+31,0
+Profile form deviation according to ISO 1328-
+1:2013
+μm
+ƒfα
+16,0
+33,0
+Helix slope deviation according to ISO 1328-1:2013
+μm
+fHβ
+12,0
+27,0
+Surface roughness – flank Ra (Rz)
+μm
+—
+1,0 (6,0)
+3,0 (18,0)
+Surface roughness – fillet Ra (Rz)
+μm
+—
+3,0 (18,0)
+3,0 (18,0)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+30
+
+===PAGE 35===
+ISO/TR 6336-30:2022(E)
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Material
+Material
+—
+—
+V
+V
+Material quality
+—
+—
+MQ
+MQ
+Case hardness
+various
+—
+310 HV
+260 HV
+Core hardness
+various
+—
+—
+—
+Young’s modulus
+N/mm2
+E
+206 000
+206 000
+Poisson’s ratio
+—
+v
+0,3
+0,3
+Yield/proof stress
+N/mm2
+σS/σ0,2
+500,0
+500,0
+Material density
+kg/m3
+ρ
+7 830
+7 830
+Shot peen
+—
+—
+No
+No
+Limited pitting allowable
+—
+—
+No
+No
+Application
+Application factor
+—
+KA-A
+1,300
+Mesh load factor
+—
+Kγ
+1,00
+Reverse bending
+—
+—
+No
+No
+Favourable contact position
+—
+—
+No
+No
+Helix modification (ISO 6336-1:2019, Table 12)
+—
+—
+None (No. 1)
+Dynamic factor, Kv, calculation method
+—
+—
+Method B
+Face load distribution factor, KHβ and KFβ,
+calculation method
+—
+—
+Method C
+Number of meshes
+—
+NM
+1
+1
+Gear blank type
+—
+—
+Solid
+Solid
+Web thickness
+mm
+bs
+—
+—
+Inside diameter
+mm
+—
+—
+—
+Number of webs
+—
+—
+—
+—
+Arrangement (ISO 6336-1:2019, Figure 13)
+—
+—
+a
+Bearing span
+mm
+l
+200,0
+—
+Bearing span offset
+mm
+s
+0,00
+—
+External shaft diameter
+mm
+dsh
+100,00
+—
+Internal shaft diameter
+mm
+dshi
+0,00
+—
+Equivalent misalignment
+μm
+ƒsh
+As Formula (59)
+Mesh misalignment
+μm
+ƒma
+As Formula (66)
+Minimum safety factor pitting
+—
+SH min
+1,00
+Minimum safety factor tooth breakage
+—
+SF min
+1,00
+Lubrication viscosity
+mm2/s
+ν40
+320
+Load
+Torque
+kNm
+T1
+1,000
+Speed
+min-1
+n1
+360,0
+Required life
+h
+—
+10 000
+Life factor for contact stress, ZNT, at 1010 cycles
+—
+—
+0,85
+0,85
+Life factor for tooth root stress, YNT, at 1010 cycles
+—
+—
+0,85
+0,85
+Table 13 (continued)
+Table 13 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+31
+
+===PAGE 36===
+ISO/TR 6336-30:2022(E)
+Table 14 — Example 6 output values
+Symbol
+Description
+Unit
+Pinion
+Gear
+d
+Reference diameter
+mm
+180,00
+−1 188,00
+da
+Tip diameter
+mm
+211,75
+−1 166,00
+db
+Base circle diameter
+mm
+169,14
+−1 116,35
+xE
+Generating profile shift coefficient
+—
+0,304 8
+-0,018 2
+df
+Root diameter (based on xE)
+mm
+157,31
+–1 218,44
+dFf
+Root form diameter (based on xE)
+mm
+169,66
+−1 212,79
+dNf
+Start of active profile diameter
+mm
+169,90
+−1 202,89
+dw
+Working pitch diameter
+mm
+178,57
+−1 178,57
+Ft
+Nominal tangential load at the reference 
+cylinder
+N
+11 111
+KFα-B
+Transverse load factor (root stress)
+—
+1,31
+KFβ-C
+Face load factor (root stress)
+—
+1,89
+KHα-B
+Transverse load factor (contact stress)
+—
+1,24
+KHβ-C
+Face load factor (contact stress)
+—
+2,24
+Kv-B
+Dynamic factor
+—
+1,10
+SF
+Tooth root breakage safety factor
+—
+7,40
+5,66
+SH
+Pitting safety factor
+—
+1,16
+1,16
+vw
+Pitch line velocity
+m/s
+3,37
+YB
+Rim thickness factor
+—
+1,00
+1,00
+YDT
+Deep tooth factor
+—
+1,00
+YF
+Tooth form factor
+—
+1,35
+1,14
+YNT
+Life factor for reference test conditions 
+(tooth root stress)
+—
+0,92
+0,95
+YN
+Life factor (tooth root stress)
+—
+0,92
+0,95
+YRrelT
+Relative surface factor
+—
+0,96
+0,96
+YS
+Stress correction factor
+—
+2,04
+3,42
+YST
+Stress correction factor for reference gears
+—
+2,00
+YX
+Size factor
+—
+0,96
+0,96
+Yβ
+Helix angle factor
+—
+1,00
+YδrelT
+Relative notch sensitivity factor
+—
+0,99
+1,10
+ZB
+Single pair tooth contact factor, pinion
+—
+1,01
+Zβ
+Helix angle factor (pitting)
+—
+1,00
+ZD
+Single pair tooth contact factor, wheel
+—
+1,00
+ZE
+Elasticity factor
+N
+mm
+/
+2
+189,81
+Zε
+Contact ratio factor
+—
+0,90
+ZH
+Zone factor
+—
+2,59
+ZL
+Lubricant factor
+—
+1,09
+1,08
+ZNT
+Life factor for reference test conditions (con­
+tact stress)
+—
+0,96
+1,03
+ZN
+Life factor (contact stress)
+—
+0,96
+1,04
+ZR
+Roughness factor
+—
+0,86
+0,87
+Zv
+Velocity factor
+—
+0,94
+0,95
+ZW
+Work hardening factor
+—
+1,00
+1,00
+ZX
+Size factor
+—
+1,00
+1,00
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+32
+
+===PAGE 37===
+ISO/TR 6336-30:2022(E)
+Symbol
+Description
+Unit
+Pinion
+Gear
+εα
+Transverse contact ratio
+—
+1,57
+εβ
+Overlap ratio
+—
+0,00
+εγ
+Total contact ratio
+—
+1,57
+σF0
+Nominal tooth root stress
+N/mm2
+20
+29
+σF
+Tooth root stress
+N/mm2
+72
+102
+σF lim
+Limiting tooth root stress
+N/mm2
+319
+298
+σFP
+Permissible tooth root stress
+N/mm2
+534
+578
+σH
+Contact stress
+N/mm2
+572
+568
+σH lim
+Limiting contact stress
+N/mm2
+780
+714
+σH0
+Nominal contact stress
+N/mm2
+286
+σHP
+Permissible contact stress
+N/mm2
+662
+660
+Intermediate calculation values
+Kv-B intermediate calculation values
+cγα
+Mean value of mesh stiffness per unit face­
+width (used for Kv-B, KHα-B, KFα-B)
+N/(mm·μm)
+20,8
+c′
+Maximum tooth stiffness per unit facewidth 
+(single stiffness) of a tooth pair
+N/(mm·μm)
+14,6
+mred
+Reduced gear pair mass per unit facewidth 
+referenced to the line of action
+kg/mm
+0,123
+N
+Resonance ratio
+—
+0,04
+KHβ-C intermediate calculation values
+cγβ
+Mean value of mesh stiffness per unit face­
+width (used for KHβ-C, KFβ-C)
+N/(mm·μm)
+17,7
+fsh0
+Shaft deformation under specific load
+μm
+0,011
+Fβx
+Initial equivalent misalignment (before 
+running-in)
+μm
+31,4
+Fβy
+Effective equivalent misalignment (after 
+running-in)
+μm
+17,9
+yα
+Running-in allowance for a gear pair (calcu­
+lated with max(fpb, ffα))
+μm
+7,080
+yβ
+Running-in allowance (equivalent 
+misalignment)
+μm
+13,5
+fpb
+Transverse base pitch deviation
+μm
+29,1
+fHβ5
+Tolerance on helix slope deviation for flank 
+tolerance class 5
+μm
+9,5
+fsh
+Component of equivalent misalignment due 
+to deformations of pinion and wheel shafts
+μm
+1,4
+fma
+Mesh misalignment due to manufacturing 
+deviations
+μm
+29,5
+Auxiliary values
+fZCa
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+—
+fε
+Load distribution influence factor
+—
+1,00
+Table 14 (continued)
+Table 14 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+33
+
+===PAGE 38===
+ISO/TR 6336-30:2022(E)
+4.9 Example 7: Double helical through-hardened wrought gear pair
+For example 7, input values and output values are given in Tables 15 and 16, respectively.
+Table 15 — Example 7 input values
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Geometry
+Number of teeth
+—
+z
+86
+429
+Normal module
+mm
+mn
+1,693 333 3 (15 DP)
+Normal pressure angle
+°
+αn
+20,00
+Helix angle
+°
+β
+18,31
+Hand of helix
+—
+—
+Double helical
+Facewidth (total)
+mm
+b
+165,1
+(82,55 × 2)
+165,1
+(82,55 × 2)
+Gap width
+mm
+—
+50,80
+50,80
+Edge chamfer
+mm
+—
+0,00
+0,00
+Contact facewidth (total)
+mm
+—
+165,1 (82,55 × 2)
+Centre distance
+mm
+a
+460,375
+Span measurement
+mm
+Wk
+60,068
+289,367
+Number of teeth spanned
+—
+k
+12
+56
+Dimension between balls
+mm
+MdK
+—
+—
+Ball diameter
+mm
+DM
+—
+—
+Nominal profile shift coefficient
+—
+x
+0,361 5
+(0,286 3)
+Tip diameter
+mm
+da
+157,99
+769,52
+Basic rack dedendum coefficient
+—
+hfP/mn
+1,250
+1,250
+Tip chamfer
+mm
+hK
+0,00
+0,00
+Basic rack fillet root radius coefficient
+—
+ρfP/mn
+0,38
+0,38
+As cut basic rack undercut
+mm
+pr
+0,000
+0,000
+Material allowance for finishing
+mm
+q
+0,000
+0,000
+Residual fillet undercut, s
+pr
+q
+pr =
+−
+mm
+spr
+0,000
+0,000
+Pinion cutter number of teeth
+—
+z0
+—
+—
+Pinion cutter profile shift (ref)
+—
+x0
+—
+—
+Flank finishing process
+—
+—
+As cut
+As cut
+Root finishing process
+—
+—
+As cut
+As cut
+Tip relief
+μm
+Ca
+13
+13
+Root relief
+µm
+Cf
+0
+0
+Profile modification compensate for the 
+deflections
+—
+—
+No
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+fZCa
+manufacturers experience
+Quality
+Flank tolerance class
+—
+A
+5
+5
+Single pitch tolerance according 
+to ISO 1328-1:2013
+μm
+ƒpT
+6,0
+6,5
+Profile form deviation according 
+to ISO 1328-1:2013
+μm
+ƒfα
+6,0
+6,0
+Helix slope deviation
+μm
+fHβ
+8,0
+8,5
+Surface roughness – flank Ra (Rz)
+μm
+—
+1,0 (6,0)
+1,0 (6,0)
+Surface roughness – fillet Ra (Rz)
+μm
+—
+3,0 (18,0)
+3,0 (18,0)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+34
+
+===PAGE 39===
+ISO/TR 6336-30:2022(E)
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Material
+Material
+—
+—
+V (alloy steel)
+V (alloy steel)
+Material quality
+—
+—
+ML
+ML
+Case hardness
+—
+—
+342 HB
+300 HB
+Core hardness
+—
+—
+—
+—
+Young’s modulus
+N/mm2
+E
+206 000
+206 000
+Poisson’s ratio
+—
+v
+0,3
+0,3
+Yield/proof stress
+N/mm2
+σS/σ0,2
+1 000,0
+1 000,0
+Material density
+kg/m3
+ρ
+7 830
+7 830
+Shot peen
+—
+—
+No
+No
+Limited pitting allowable
+—
+—
+Yes
+Yes
+Application
+Application factor
+—
+KA-A
+1,000
+Mesh load factor
+—
+Kγ
+1,00
+Reverse bending
+—
+—
+No
+No
+Favourable contact position
+—
+—
+Yes
+Yes
+Helix modification (ISO 6336-1:2019, 
+Table 12)
+—
+—
+None (No. 1)
+Dynamic factor, Kv, calculation method
+—
+—
+Method B
+Face load distribution factor, KHβ and KFβ,
+calculation method
+—
+—
+Method C
+Number of meshes
+—
+NM
+1
+1
+Gear blank type
+—
+—
+Solid
+Solid
+Web thickness
+mm
+bs
+—
+—
+Inside diameter
+mm
+—
+—
+—
+Number of webs
+—
+—
+—
+—
+Arrangement (ISO 6336-1:2019, Figure 13)
+—
+—
+a
+Bearing span
+mm
+l
+355,600
+—
+Bearing span offset
+mm
+s
+0,00
+—
+External shaft diameter
+mm
+dsh
+63,50
+—
+Internal shaft diameter
+mm
+dshi
+0,00
+—
+Equivalent misalignment
+μm
+ƒsh
+As Formula (59)
+Mesh misalignment
+μm
+ƒma
+As Formula (66)
+Minimum safety factor pitting
+—
+SH min
+1,00
+Minimum safety factor tooth breakage
+—
+SF min
+1,00
+Lubrication viscosity
+mm2/s
+ν40
+25
+Load
+Torque
+kNm
+T1
+0,528
+Speed
+min-1
+n1
+5 400,0
+Required life
+h
+—
+30 000
+Life factor for contact stress, ZNT, at 
+1010 cycles
+—
+—
+0,85
+0,85
+Life factor for tooth root stress, YNT, at 
+1010 cycles
+—
+—
+0,85
+0,85
+Table 15 (continued)
+Table 15 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+35
+
+===PAGE 40===
+ISO/TR 6336-30:2022(E)
+Table 16 — Example 7 output values
+Symbol
+Description
+Unit
+Pinion
+Gear
+d
+Reference diameter
+mm
+153,39
+765,18
+da
+Tip diameter
+mm
+157,988
+769,518
+db
+Base circle diameter
+mm
+143,23
+714,47
+xE
+Generating profile shift coefficient
+—
+0,185 7
+0,110 4
+df
+Root diameter (based on xE)
+mm
+149,79
+761,32
+dFf
+Root form diameter (based on xE)
+mm
+150,81
+762,21
+dNf
+Start of active profile diameter
+mm
+151,39
+763,15
+dw
+Working pitch diameter
+mm
+153,76
+766,99
+Ft
+nominal tangential load at the reference cylinder
+N
+6 884
+KFα-B
+Transverse load factor (root stress)
+—
+1,37
+KFβ-C
+Face load factor (root stress)
+—
+1,36
+KHα-B
+Transverse load factor (contact stress)
+—
+1,37
+KHβ-C
+Face load factor (contact stress)
+—
+1,38
+Kv-B
+Dynamic factor
+—
+1,68
+SF
+Tooth root breakage safety factor
+—
+2,79
+2,50
+SH
+Pitting safety factor
+—
+1,30
+1,33
+vw
+Pitch line velocity
+m/s
+43,47
+YB
+Rim thickness factor
+—
+1,00
+1,00
+YDT
+Deep tooth factor
+—
+1,00
+YF
+Tooth form factor
+—
+0,86
+0,89
+YNT
+Life factor for reference test conditions (tooth root stress)
+—
+0,85
+0,88
+YN
+Life factor (tooth root stress)
+—
+0,85
+0,88
+YRrelT
+Relative surface factor
+—
+0,96
+0,96
+YS
+Stress correction factor
+—
+2,30
+2,36
+YST
+Stress correction factor for reference gears
+—
+2,00
+YX
+Size factor
+—
+1,00
+1,00
+Yβ
+Helix angle factor
+—
+0,99
+YδrelT
+Relative notch sensitivity factor
+—
+1,00
+1,00
+ZB
+Single pair tooth contact factor, pinion
+—
+1,03
+Zβ
+Helix angle factor (pitting)
+—
+1,03
+ZD
+Single pair tooth contact factor, wheel
+—
+1,03
+ZE
+Elasticity factor
+189,81
+Zε
+Contact ratio factor
+—
+0,77
+ZH
+Zone factor
+—
+2,37
+ZL
+Lubricant factor
+—
+0,85
+0,85
+ZNT
+Life factor for test reference conditions (contact stress)
+—
+0,85
+0,95
+ZN
+Life factor (contact stress)
+—
+0,85
+0,95
+ZR
+Roughness factor
+—
+0,94
+0,94
+Zv
+Velocity factor
+—
+1,09
+1,09
+ZW
+Work hardening factor
+—
+1,00
+1,00
+ZX
+Size factor
+—
+1,00
+1,00
+εα
+Transverse contact ratio
+—
+1,68
+εβ
+Overlap ratio
+—
+4,87
+εγ
+Total contact ratio
+—
+6,56
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+36
+
+===PAGE 41===
+ISO/TR 6336-30:2022(E)
+Symbol
+Description
+Unit
+Pinion
+Gear
+σF0
+Nominal tooth root stress
+N/mm2
+48
+51
+σF
+Tooth root stress
+N/mm2
+151
+161
+σF lim
+Limiting tooth root stress (input data)
+N/mm2
+256
+238
+σFP
+Permissible tooth root stress
+N/mm2
+421
+404
+σH
+Contact stress
+N/mm2
+375
+375
+σH lim
+Limiting contact stress (input data)
+N/mm2
+661
+603
+σH0
+Nominal contact stress
+N/mm2
+203
+σHP
+Permissible contact stress
+N/mm2
+489
+499
+Intermediate calculation values
+Kv-B intermediate calculation values
+cγα
+Mean value of mesh stiffness per unit facewidth (used for Kv-B, 
+KHα-B, KFα-B)
+N/(mm·μm)
+19,3
+c′
+Maximum tooth stiffness per unit facewidth (single stiffness) of 
+a tooth pair
+N/(mm·μm)
+12,7
+mred
+Reduced gear pair mass per unit facewidth referenced to the line 
+of action
+kg/mm
+0,081
+N
+Resonance ratio
+—
+3,16
+KHβ-C intermediate calculation values
+cγβ
+Mean value of mesh stiffness per unit facewidth (used for KHβ-C, 
+KFβ-C)
+N/(mm·μm)
+16,4
+fsh0
+Shaft deformation under specific load
+μm
+0,010
+Fβx
+Initial equivalent misalignment (before 
+running-in)
+μm
+6,6
+Fβy
+Effective equivalent misalignment (after 
+running-in)
+μm
+3,3
+yα
+Running-in allowance for a gear pair
+(calculated with max(fpb, ffα))
+μm
+1,540
+yβ
+Running-in allowance (equivalent 
+misalignment)
+μm
+3,4
+fpb
+Transverse base pitch deviation
+μm
+6,1
+fHβ5
+Tolerance on helix slope deviation for flank tolerance class 5
+μm
+8,5
+fsh
+Component of equivalent misalignment due to deformations of 
+pinion and wheel shafts
+μm
+1,4
+fma
+Mesh misalignment due to manufacturing deviations
+μm
+11,7
+Auxiliary values
+fZCa
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+1,07
+fε
+Load distribution influence factor
+—
+0,74
+Table 16 (continued)
+Table 16 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+37
+
+===PAGE 42===
+ISO/TR 6336-30:2022(E)
+4.10 Example 8: Single helical case carburized gear pair
+NOTE	
+Example 8 is the application of residual protuberance, pr.
+For example 8, input values and output values are given in Tables 17 and 18, respectively.
+Table 17 — Example 8 input values
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Geometry
+Number of teeth
+—
+z
+15
+63
+Normal module
+mm
+mn
+4,50
+Normal pressure angle
+°
+αn
+20,00
+Helix angle
+°
+β
+11,00
+Hand of helix
+—
+—
+Left
+Right
+Facewidth (total)
+mm
+b
+78,74
+76,20
+Gap width
+mm
+—
+0,00
+0,00
+Edge chamfer
+mm
+—
+0,00
+0,00
+Contact facewidth (total)
+mm
+beff
+76,20
+Centre distance
+mm
+a
+182,880
+Span measurement
+mm
+Wk
+35,706
+118,358
+Number of teeth spanned
+—
+k
+3
+9
+Dimension between balls
+mm
+MdK
+—
+—
+Ball diameter
+mm
+DM
+—
+—
+Nominal profile shift coefficient
+—
+x
+0,541 3
+(0,439 3)
+Tip diameter
+mm
+da
+82,19
+301,55
+Basic rack dedendum coefficient (pre-fin­
+ishing)
+—
+hfP/mn
+1,516
+1,516
+Basic rack dedendum coefficient (finishing)
+—
+hfP/mn
+1,373
+1,373
+Tip chamfer
+mm
+hK
+0,00
+0,00
+Basic rack fillet root radius coefficient
+—
+ρfP/mn
+0,40
+0,40
+As cut (pre-finishing) basic rack undercut
+mm
+pr
+0,267
+0,267
+Material allowance for grinding (finishing)
+mm
+q
+0,220
+0,220
+Residual fillet undercut, s
+pr
+q
+pr =
+−
+mm
+spr
+0,047
+0,047
+Cutting tool protuberance angle
+—
+—
+10°
+10°
+Pinion cutter number of teeth
+—
+z0
+—
+—
+Pinion cutter profile shift (ref)
+—
+x0
+—
+—
+Flank finishing process
+—
+—
+Cut (pre-fin­
+ishing) 
+and ground 
+(finishing)
+Cut (pre-finish­
+ing) 
+and ground
+(finishing)
+Root finishing process
+—
+—
+As cut 
+(pre-finish­
+ing)
+As cut (pre-fin­
+ishing)
+Tip relief
+μm
+Ca
+13
+13
+Root relief
+µm
+Cf
+0
+0
+Profile modification compensate for the 
+deflections
+—
+—
+No
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+fZCa
+manufacturers experience
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+38
+
+===PAGE 43===
+ISO/TR 6336-30:2022(E)
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Quality
+Flank tolerance class
+—
+A
+6
+6
+Single pitch tolerance according 
+to ISO 1328-1:2013
+μm
+ƒpT
+9,5
+10,0
+Profile form deviation according 
+to ISO 1328-1:2013
+μm
+ƒfα
+11,0
+11,0
+Helix slope deviation
+μm
+fHβ
+11,0
+11,0
+Surface roughness – flank Ra (Rz)
+μm
+—
+0,38 (2,3)
+0,38 (2,3)
+Surface roughness – fillet Ra (Rz)
+μm
+—
+3,0 (18,0)
+3,0 (18,0)
+Material
+Material
+—
+—
+Eh
+Eh
+Material quality
+—
+—
+MQ
+MQ
+Case hardness
+—
+—
+58 HRC
+58 HRC
+Core hardness
+—
+—
+30 HRC
+30 HRC
+Young’s modulus
+N/mm2
+E
+206 000
+206 000
+Poisson’s ratio
+—
+v
+0,3
+0,3
+Yield/proof stress
+N/mm2
+σS/σ0,2
+689,5
+689,5
+Material density
+kg/m3
+ρ
+7 830
+7 830
+Shot peen
+—
+—
+No
+No
+Limited pitting allowable
+—
+—
+No
+No
+Application Application factor
+—
+KA-A
+1,000
+Mesh load factor
+—
+Kγ
+1,00
+Reverse bending
+—
+—
+No
+No
+Favourable contact position
+—
+—
+Yes
+Yes
+Helix modification (ISO 6336-1:2019, 
+Table 12)
+—
+—
+Helix + Crowning
+(No. 5)
+Dynamic factor, Kv, calculation method
+—
+—
+Method B
+Face load distribution factor, 
+KHβ and KFβ, calculation method
+—
+—
+Method C
+Number of meshes
+—
+NM
+1
+1
+Gear blank type
+—
+—
+Solid
+Solid
+Web thickness
+mm
+bs
+—
+—
+Inside diameter
+mm
+—
+—
+—
+Number of webs
+—
+—
+—
+—
+Arrangement (ISO 6336-1:2019, Figure 13)
+—
+—
+b
+Bearing span
+mm
+l
+331,724
+—
+Bearing span offset
+mm
+s
+67,56
+—
+External shaft diameter
+mm
+dsh
+63,50
+—
+Internal shaft diameter
+mm
+dshi
+0,00
+—
+Equivalent misalignment
+μm
+fsh
+As Formula (59)
+Mesh misalignment
+μm
+ƒma
+As Formula (66)
+Minimum safety factor pitting
+—
+SH min
+1,00
+Minimum safety factor tooth breakage
+—
+SF min
+1,00
+Lubrication viscosity
+mm2/s
+ν40
+220
+Table 17 (continued)
+Table 17 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+39
+
+===PAGE 44===
+ISO/TR 6336-30:2022(E)
+Type
+Description
+Unit
+Symbol
+Pinion
+Wheel
+Load
+Torque
+kNm
+T1
+1,494
+Speed
+min-1
+n1
+1 430,0
+Required life
+h
+—
+10 000
+Life factor for contact stress, ZNT, at 
+1010 cycles
+—
+—
+1,00
+1,00
+Life factor for tooth root stress, YNT, at 
+1010 cycles
+—
+—
+1,00
+1,00
+Table 18 — Example 8 output values
+Symbol
+Description
+Unit
+Pinion
+Gear
+d
+Reference diameter
+mm
+68,76
+288,81
+da
+Tip diameter
+mm
+82,19
+301,55
+db
+Base circle diameter
+mm
+64,47
+270,79
+xE,V
+Generating profile shift coefficient (pre-finishing)
+—
+0,629 5
+0,549 9
+xE
+Generating profile shift coefficient
+—
+0,486 6
+0,406 9
+df
+Root diameter
+(based on xE,V — pre-finishing)
+mm
+60,79
+280,11
+dFf
+Root form diameter
+(based on xE —finishing)
+mm
+65,87
+284,03
+dNf
+Start of active profile diameter
+mm
+65,88
+287,05
+dw
+Working pitch diameter
+mm
+70,34
+295,42
+Ft
+Nominal tangential load at the reference cylinder
+N
+43 453
+KFα-B
+Transverse load factor (root stress)
+—
+1,03
+KFβ-C
+Face load factor (root stress)
+—
+1,05
+KHα-B
+Transverse load factor (contact stress)
+—
+1,03
+KHβ-C
+Face load factor (contact stress)
+—
+1,06
+Kv-B
+Dynamic factor
+—
+1,02
+SF
+Tooth root breakage safety factor
+—
+3,01
+2,78
+SH
+Pitting safety factor
+—
+1,20
+1,20
+vw
+Pitch line velocity
+m/s
+5,27
+YB
+Rim thickness factor
+—
+1,00
+1,00
+YDT
+Deep tooth factor
+—
+1,00
+YF
+Tooth form factor
+—
+1,25
+1,28
+YNT
+Life factor for reference test conditions (tooth root stress)
+—
+1,00
+1,00
+YN
+Life factor (tooth root stress)
+—
+1,00
+1,00
+YRrelT
+Relative surface factor
+—
+0,96
+0,96
+YS
+Stress correction factor
+—
+1,98
+2,03
+YST
+Stress correction factor for reference gears
+—
+2,00
+YX
+Size factor
+—
+1,00
+1,00
+Yβ
+Helix angle factor
+—
+0,96
+YδrelT
+Relative notch sensitivity factor
+—
+1,00
+1,00
+ZB
+Single pair tooth contact factor, pinion
+—
+1,03
+Zβ
+Helix angle factor (pitting)
+—
+1,01
+ZD
+Single pair tooth contact factor, wheel
+—
+1,03
+Table 17 (continued)
+Table 17 (continued)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+40
+
+===PAGE 45===
+ISO/TR 6336-30:2022(E)
+Symbol
+Description
+Unit
+Pinion
+Gear
+ZE
+Elasticity factor
+N
+mm
+/
+2
+189,81
+Zε
+Contact ratio factor
+—
+0,85
+ZH
+Zone factor
+—
+2,27
+ZL
+Lubricant factor
+—
+1,02
+1,02
+ZNT
+Life factor for reference test conditions (contact stress)
+—
+1,00
+1,00
+ZN
+Life factor (contact stress)
+—
+1,00
+1,00
+ZR
+Roughness factor
+—
+1,02
+1,02
+Zv
+Velocity factor
+—
+0,98
+0,98
+ZW
+Work hardening factor
+—
+1,00
+1,00
+ZX
+Size factor
+—
+1,00
+1,00
+εα
+Transverse contact ratio
+—
+1,39
+εβ
+Overlap ratio
+—
+1,03
+εγ
+Total contact ratio
+—
+2,41
+σF0
+Nominal tooth root stress
+N/mm2
+291
+317
+σF
+Tooth root stress
+N/mm2
+320
+347
+σF lim
+Limiting tooth root stress
+N/mm2
+500
+500
+σFP
+Permissible tooth root stress
+N/mm2
+962
+965
+σH
+Contact stress
+N/mm2
+1 285
+1 285
+σH lim
+Limiting contact stress
+N/mm2
+1 500
+1 500
+σH0
+Nominal contact stress
+N/mm2
+1 181
+σHP
+Permissible contact stress
+N/mm2
+1 541
+1 541
+Intermediate calculation values
+Kv-B intermediate calculation values
+cγα
+Mean value of mesh stiffness per unit facewidth (used for Kv-B, 
+KHα-B, KFα-B)
+N/(mm·μm)
+17,5
+c′
+Maximum tooth stiffness per unit facewidth (single stiffness) of a 
+tooth pair
+N/(mm·μm)
+13,5
+mred
+Reduced gear pair mass per unit facewidth referenced to the line 
+of action
+kg/mm
+0,018
+N
+Resonance ratio
+—
+0,07
+KHβ-C intermediate calculation values
+cγβ
+Mean value of mesh stiffness per unit facewidth (used for KHβ-C, 
+KFβ-C)
+N/(mm·μm)
+14,8
+fsh0
+Shaft deformation under specific load
+μm
+0,136
+Fβx
+Initial equivalent misalignment (before 
+running-in)
+μm
+5,5
+Fβy
+Effective equivalent misalignment (after 
+running-in)
+μm
+4,7
+yα
+Running-in allowance for a gear pair 
+(calculated with max(fpb, ffα))
+μm
+0,825
+yβ
+Running-in allowance (equivalent 
+misalignment)
+μm
+0,8
+fpb
+Transverse base pitch deviation
+μm
+9,4
+fHβ5
+Tolerance on helix slope deviation for flank tolerance class 5
+μm
+8,0
+fsh
+Component of equivalent misalignment due to deformations of 
+pinion and wheel shafts
+μm
+78,9
+Table 18 (continued)
+Table 18 (continued)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+41
+
+===PAGE 46===
+ISO/TR 6336-30:2022(E)
+Symbol
+Description
+Unit
+Pinion
+Gear
+fma
+Mesh misalignment due to manufacturing deviations
+μm
+15,6
+Auxiliary values
+fZCa
+Tooth flank correction factor
+(auxiliary factor, see ISO 6336-2:2019)
+—
+1,07
+fε
+Load distribution influence factor
+—
+0,84
+Table 18 (continued)
+Table 18 (continued)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+42
+
+===PAGE 47===
+ISO/TR 6336-30:2022(E)
+Annex A
+(informative)
+
+Example 1 detailed calculation
+A.1	 General
+This annex contains the detailed calculation example 1. The formulae are numbered according to the 
+respective referenced document.
+A.2 Defined data
+The defined data are shown in Tables A.1, A.2 and A.3.
+Table A.1 — Gear geometry
+Description
+Pinion
+Wheel
+Number of teeth
+z1 = 17
+z2 = 103
+Normal module
+mn = 8
+Normal pressure angle
+αn = 20,00°
+Helix angle
+β = 15,8°
+Hand of helix
+Left
+Right
+Facewidth
+b1 = 100 mm
+b2 = 100 mm
+Contact facewidth
+b = 100 mm
+Centre distance
+a = 500 mm
+Nominal addendum correction factor
+x1 = (0,145 22)
+x2 = 0
+Span measurement
+Wk1 = 38,196 mm
+Wk2 = 307,943 mm
+Number of teeth spanned
+k1 = 2
+k2 = 13
+Tip diameter
+da1 = 159,66 mm
+da2 = 872,35 mm
+Basic rack dedendum
+hfP1 = 1,4 mn mm
+hfP2 = 1,4 mn = 11,2 mm
+Basic rack fillet root radius
+ρfP1 = 0,39 mn mm
+ρfP2 = 0,39 mn = 3,12 mm
+residual fillet undercut
+spr1 = 0,00 mm
+spr2 = 0,00 mm
+Material allowance for finishing
+q1 = 0,00 mm
+q2 = 0,00 mm
+Tip relief
+Ca = 70 μm
+Root relief
+Cf = 0 μm
+Profile modification compensate for the deflections
+Yes
+Table A.2 — Gear quality
+Description
+Pinion
+Wheel
+Flank tolerance class
+A = 5
+A = 5
+Single pitch tolerance
+fpT1 = 8,5 μm
+fpT2 = 9,0 μm
+Profile form deviation
+ffα1 = 9,5 μm
+ffα2 = 9,5 μm
+Helix slope deviation
+fHβ1 = 8,0 μm
+fHβ2 = 9,0 μm
+Surface roughness (Ra)
+RaH1 = 1,0 μm
+RaH2 = 1,0 μm
+Fillet roughness (Ra)
+RaF1 = 3,0 μm
+RaF2 = 3,0 μm
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+43
+
+===PAGE 48===
+ISO/TR 6336-30:2022(E)
+Table A.3 — Material data
+Description
+Pinion
+Wheel
+Material type
+Eh
+Eh
+Material quality
+MQ
+MQ
+Case hardness (HRC)
+60
+60
+Core hardness (HRC)
+30
+30
+Young’s modulus
+E1 = 206 000 N/mm2
+E2 = 206 000 N/mm2
+Poisson’s ratio
+v1 = 0,3
+v2 = 0,3
+Yield/proof stress
+σS1 = 500 N/mm2
+σS2 = 500 N/mm2
+Material density
+ρ1 = 7 830 kg/m3
+ρ2 = 7 830 kg/m3
+Shot peen
+No
+No
+Limited pitting allowable
+No
+No
+A.3 ISO 6336-5:2016 — Allowable stress values for contact and bending
+5.5 Allowable contact stress number, σH lim
+For material Eh with MQ quality (see ISO 6336-5:2016, Table 1),
+σ H lim
+2
+=1500 N/ mm
+Minimum required safety value for contact, SH min = 1,00
+Allowable stress number (bending), σF lim
+For material Eh, material quality MQ with core hardness ≥ 30 HRC (see ISO 6336-5:2016, Figure 10),
+σ F lim
+2
+=500 N/ mm
+Minimum safety value for bending, SF min = 1,00
+A.4	 Application data
+See Table A.4.
+Table A.4 — Application data
+Description
+Pinion
+Wheel
+Application factor
+KA = 1,00
+Mesh load factor
+Kγ = 1,00
+Reverse bending
+No
+No
+Favourable contact position
+No
+No
+Helix modification
+No
+No
+Profile modifications compensate for the deflections
+Yes
+Yes
+Number of mesh contacts
+NM1 = 1
+NM2 = 1
+Gear blank type
+Solid
+Solid
+Bearing span offset
+s1 = 0,00 mm
+ 
+Equivalent misalignment
+fsh = 14,705 μm
+ 
+Mesh misalignment
+fma = 12,042 μm
+ 
+Lubrication viscosity
+ν40 = 320 mm2/s
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+44
+
+===PAGE 49===
+ISO/TR 6336-30:2022(E)
+A.5	 Load data
+See Table A.5.
+Table A.5 — Load data
+Description
+Pinion
+Wheel
+Pinion torque
+T1 = 9 000 Nm
+—
+Pinion speed
+n1 = 360 min-1
+—
+Required life
+Lh = 50 000 h
+—
+A.6	 Supplementary calculations
+Gear ratio
+u
+z
+z
+=
+=
+2
+1
+6 058 82
+,
+ 
+Transverse module
+m
+m
+t
+n
+ 
+mm
+=
+( )
+=
+cos
+,
+β
+8 314 12
+Reference diameter
+d
+z
+m
+1
+1
+141 340
+=
+⋅
+=
+t
+mm
+,
+d
+z
+m
+2
+2
+856 355
+=
+⋅
+=
+t
+mm
+,
+Involute normal 
+pressure angle
+inv
+ 
+ rad
+n
+n
+n
+α
+α
+α
+=
+(
+) −
+=
+tan
+,
+0 014 90
+Transverse pressure
+angle
+α
+α
+β
+t
+n
+tan
+=
+( )
+
+
+
+=
+°
+a
+tan(
+)
+cos
+,
+20 720
+inv
+rad
+t
+t
+α
+α
+α
+=
+(
+) −
+=
+tan
+,
+t
+0 01663
+Transverse working
+pressure angle
+α
+α
+β
+wt
+n
+t
+w
+cos
+=
++
+⋅
+(
+)
+⋅
+( )
+
+
+
+
+
+
+
+
+
+
+=
+°
+a
+z
+z
+m
+a
+1
+2
+2
+21 066
+cos
+cos
+,
+Generating profile 
+shift
+coefficient
+x
+W
+m
+k
+z
+m
+E
+k
+n
+n
+t
+n
+n
+cos
+inv
+1
+1
+1
+1
+0 5
+2
+0 117
+=
+−
+⋅
+(
+)
+−
+(
+) +
+⋅
+[
+]
+{
+}
+⋅
+⋅
+(
+)
+=
+α
+π
+α
+α
+,
+sin
+,
+ 79
+x
+W
+m
+k
+z
+m
+E
+k
+n
+n
+t
+n
+n
+cos
+inv
+2
+2
+2
+2
+0 5
+2
+0 02
+=
+−
+⋅
+(
+)
+−
+(
+) +
+⋅
+[
+]
+{
+}
+⋅
+⋅
+(
+)
+= −
+α
+π
+α
+α
+,
+sin
+,
+7 48
+ 
+Root diameter
+(based on generating 
+profile shift 
+coefficient, xE)
+d
+d
+h
+x
+m
+f
+fP
+E
+n
+ mm
+1
+1
+1
+1
+2
+120 825
+=
+−
+−(
+)
+[
+] =
+,
+d
+d
+h
+x
+m
+f
+fP
+E
+n
+ mm
+2
+2
+2
+2
+2
+833 515
+=
+−
+−(
+)
+[
+] =
+,
+Root form diameter
+(based on generated 
+profile shift coeffi­
+cient, xE; in this case 
+there is no undercut 
+or protuberance, so 
+the following formula 
+can be applied)
+d
+ 
+ sin
+ 
+ 
+ 
+sin
+Ff1
+t
+aP
+E
+n
+aP
+n
+t
+=
+−
+−
+−
+−
+(
+)
+(
+)
+[
+]
+
+d
+h
+x
+m
+1
+0
+1
+0
+2
+1
+(
+)
+sin
+(
+)
+α
+ρ
+α
+α
+
+
+
+
++
+=
+2
+1
+2
+132 248
+db
+ mm
+,
+d
+ 
+ sin
+ 
+ 
+ 
+sin
+Ff2
+t
+aP
+E
+n
+aP
+n
+t
+=
+−
+−
+−
+−
+(
+)
+(
+)
+[
+]
+
+d
+h
+x
+m
+2
+0
+2
+0
+2
+1
+(
+)
+sin
+(
+)
+α
+ρ
+α
+α
+
+
+
+
++
+=
+2
+2
+2
+839 084
+ 
+ mm
+b
+d
+,
+Base diameter
+d
+d
+b
+t
+ mm
+1
+1
+132 199
+=
+(
+) =
+cos
+,
+α
+d
+d
+b
+t
+ mm
+2
+2
+800 968
+=
+(
+) =
+cos
+,
+α
+Base helix angle
+β
+β
+α
+b
+t
+cos
+=
+( )
+(
+)
+[
+] =
+°
+−
+tan
+tan
+,
+1
+14 825
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+45
+
+===PAGE 50===
+ISO/TR 6336-30:2022(E)
+Working pitch 
+diameter
+d
+d
+w
+b
+wt
+cos
+ mm
+1
+1
+141 667
+=
+(
+)
+=
+α
+,
+d
+d
+w
+b
+wt
+cos
+ mm
+2
+2
+858 333
+=
+(
+)
+=
+α
+,
+Normal pitch
+p
+m
+n
+n
+ mm
+=
+⋅
+=
+π
+25 133
+,
+Transverse pitch
+p
+m
+t
+t
+ mm
+=
+⋅
+=
+π
+26 120
+,
+Transverse base pitch p
+p
+bt
+t
+t
+ mm
+=
+⋅
+(
+) =
+cos
+,
+α
+24 430
+Transverse base pitch
+on the path of contact
+p
+p
+et
+bt
+ mm
+=
+= 24 430
+,
+Length of line of 
+contact
+g
+d
+d
+z
+z
+d
+d
+a
+α
+α
+=
+−
++
+−
+−
+(
+)
+
+
+
+=
+1
+2
+2
+37 845
+1
+2
+1
+2
+2
+2
+2
+2
+2
+2
+Na
+b
+Na
+b
+w
+wt
+ mm
+sin
+,
+SAP diameter
+d
+a
+d
+d
+d
+b
+Nf1
+wt
+Fa
+b
+ mm
+=
+−
+−
+(
+) +
+=
+2
+132 921
+2
+2
+2
+2
+2
+1
+2
+sin
+,
+α
+d
+z
+z
+a
+d
+d
+d
+wt
+Nf
+Fa
+b
+b
+ mm
+2
+2
+2
+1
+2
+1
+2
+2
+2
+2
+2
+845 225
+=
+−
+−
+(
+) +
+=
+sin
+,
+α
+Transverse contact 
+ratio
+εα
+α
+=
+=
+g
+pet
+1 54909
+,
+Overlap ratio
+ε
+β
+π
+β =
+⋅
+( )
+⋅
+=
+b
+m
+sin
+n
+1 08337
+,
+Total contact ratio
+ε
+ε
+ε
+γ
+α
+β
+=
++
+= 2 63246
+,
+Transverse base pitch
+deviation
+f
+f
+pb
+pT
+t
+cos
+ 
+m
+1
+1
+7 950 24
+=
+⋅
+(
+) =
+α
+,
+µ
+f
+f
+pb
+pT
+t
+cos
+ 
+m
+2
+2
+8 417 90
+=
+⋅
+(
+) =
+α
+,
+µ
+Pitch line velocity
+v
+d
+n
+w
+w
+  
+ 
+ m
+s
+=
+⋅
+⋅
+=
+1
+1
+3
+60
+10
+2 670 35
+π
+·
+,
+Circumferential ve­
+locity at the reference 
+circle
+(see ISO 6336-1:2019, 
+4.2.2)
+v
+d
+n
+=
+⋅
+⋅
+=
+1
+1
+3
+60
+10
+2 664 20
+π
+  
+ 
+ m
+s
+·
+,
+A.7	 ISO 6336-2:2019 — Contact ratio factor
+8.2.2 Contact ratio factor, Zε
+Zε
+α
+ε
+=
+=
+1
+0 803 46
+,
+ 
+	
+(31)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+46
+
+===PAGE 51===
+ISO/TR 6336-30:2022(E)
+A.8 ISO 6336-1:2019 — Basic principles, introduction and general influence 
+factors
+A.8.1	 Determination of dynamic factor, Kv
+4.2.2 Nominal tangential load, Ft
+F
+T
+d
+t
+N
+=
+=
+2 000
+127 352 381
+1
+1
+,
+	
+(1)
+9.3 Determination of tooth stiffness parameters, c′ and cγ
+Virtual number of teeth, zn
+z
+z
+n
+b
+1
+1
+2
+18 905
+=
+(
+)
+( )
+=
+cos
+cos
+,
+β
+β
+z
+z
+n
+b
+2
+2
+2
+114 543
+=
+(
+)
+( )
+=
+cos
+cos
+,
+β
+β
+9.3.2.2 Theoretical single stiffness, c′th
+Coefficients:
+C1
+0 047 23
+= ,
+ 
+C2
+0 155 51
+= ,
+ 
+C3
+0 257 91
+= ,
+ 
+C4
+0 006 35
+= −,
+ 
+C5
+0 116 54
+= −,
+ 
+C6
+0 00193
+= −,
+ 
+C7
+0 24188
+= −,
+ 
+C8
+0 005 29
+= ,
+ 
+C9
+0 00182
+= ,
+Minimum value for the flexibility of gear pair, q′
+′ =
++
++
++
++
++
++
++
++
+=
+q
+C
+C
+z
+C
+z
+C x
+C x
+z
+C x
+C x
+z
+C x
+C x
+1
+2
+1
+3
+2
+4 1
+5 1
+1
+6 2
+7 2
+2
+8 1
+2
+9 2
+2
+0
+n
+n
+n
+n
+,056 00
+ 
+ mm
+m
+N
+⋅
+(
+)
+µ
+/
+	
+(84)
+′
+′
+=
+=
+⋅
+(
+)
+c
+q
+th
+ N
+mm
+m
+1
+17 857
+,
+/
+µ
+	
+(83)
+9.3.2.3 Correction factor, CM
+CM =0 8
+,
+	
+(85)
+9.3.2.4 Gear blank factor, CR
+CR
+for solid gears
+=
+(
+)
+1 0
+,
+	
+(86)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+47
+
+===PAGE 52===
+ISO/TR 6336-30:2022(E)
+9.3.2.5 Basic rack factor, CB
+Normal pressure angle of basic rack, α
+α
+Pn
+n
+=
+Basic rack dedendum for pinion and gear are the same, therefore,
+C
+h
+m
+B
+fP
+n
+Pn
+1
+1
+1 0 0 5 1 2
+1 0 0 02
+20
+0 90
+=
++
+−
+
+
+
+
+
+
+
+
+−
+⋅
+°−
+(
+)
+[
+]=
+,
+,
+,
+,
+,
+,
+α
+000 	
+(88)
+C
+h
+m
+B
+fP
+n
+Pn
+2
+2
+1 0 0 5 1 2
+1 0 0 02
+20
+0 90
+=
++
+−
+
+
+
+
+
+
+
+
+−
+⋅
+°−
+(
+)
+[
+]=
+,
+,
+,
+,
+,
+,
+α
+000
+C
+C
+C
+B
+B
+B
+=
+⋅
++
+(
+)
+0 5
+1
+2
+,
+ = 0,900 00	
+(89)
+9.3.2 Single stiffness, c′
+′
+′
+=
+⋅
+⋅
+⋅
+( ) =
+⋅
+(
+)
+c
+c
+C
+C
+C
+th
+M
+R
+B cos
+N
+mm
+m
+β
+12 371
+,
+/
+µ
+	
+(82)
+9.3.3.1 Mesh stiffness, cγα
+c
+c
+γα
+α
+ε
+=
+⋅
++
+(
+) =
+⋅
+(
+)
+′
+0 75
+0 25
+17 466
+,
+,
+,
+/
+ 
+N
+mm
+m
+µ
+	
+(93)
+9.3.3.2 Mesh stiffness, cγβ
+c
+c
+γβ
+γα
+=
+=
+⋅
+(
+)
+0 85
+14 846
+,
+,
+/
+N
+mm
+m
+µ
+	
+(94)
+6.5.3 Calculation of reduced mass of gear pair with external teeth, mred
+Mean tooth diameter, dm
+d
+d
+d
+m
+a
+f
+ mm
+1
+1
+1
+2
+140 462
+=
++
+=
+,
+          d
+d
+d
+m
+a
+f
+ mm
+2
+2
+2
+2
+853 152
+=
++
+=
+,
+	
+(31)
+Given density	 ρ1 = 7 830 kg/m3 	
+ρ2 = 7 830 kg/m3
+m
+J
+r
+1
+1
+1
+2
+0 068 486
+*
+*
+,
+/
+=
+=
+b
+ 
+ kg mm            m
+J
+r
+2
+2
+2
+2
+2 539 206
+*
+*
+,
+/
+=
+=
+b
+ 
+ 
+ kg mm 	
+(8)
+m
+m
+m
+m
+m
+red
+ 
+ 
+ kg mm
+=
+⋅
++
+=
+1
+2
+1
+2
+0 066 69
+*
+*
+*
+*
+,
+/
+	
+(7)
+NOTE	
+Quantity (1 − q14) = (1 − q24) = 1 for solid pinion and wheel	
+(33)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+48
+
+===PAGE 53===
+ISO/TR 6336-30:2022(E)
+6.5.3 Determination of resonance running speed, nE1
+n
+z
+c
+m
+E
+red
+ 
+min
+1
+1
+1
+30 000
+9090 605
+=
+=
+−
+π
+γα
+,
+	
+(6)
+Resonance ratio, N
+N
+n
+n
+=
+=
+1
+1
+0 03960
+E
+,
+	
+(9)
+Lower limit of resonance ratio, NS
+F K
+b
+NS
+t
+A
+therefore, 
+>
+=
+100
+0 85
+,
+,
+	
+(12)
+6.5.4 Dynamic factor in subcritical range, (N ≤ NS)
+εγ > 2 (see ISO 6336-1:2019, Table 8), therefore,
+Cv1
+0 320 00
+= ,
+ 
+                                  Cv4
+0 57 0 05
+1 44
+0 367 62
+=
+−
+−
+=
+,
+,
+,
+,
+ε
+ε
+γ
+γ
+ 
+Cv2
+0 57
+0 3
+0 244 38
+=
+−
+=
+,
+,
+,
+εγ
+ 
+              Cv5
+0 47
+0 470 00
+=
+=
+,
+,
+ 
+Cv3
+0 096
+1 56
+0 08951
+=
+−
+=
+,
+,
+,
+εγ
+             Cv6
+0 12
+1 74
+0 134 46
+=
+−
+=
+,
+,
+,
+εγ
+εγ > 2,5                                                    Cv7
+1
+=
+Cay
+H lim
+m
+=
+−
+
+
+
+
+
++
+=
+1
+18
+97
+18 45
+1 5
+1 99537
+2
+σ
+,
+,
+,
+µ
+Base pitch deviation, f
+f
+f
+pb
+pb
+pb
+max
+m
+=
+(
+) =
+1
+2
+8 41790
+,
+,
+µ
+ (see note in ISO 6336-1:2019, 8.3.2)
+Profile form deviation, f
+f
+f
+f
+f
+f
+max
+m
+α
+α
+α
+=
+(
+) =
+1
+2
+9 5
+,
+, µ
+, Running-in allowance (see ISO  6336-1:2019, 
+8.3.6)
+As materials are the same and for Eh material, then,
+y
+f
+α =
+=
+0 075
+0 63134
+,
+,
+pb
+m
+µ
+	
+(79)
+NOTE	
+The application of 50 % of the values fpb or ffα (due to profile modification compensation of deflections) 
+is only valid for the calculation of KHβ, but not for the calculation of Kv.
+Comparison with the allowable limit for material Eh of 3 μm.
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+49
+
+===PAGE 54===
+ISO/TR 6336-30:2022(E)
+Estimated running-in allowance (pitch deviation) (see note in ISO 6336-1:2019, 6.54)
+y
+y
+p
+ 
+ m
+=
+=
+α
+0 631 34
+,
+µ
+Estimated running-in allowance (flank deviation) (see ISO 6336-1:2019, 6.5.4)
+y
+f
+f
+f
+ 
+ m
+=
+=
+0 075
+0 712 50
+,
+,
+α
+µ
+Comparison with the allowable limit for material Eh of 3 μm.
+f
+f
+y
+pbeff
+pb
+p
+ 
+ m
+=
+−
+=7 786 56
+,
+µ
+	
+(18)
+f
+f
+y
+f eff
+f
+f
+ 
+ m
+α
+α
+=
+−
+= 8 787 50
+,
+µ
+	
+(19)
+B
+c
+f
+K
+K
+F
+b
+p
+pb eff
+A
+t
+ 
+=
+⋅
+⋅
+⋅
+
+
+
+=
+′
+γ
+0 075 64
+,
+	
+(15)
+B
+c
+f
+K
+K
+F
+b
+f
+f
+ eff
+A
+t
+ 
+=
+⋅
+⋅
+⋅
+
+
+
+=
+′
+α
+γ
+0 085 36
+,
+	
+(16)
+As lowest flank tolerance class ≤ Flank tolerance class 5, then,
+B
+c
+C
+C
+C
+C
+K
+K
+F
+b
+k
+a
+f
+a
+f
+A
+t
+min
+ 
+=
+−
+⋅
++
++
+(
+)
+⋅
+⋅
+
+
+
+=
+′
+1
+0 320 02
+1
+2
+2
+1
+,
+,
+γ
+	
+(17)
+K
+C
+B
+C
+B
+C
+B
+=
+⋅
+(
+)+
+⋅
+(
+)+
+⋅
+(
+) =
+v1
+p
+v2
+f
+v3
+k
+ 
+0 073 71
+,
+	
+(14)
+As N ≤ NS, (see ISO 6336-1:2019, 6.5.4), then,
+K
+N K
+v
+ 
+=
+⋅
++
+=
+1
+1 002 92
+,
+	
+(13)
+A.8.2	 Determination of face load factors, KHβ and KFβ
+Mean transverse tangential load (see 7.2)
+F
+F
+K
+K
+K
+m
+t
+A
+v
+ 
+N
+=
+⋅
+⋅
+⋅
+=
+γ
+127 724 130
+,
+7.5.3.5.2 Approximate calculation of equivalent misalignment, fsh
+Pinion offset s1 = 0, therefore,
+f
+F
+b
+b
+d
+sh
+m
+m
+=
++ −
+(
+)+
+[
+]
+
+
+=
+0 023 1 0 0 3
+0 3
+14 705
+1
+2
+,
+,
+,
+,
+µ
+	
+(59)
+7.5.4.4 Mesh misalignment, fma
+f
+f
+f
+ma
+H
+H
+m
+=
++
+=
+β
+β
+1
+2
+2
+2
+12 042
+,
+µ
+	
+(66)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+50
+
+===PAGE 55===
+ISO/TR 6336-30:2022(E)
+7.5.3.4 Initial equivalent misalignment, Fβx
+As no helix modification is applied,
+ 
+B1 = 1
+B2 = 1
+(see Table 12 of ISO 6336-1:2019)
+F
+B
+f
+B
+f
+βx
+sh
+ma
+m
+=
++
+=
+1 33
+31 599
+1
+2
+,
+,
+µ
+	
+(54)
+7.5.3.2 Running-in allowance, yβ and Xβ
+As materials are the same and for Eh material,
+y
+F
+β
+β
+=
+=
+0 15
+4 73992
+,
+,
+x
+m
+µ
+	
+(50)
+Comparison with the allowable limit for material Eh of 6 μm.
+xβ 2
+0 85
+= ,
+	
+(51)
+7.5.2 Effective equivalent misalignment, Fβy
+F
+F
+y
+β
+β
+β
+y
+x
+m
+=
+−
+=26 860
+,
+µ
+	
+(45)
+7.5 Face load factor, KHβ-C
+F
+c
+F
+b
+y
+β
+γβ
+2
+1
+m
+<
+therefore,
+K
+F
+c
+F
+b
+H
+y
+m
+β
+β
+γβ
+=
++
+
+
+
+
+
+
+
+
+
+
+=
+1
+2
+1 156 10
+,
+ 
+	
+(43)
+7.6 Face load factor, KFβ
+h
+d
+d
+1
+1
+1
+2
+19 198
+=
+−
+=
+a
+f
+mm
+,
+              b
+h
+1
+1
+5 20883
+= ,
+h
+d
+d
+2
+2
+2
+2
+19 198
+=
+−
+=
+a
+f
+mm
+,
+              b
+h
+2
+2
+5 20883
+= ,
+NOTE	
+The root diameters df were calculated with nominal (see 4.2.16).
+N
+b
+h
+b
+h
+b
+h
+F
+ 
+=
+(
+)
++
++(
+)
+=
+1
+1
+2
+1
+1
+1
+1
+2
+1
+0 813 78
+/
+/
+/
+,
+	
+(72)
+K
+K
+N
+F
+H
+F
+β
+β
+=
+=1 12529
+,
+	
+(70)
+A.8.3	 Determination of transverse load factors, KHα and KFα
+Determination tangential load in transverse plane.
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+51
+
+===PAGE 56===
+ISO/TR 6336-30:2022(E)
+8.3.2 Transverse load factor, KHα
+ 
+F
+F K
+K
+K
+K
+tH
+t
+A
+v
+H
+N
+=
+=
+γ
+β
+147661 660
+,
+(see definition in ISO 6336-1:2019, 8.3.2)
+ 
+εγ > 2
+therefore:
+NOTE	
+If the profile form deviation ffα is larger than the base pitch deviation fpb, the profile form deviation is 
+taken instead of the base pitch deviation. If the profile modifications compensate for the deflections at the actual 
+load level, 50 % of [max(fpb, ffα) - yα] is used. The value of yα is calculated by max(fpb, ffα).
+K
+c
+y
+F
+b
+H
+B
+pb
+f
+tH
+max f
+f
+α
+γ
+γ
+γα
+α
+α
+ε
+ε
+−=
++
+−
+(
+)
+⋅
+⋅
+(
+)−
+
+=
+0 9 0 4
+2
+1
+0 5
+0 92
+,
+,
+,
+,
+,
+3 15
+ 
+	
+(74)
+K
+K
+F
+B
+H
+B
+ 
+α
+α
+−
+−
+=
+=0 923 15
+,
+	
+(74)
+8.3.4 Limiting factors, KHα
+KH
+B
+α−<1 0
+, , therefore, KHα =1 0
+, 	
+(75)
+8.3.5 Limiting factors, KFα
+KF
+B
+α−<1 0
+,  therefore, KFα =1 0
+, 	
+(76)
+A.9 ISO 6336-2:2019 — Calculation of surface durability (pitting)
+A.9.1	 Determination of contact stress, σH
+6.2 Zone factor, ZH
+ZH
+b
+wt
+t
+wt
+=
+(
+)
+(
+)
+(
+)
+[
+]
+(
+)
+=
+2
+2 39533
+2
+cos
+cos
+cos
+sin
+,
+β
+α
+α
+α
+	
+(16)
+6.3 Single pair tooth contact factors, ZB and ZD
+As the design of profile modification is based on a 3D load distribution program, see Table 3 – Factor fZCa 
+in ISO 6336-2:2019, then,
+fZCa =1 0
+,
+As β > 0 and εα > 1, then, Z
+f
+B
+ZCa
+=
+=1 0
+, 	
+(19)
+Z
+f
+D
+ZCa
+=
+=1 0
+, 	
+(19)
+7 Elasticity factor, ZE
+Z
+v
+E
+v
+E
+N
+E
+mm
+=
+−
++
+−
+
+
+
+
+
+
+=
+1
+1
+1
+189 812
+1
+2
+1
+2
+2
+2
+2
+π
+,
+	
+(24)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+52
+
+===PAGE 57===
+ISO/TR 6336-30:2022(E)
+8.2 Contact ratio factor, Zε
+For helical gears with εβ ≥ 1, then,
+Zε
+α
+ε
+=
+=
+1
+0 803 46
+,
+ 
+	
+(31)
+9 Helix angle factor, Zβ
+Zβ
+β
+=
+( )
+=
+1
+1 01944
+cos
+,
+	
+(41)
+5.3 Contact stress, σH
+Nominal contact stress at pitch point, σH0
+σ
+ε
+β
+H0
+H
+E
+t
+ N mm
+=
+⋅
+⋅
+⋅
+⋅
++
+=
+Z
+Z
+Z
+Z
+F
+d b
+u
+u
+1
+2
+1
+1206 582
+,
+/
+	
+(3)
+σ
+σ
+γ
+β
+α
+H
+B
+H
+A
+v
+H
+H
+ N mm
+1
+0
+2
+1299 233
+=
+⋅
+⋅
+⋅
+⋅
+=
+Z
+K
+K
+K
+K
+K
+,
+/
+	
+(4)
+σ
+σ
+γ
+β
+α
+H
+D
+H
+A
+v
+H
+H
+ N mm
+2
+0
+2
+1299 233
+=
+⋅
+⋅
+⋅
+⋅
+=
+Z
+K
+K
+K
+K
+K
+,
+/
+	
+(5)
+A.9.2 Determination of permissible contact stress, σHP
+The number of load cycles for pinion and wheel are greater than the endurance point, therefore the 
+reference values of ZL, Zv, ZR, ZW and ZX can be used.
+12.3.2.1.3 Lubricant factor, ZL
+As σH lim > 1 200, then,
+CZL =0 91000
+,
+	
+(45)
+Z
+C
+C
+v
+L
+ZL
+ZL
+=
++
+−
+(
+)
++
+
+
+
+
+=
+4 1 0
+1 2
+134
+1 04739
+40
+2
+,
+,
+,
+	
+(42)
+12.3.2.2.3 Velocity factor, Zv
+C
+C
+Zv
+ZL
+=
++
+=
+0 02
+0 93000
+,
+,
+	
+(48)
+Z
+C
+C
+v
+Zv
+Zv
+v
+=
++
+−
+(
+)
++
+=
+2 1 0
+0 8
+32
+0 96911
+,
+,
+,
+	
+(47)
+12.3.2.3 Roughness factor, ZR
+Rz = 6 Ra, therefore,
+Rz
+Ra
+Rz
+Ra
+H
+H
+H
+H
+m
+m
+1
+1
+2
+2
+6
+6
+6
+6
+=
+=
+=
+⋅
+=
+⋅
+µ
+µ
+Mean surface of peak-to-valley
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+53
+
+===PAGE 58===
+ISO/TR 6336-30:2022(E)
+Roughness of gear pair
+Rz
+Rz
+Rz
+H
+H
+H
+m
+=
++
+=
+1
+2
+2
+6 00000
+,
+µ
+	
+(49)
+Radius of curvature
+ρ
+α
+1
+1
+0 5
+25 461
+=
+(
+) =
+,
+tan
+,
+db
+wt
+mm 	
+(52)
+ρ
+α
+2
+2
+0 5
+154 262
+=
+(
+) =
+,
+tan
+,
+db
+wt
+mm
+Relative radius of curvature
+ρ
+ρ ρ
+ρ
+ρ
+red
+mm
+=
++
+=
+1
+2
+1
+2
+21 854
+,
+	
+(51)
+Mean relative peak-to-valley roughness for the gear pair
+Rz
+Rz
+H
+H
+red
+m
+10
+3 10
+4 62355
+=
+=
+ρ
+,
+µ
+	
+(50)
+As σHlim > 1 200, then,
+CZR =0 08000
+,
+	
+(56)
+Z
+Rz
+C
+R
+H
+ZR
+= 
+
+
+
+=
+3
+0 96599
+10
+,
+	
+(53)
+Work hardening factor, ZW
+For Eh pinion and gear, ZW =1 000
+,
+Size factor, ZX
+ZX =1 000
+,
+11.3 Life factor for reference test conditions (contact stress), ZNT-B
+Number of load cycles
+N
+n
+L
+L
+h
+1
+1
+9
+60
+1 080 10
+=
+⋅
+=
+⋅
+,
+N
+N
+u
+L
+L
+2
+1
+8
+1 783 10
+=
+=
+⋅
+,
+Number of load cycles, NL1, is greater than endurance point, therefore, interpolation between the 
+endurable point and 1010 cycles is required.
+ZNT1ref1
+1
+=
+                   ZNT1ref2 =0 85
+,
+NL1ref1 =5 107
+·
+              NL1ref2
+10
+10
+=
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+54
+
+===PAGE 59===
+ISO/TR 6336-30:2022(E)
+Z
+N
+Z
+Z
+N
+N
+NT
+L
+NT1ref
+NT1ref
+L1ref2
+L1ref
+1
+1
+2
+1
+1
+=
+(
+)−
+(
+)
+(
+)−
+log
+log
+log
+log(
+)
+
+
+
+
+(
+)−
+(
+)
+(
+)−
+N
+Z
+Z
+N
+L1ref
+NT1ref2
+NT1ref
+L1ref2
+1
+1
+log
+log
+log
+log
+,
+NL1ref1
+0 91005
+(
+)
+
+
+
+
+=
+Number of load cycles, NL2, is greater than endurance point, therefore, interpolation between the 
+endurable point and 1010 cycles is required.
+ZNT2ref1
+1
+=
+               ZNT2ref2
+0 85
+= ,
+NL2ref1
+7
+5 10
+= ⋅
+         NL2ref2 =1010
+Z
+N
+Z
+Z
+N
+N
+NT2
+L
+NT2ref
+NT2ref
+L2ref2
+L2ref
+=
+(
+)−
+(
+)
+(
+)−
+2
+2
+1
+1
+log
+log
+log
+log(
+)
+
+
+
+
+(
+)−
+(
+)
+(
+)−
+N
+Z
+Z
+N
+L2ref
+NT2ref
+NT2ref
+L2ref
+1
+2
+1
+2
+log
+log
+log
+log
+,
+NL2ref1
+(
+)
+
+
+
+
+=0 96176
+5.4.2 Permissible contact stress,σHP
+σ
+σ
+HP1
+H lim1
+NT
+H min
+L
+v
+R
+W
+X
+N mm
+=
+⋅
+⋅
+⋅
+⋅
+⋅
+=
+Z
+S
+Z
+Z
+Z
+Z
+Z
+1
+2
+1338 481
+,
+/
+	
+(6)
+σ
+σ
+HP2
+H lim2 NT2
+H min
+L
+v
+R
+W
+X
+N mm
+=
+⋅
+⋅
+⋅
+⋅
+⋅
+=
+Z
+S
+Z
+Z
+Z
+Z
+Z
+1414 526
+2
+,
+/
+	
+(6)
+5.2 Safety factor for surface durability, SH
+S
+S
+H
+HP
+H min
+H
+1
+1
+1
+1 03021
+=
+⋅
+=
+σ
+σ
+,
+	
+(1)
+S
+S
+H2
+HP2
+H min
+H2
+=
+⋅
+=
+σ
+σ
+1 08874
+,
+	
+(2)
+A.10 ISO 6336-3:2019 — Calculation of tooth bending strength
+A.10.1	Determination of tooth root stress, σF
+6.2 Tooth form factor, YF (pinion)
+6.2.3 Tooth root normal chord, sFn, radius of root fillet, ρF, and bending moment arm, hFe
+(auxiliary values)
+E
+m
+h
+s
+1
+1
+4
+1
+0 0
+=
+−
+(
+)+
+(
+)
+−
+−
+(
+)
+[
+]
+(
+)
+=
+π
+α
+α
+α
+ρ
+α
+n
+fP1
+n
+pr1
+n
+n
+fP
+n
+tan
+cos
+sin
+cos
+, 2207 	
+(26)
+G
+m
+h
+m
+x
+1
+1
+1
+1
+0 89221
+=
+−
++
+= −
+ρfP
+n
+fP
+n
+E
+,
+	
+(27)
+H
+z
+E
+m
+1
+1
+1
+2
+2
+3
+0 88131
+=
+−
+
+
+
+−
+= −
+n
+n
+π
+π
+,
+	
+(28)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+55
+
+===PAGE 60===
+ISO/TR 6336-30:2022(E)
+θ
+π
+1
+6
+=
+rad for external gears
+θ
+θ
+1
+1
+1
+1
+2
+0 82682
+=
+(
+)−
+=
+G
+z
+H
+n1
+tan
+,
+ (first iteration)	
+(29)
+θ
+θ
+1
+1
+1
+1
+1
+2
+0 77876
+=
+(
+)−
+=
+G
+z
+H
+n
+tan
+,
+ (second iteration)
+θ
+θ
+1
+1
+1
+1
+1
+2
+0 78817
+=
+(
+)−
+=
+G
+z
+H
+n
+tan
+,
+θ
+θ
+1
+1
+1
+1
+1
+2
+0 786 40
+=
+(
+)−
+=
+G
+z
+H
+n
+tan
+,
+θ
+θ
+1
+1
+1
+1
+1
+2
+0 78673
+=
+(
+)−
+=
+G
+z
+H
+n
+tan
+,
+θ
+θ
+1
+1
+1
+1
+1
+2
+0 78667
+=
+(
+)−
+=
+G
+z
+H
+n
+tan
+,
+θ
+θ
+1
+1
+1
+1
+1
+2
+0 78668
+=
+(
+)−
+=
+G
+z
+H
+n
+tan
+,
+θ
+θ
+1
+1
+1
+1
+1
+2
+0 78668
+=
+(
+)−
+=
+G
+z
+H
+n
+tan
+,
+ (resolved)
+6.2.2 Parameters of virtual tooth
+ε
+ε
+β
+α
+α
+n
+b
+=
+(
+)
+[
+]
+=
+cos
+,
+2
+1 65760 	
+(17)
+d
+z
+m
+n
+n
+n
+mm
+1
+1
+151 241
+=
+=
+,
+	
+(18)
+p
+m
+bn
+n
+n
+mm
+=
+(
+) =
+π
+α
+cos
+,
+23 617
+	
+(19)
+d
+d
+bn
+n
+n
+mm
+1
+1
+142 120
+=
+(
+) =
+cos
+,
+α
+	
+(20)
+d
+d
+d
+d
+an
+n
+a
+mm
+1
+1
+1
+1
+169 561
+=
++
+−
+=
+,
+	
+(21)
+d
+z
+z
+d
+d
+d
+z
+en
+an
+bn1
+n
+n
+1
+1
+1
+1
+2
+2
+1
+1
+2
+2
+2
+=
+
+
+
+−
+
+
+
+−
+( )
+(
+)
+−
+π
+β
+α
+εα
+cos
+cos
+1
+2
+2
+2
+(
+)
+
+
+
+
+
+
+
++
+
+
+
+dbn1
+den
+mm
+1
+154 824
+=
+,
+	
+(22)
+αen
+bn
+en
+cos
+1
+1
+1
+23 373
+=
+
+
+
+=
+°
+a
+d
+d
+,
+	
+(23)
+inv
+rad
+en
+en
+en
+α
+α
+α
+1
+1
+1
+0 02424
+=
+(
+)−
+=
+tan
+,
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+56
+
+===PAGE 61===
+ISO/TR 6336-30:2022(E)
+γ
+π
+α
+α
+α
+e
+n
+E
+n
+n
+en
+inv
+inv
+rad
+1
+1
+1
+1
+0 5
+2
+0 07829
+=
++
+(
+)
++
+−
+=
+,
+tan
+,
+x
+z
+γ e1
+4 48547
+=
+°
+,
+	
+(24)
+α
+α
+γ
+Fen
+en
+e
+1
+1
+1
+18 887
+=
+−
+=
+°
+,
+	
+(25)
+(a) Tooth root normal chord, sFn
+s
+m
+z
+G
+m
+Fn1
+n
+n
+fP
+n
+=
+−
+
+
+
++
+(
+)
+−
+
+
+
+
+
+
+
+
+
+
+=
+1
+1
+1
+1
+1
+3
+3
+16
+sin
+cos
+,
+π
+θ
+θ
+ρ
+046 mm	
+(30)
+(b) Radius of root fillet, ρF
+ρ
+ρ
+θ
+θ
+F1
+n
+fP
+n
+n
+=
++
+(
+)
+(
+)
+[
+] −
+{
+}
+
+
+
+
+
+
+=
+m
+m
+G
+z
+G
+1
+1
+2
+1
+1
+1
+2
+1
+2
+2
+4 72
+cos
+cos
+,
+8 50
+ 
+mm 	
+(31)
+(c) Bending moment arm, hFe
+h
+m
+d
+m
+z
+Fe
+n
+e
+e
+Fen
+en
+n
+n
+1
+1
+1
+1
+1
+1
+1
+1
+2
+3
+=
+(
+)−
+(
+)
+(
+)
+[
+]
+−
+−
+
+
+cos
+sin
+tan
+cos
+γ
+γ
+α
+π
+θ
+
+
+−
+(
+)
+−
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+G
+m
+1
+1
+cos θ
+ρfP1
+n
+hFe
+mm
+1
+8 648 49
+= ,
+	
+(32)
+Load distribution influence factor
+As εβ > 1, then,
+fε
+α
+ε
+=
+=
+−
+ 
+ 
+n
+0 5
+0 776 71
+,
+,
+	
+(14)
+Form factor
+Y
+h
+m
+s
+m
+f
+F
+Fe
+n
+Fen
+Fn
+n
+n
+1
+1
+1
+1
+2
+6
+1 26087
+=
+(
+)
+
+
+
+
+(
+)
+⋅
+=
+cos
+cos
+,
+α
+α
+ε
+	
+(9)
+6.2 Tooth form factor, YF (wheel)
+6.2.3 Tooth root normal chord, sFn, radius of root fillet, ρF, and bending moment arm, hFe
+(auxiliary values)
+E
+m
+h
+s
+2
+2
+2
+2
+4
+1
+0 0
+=
+−
+(
+)+
+(
+)
+−
+−
+(
+)
+[
+]
+(
+)
+=
+π
+α
+α
+α
+ρ
+α
+n
+fP
+n
+pr
+n
+n
+fP
+n
+tan
+cos
+sin
+cos
+, 2207 mm 	
+(26)
+G
+m
+h
+m
+x
+2
+2
+2
+1 037 48
+=
+−
++
+= −
+ρfP
+n
+fP2
+n
+E
+,
+	
+(27)
+H
+z
+E
+m
+2
+2
+2
+2
+3
+1 01982
+=
+−
+
+
+
+−
+= −
+n2
+n
+π
+π
+,
+	
+(28)
+θ
+π
+2
+6
+=
+rad for external gears
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+57
+
+===PAGE 62===
+ISO/TR 6336-30:2022(E)
+θ
+θ
+2
+2
+2
+2
+2
+1 00936
+=
+(
+)−
+=
+G
+z
+H
+n2
+tan
+,
+ (first iteration)	
+(29)
+θ
+θ
+2
+2
+2
+2
+2
+0 99102
+=
+(
+)−
+=
+G
+z
+H
+n2
+tan
+,
+ (second iteration)
+θ
+θ
+2
+2
+2
+2
+2
+0 99216
+=
+(
+)−
+=
+G
+z
+H
+n2
+tan
+,
+θ
+θ
+2
+2
+2
+2
+2
+2
+0 99209
+=
+(
+)−
+=
+G
+z
+H
+n
+tan
+,
+θ
+θ
+2
+2
+2
+2
+2
+2
+0 99209
+=
+(
+)−
+=
+G
+z
+H
+n
+tan
+,
+ (resolved)
+6.2.2 Parameters of virtual tooth
+ε
+ε
+β
+α
+α
+n
+b
+=
+(
+)
+[
+]
+=
+cos
+,
+2
+1 65760 	
+(17)
+d
+z
+m
+n
+n
+n
+mm
+2
+2
+916 342
+=
+=
+,
+	
+(18)
+d
+d
+bn
+n
+n
+mm
+2
+2
+861 080
+=
+(
+) =
+cos
+,
+α
+	
+(20)
+d
+d
+d
+d
+an
+n
+a
+mm
+2
+2
+2
+2
+932 338
+=
++
+−
+=
+,
+	
+(21)
+d
+z
+z
+d
+d
+d
+z
+en
+an
+bn
+n
+n
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+=
+
+
+
+−
+
+
+
+−
+( )
+(
+)
+−
+π
+β
+α
+εα
+cos
+cos
+1
+2
+2
+2
+2
+(
+)
+
+
+
+
+
+
+
++
+
+
+
+dbn
+den
+mm
+2
+920 875
+=
+,
+	
+(22)
+αen
+bn
+en2
+cos
+2
+2
+20 761
+=
+
+
+
+=
+°
+a
+d
+d
+,
+	
+(23)
+inv
+en
+en
+α
+α
+α
+2
+2
+2
+0 01674
+=
+(
+)−
+=
+tan
+,
+γ
+π
+α
+α
+α
+e
+n
+E
+n2
+n
+en
+inv
+inv
+rad
+2
+2
+2
+0 5
+2
+0 01171
+=
++
+(
+)
++
+−
+=
+,
+tan
+,
+x
+z
+γ e
+ 
+2
+0 670 69
+=
+°
+,
+	
+(24)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+58
+
+===PAGE 63===
+ISO/TR 6336-30:2022(E)
+α
+α
+γ
+Fen
+en
+e
+2
+2
+2
+20 090
+=
+−
+=
+°
+,
+	
+(25)
+(a) Tooth root normal chord, sFn
+s
+m
+z
+G
+m
+Fn
+n
+n
+fP2
+n
+2
+2
+2
+2
+2
+3
+3
+18
+=
+−
+
+
+
++
+(
+)
+−
+
+
+
+
+
+
+
+
+
+
+=
+sin
+cos
+,
+π
+θ
+θ
+ρ
+783mm 	
+(30)
+(b) Radius of root fillet, ρF
+ρ
+ρ
+θ
+θ
+F2
+n
+fP
+n
+n
+=
++
+(
+)
+(
+)
+[
+] −
+{
+}
+
+
+
+
+
+
+=
+m
+m
+G
+z
+G
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+3 98
+cos
+cos
+,
+6 47 mm 	
+(31)
+(c) Bending moment arm, hFe
+h
+m
+d
+m
+z
+Fe
+n
+e
+e
+Fen
+en
+n
+n
+2
+2
+2
+2
+2
+2
+2
+1
+2
+3
+=
+(
+)−
+(
+)
+(
+)
+[
+]
+−
+−
+
+
+cos
+sin
+tan
+cos
+γ
+γ
+α
+π
+θ
+
+
+−
+(
+)
+−
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+G
+m
+2
+2
+cos θ
+ρfP2
+n
+hFe
+mm
+2
+10 106
+=
+,
+	
+(32)
+Load distribution influence factor
+As εβ > 1, then,
+fε
+α
+ε
+=
+=
+−
+n
+0 5
+0 77671
+,
+,
+	
+(14)
+Form factor
+Y
+h
+m
+s
+m
+f
+F
+Fe
+n
+Fen
+Fn
+n
+n
+2
+2
+2
+2
+2
+6
+1 06734
+=
+(
+)
+
+
+
+
+(
+)
+⋅
+=
+cos
+cos
+,
+α
+α
+ε
+	
+(9)
+7.2 Stress concentration factor, YS
+Notch factor
+where
+q
+s
+s1
+1
+1
+2
+1 69677
+=
+=
+Fn
+F
+ρ
+,
+                   q
+s
+s
+Fn2
+F2
+2
+2
+2 35588
+=
+=
+ρ
+,
+	
+(64)
+L
+s
+h
+1
+1
+1
+1 85539
+=
+=
+Fn
+Fe
+,
+                       L
+s
+h
+2
+2
+2
+1 85856
+=
+=
+Fn
+Fe
+,
+	
+(63)
+1 ≤ qs < 8, therefore,
+Y
+L
+q
+L
+S
+s
+1
+1
+1
+1
+1 21 2 3
+1 2 0 13
+1 78839
+1
+=
++
+(
+)
+=
++
+
+
+
+
+
+
+
+
+
+
+
+
+,
+,
+,
+,
+,
+	
+(62)
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+59
+
+===PAGE 64===
+ISO/TR 6336-30:2022(E)
+Y
+L
+q
+L
+S
+s
+2
+2
+2
+1
+1 21 2 3
+1 2 0 13
+2 04598
+2
+=
++
+(
+)
+=
++
+
+
+
+
+
+
+
+
+
+
+
+
+,
+,
+,
+,
+,
+8.3 Helix angle factor, Yβ
+Yβ
+β
+ε
+β
+β
+=
+−
+⋅
+°
+
+
+
+⋅
+( )
+=
+1
+120
+1
+0 97469
+3
+cos
+,
+	
+(66)
+9.3 Rim thickness factor, YB
+For solid gears,
+Y
+Y
+B
+B
+1
+2
+1 0
+1 0
+=
+=
+,
+, 	
+(68)
+10.3 Deep tooth factor, YDT
+As εαn < 2,05, then,
+YDT =1 0
+, 	
+(72)
+5.3.3 Tooth root stress, σF
+Nominal tooth root stress, σF0
+σ
+β
+F01
+n
+F1
+S
+B
+DT
+2
+N/mm
+=
+=
+F
+b m Y
+Y
+Y Y
+Y
+t
+1
+1
+1
+349 8766
+,
+	
+(4)
+σ
+β
+F02
+n
+F
+S2
+B
+DT
+2
+N/mm
+=
+=
+F
+b m Y
+Y
+Y Y
+Y
+t
+1
+2
+2
+338 834 4
+,
+σ
+σ
+γ
+β
+α
+F1
+F
+A
+v
+F
+F
+2
+N/mm
+=
+=
+01
+394 860
+K
+K
+K
+K
+K
+,
+	
+(3)
+σ
+σ
+γ
+β
+α
+F
+F02
+A
+v
+F
+F
+2
+N/mm
+2
+382 399
+=
+=
+K
+K
+K
+K
+K
+,
+A.10.2 Determination of permissible tooth root stress, σFP
+7.4 Stress concentration factor (standard reference test gears), YST
+YST1
+2 0
+= ,                 YST2
+2 0
+= ,
+13.3.2.1 Relative notch sensitivity factor (for reference stress), YδrelT
+χP
+* = 1
+5 	
+(77)
+χ
+χ
+1
+1
+1 2
+0 87871
+*
+*
+,
+=
++
+(
+) =
+P
+s
+q
+	
+(76)
+χ
+χ
+2
+2
+1 2
+1 14235
+*
+*
+,
+=
++
+(
+) =
+P
+s
+q
+qsT =2 5
+,
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+60
+
+===PAGE 65===
+ISO/TR 6336-30:2022(E)
+χ
+χ
+T
+P
+sT
+*
+*
+,
+=
++
+(
+) =
+1 2
+1 20000
+q
+Slip layer thickness (see ISO 6336-3:2019, Table 4).
+For material Eh,
+′ =
+ρ1
+0 003
+,
+                     
+′ =
+ρ2
+0 003
+,
+Yδ
+ρ χ
+ρ χ
+relT
+T
+ 
+1
+1
+1
+1
+1
+1
+0 991 83
+=
++
+′
++
+′
+=
+*
+*
+,
+	
+(75)
+Yδ
+ρ χ
+ρ χ
+relT
+T
+ 
+2
+2
+2
+2
+1
+1
+0 998 62
+=
++
+′
++
+′
+=
+*
+*
+,
+14.3.2.1 Relative surface factor, YRrelT
+Rz
+Ra
+F
+F
+1
+1 6
+18
+=
+=
+                 Rz
+Ra
+F
+F
+2
+2 6
+18
+=
+=
+Reference stress in the range 1 μm ≤ Rz ≤ 40 μm for material Eh
+Y
+Rz
+RrelT
+F
+ 
+1
+1
+0 1
+1 674 0 529
+1
+0 963 88
+=
+−
+⋅
++
+(
+)
+=
+,
+,
+,
+,
+	
+(87)
+Y
+Rz
+RrelT
+F
+ 
+2
+2
+0 1
+1 674 0 529
+1
+0 963 88
+=
+−
+⋅
++
+(
+)
+=
+,
+,
+,
+,
+15.3.3.1 Size factor, YX
+See ISO 6336-3:2019, Table 5.
+For material Eh and 5 < mn < 25,
+Y
+m
+X
+n
+ 
+ 
+1
+1 05 0 01
+0 970 00
+=
+−
+=
+,
+,
+,
+Y
+m
+X
+n
+ 
+ 
+2
+1 05 0 01
+0 970 00
+=
+−
+=
+,
+,
+,
+12.3 Life factor for reference test conditions (tooth root stress), YNT-B
+Number of load cycles, NL1, is greater than endurance point, therefore, interpolation between the 
+endurable point and 1010 cycles is required.
+YNT1ref1
+1
+=
+                          YNT1ref 2
+0 85
+= ,
+NL1ref1
+6
+3 10
+= ⋅
+                   NL1ref2 =1010
+Y
+N
+Y
+Y
+N
+N
+NT
+L
+NT1ref
+NT1ref
+L1ref
+L1ref
+1
+1
+2
+1
+2
+1
+=
+(
+)−
+(
+)
+(
+)−
+log
+log
+log
+log(
+)
+
+
+
+
+
+
+
+
+(
+)−
+(
+)
+(
+)−
+N
+Y
+Y
+N
+L1ref
+NT1ref
+NT1ref
+L1ref
+1
+2
+1
+2
+log
+log
+log
+log
+,
+
+NL1ref 1
+0 88876
+(
+)
+
+
+
+
+
+
+
+
+=
+Number of load cycles, NL2, is greater than endurance point, therefore, interpolation between the 
+endurable point and 1010 cycles is required.
+YNT2ref1
+1
+=
+              YNT2ref2
+0 85
+= ,
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+61
+
+===PAGE 66===
+ISO/TR 6336-30:2022(E)
+NL2ref1
+6
+3 10
+= ⋅
+        NL2ref2
+10
+10
+=
+Y
+NL
+Y
+Y
+N
+N
+NT
+NT2ref
+NT2ref
+L2ref
+L2ref
+2
+2
+2
+1
+2
+1
+=
+(
+)−
+(
+)
+(
+)−
+log
+log
+log
+log(
+)
+
+
+
+
+(
+)−
+(
+)
+(
+)−
+N
+Y
+Y
+N
+L2ref
+NT2ref
+NT2ref
+L2ref
+1
+2
+1
+2
+log
+log
+log
+log
+,
+NL2ref
+ 
+1
+0 921 42
+(
+)
+
+
+
+
+=
+5.4.3 Permissible bending stress, σFP
+σ
+σ
+δ
+FP
+F lim
+ST
+NT
+F min
+relT
+RrelT
+X
+2
+N/mm
+1
+1
+1
+1
+1
+1
+1
+824 173
+=
+⋅
+⋅
+⋅
+⋅
+=
+Y
+Y
+S
+Y
+Y
+Y
+,
+	
+(5)
+σ
+σ
+δ
+FP
+F lim
+ST
+NT
+F min
+relT
+RrelT
+X
+2
+N/mm
+2
+2
+2
+2
+2
+2
+2
+860 313
+=
+⋅
+⋅
+⋅
+⋅
+=
+Y
+Y
+S
+Y
+Y
+Y
+,
+5.2 Safety factor for bending strength, SF
+S
+S
+F
+FP
+F min
+F
+1
+1
+1
+2 08725
+=
+⋅
+=
+σ
+σ
+,
+	
+(1)
+S
+S
+F
+FP2
+F min
+F
+ 
+2
+2
+2 249 78
+=
+⋅
+=
+σ
+σ
+,
+	
+(2)
+	
+﻿
+© ISO 2022 – All rights reserved
+
+﻿
+62
+
+===PAGE 67===
+ISO/TR 6336-30:2022(E)
+Bibliography
+[1]	
+ISO 53, Cylindrical gears for general and heavy engineering — Standard basic rack tooth profile
+[2]	
+ISO  1328-1:2013, Cylindrical gears — ISO system of flank tolerance classification — Part 1: 
+Definitions and allowable values of deviations relevant to flanks of gear teeth
+[3]	
+ISO 4287:19971), Geometrical Product Specifications (GPS) — Surface texture: Profile method — 
+Terms, definitions and surface texture parameters
+[4]	
+ISO 4288:19962), Geometrical Product Specifications (GPS) — Surface texture: Profile method — 
+Rules and procedures for the assessment of surface texture
+[5]	
+ISO 21771, Gears — Cylindrical involute gears and gear pairs — Concepts and geometry
+1)	 Cancelled and replaced by ISO 21920-2:2021.
+2)	 Cancelled and replaced by ISO 21920-3:2021.
+© ISO 2022 – All rights reserved	
+﻿
+﻿
+63
+
+===PAGE 68===
+ISO/TR 6336-30:2022(E)
+ICS 21.200
+Price based on 63 pages
+© ISO 2022 – All rights reserved	
+﻿
+

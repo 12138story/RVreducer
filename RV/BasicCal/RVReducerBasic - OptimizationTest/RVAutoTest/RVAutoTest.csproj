@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>RVAutoTest</AssemblyName>
+    <RootNamespace>RVAutoTest</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- DLL 自动复制到运行目录，供 P/Invoke 使用 -->
+    <None Include="..\RVReducerDesignApp\bin\Debug\net8.0-windows\RVReducerBasic.dll"
+          Link="RVReducerBasic.dll"
+          CopyToOutputDirectory="PreserveNewest"
+          Condition="Exists('..\RVReducerDesignApp\bin\Debug\net8.0-windows\RVReducerBasic.dll')" />
+    <!-- 测试配置文件复制到运行目录 -->
+    <None Include="test_params.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <!-- ISO Example 1 参数文件复制到运行目录 -->
+    <None Include="iso_example1_params.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <!-- ISO Example 1 kisssoft 优化参数文件复制到运行目录 -->
+    <None Include="iso_example1_kisssoft_params.json"
+          CopyToOutputDirectory="PreserveNewest" />
+    <!-- 摆线针轮副独立计算参数文件复制到运行目录（cycloid 模式） -->
+    <None Include="cycloid_params.json"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
