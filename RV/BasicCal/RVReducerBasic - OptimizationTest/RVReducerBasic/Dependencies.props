@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MySqlRoot Condition="'$(MySqlRoot)' == ''">$(MSBuildThisFileDirectory)..\..\..\mysql-8.0.37-winx64\mysql-8.0.37-winx64</MySqlRoot>
+    <SparseMatrixRoot Condition="'$(SparseMatrixRoot)' == ''">$(MSBuildThisFileDirectory)..\..\..\..\CAE\DYNAMICS\dynamic\Fortran0.02\Dynamics\SparseMatrix</SparseMatrixRoot>
+    <OneApiRoot Condition="'$(OneApiRoot)' == ''">C:\Program Files (x86)\Intel\oneAPI</OneApiRoot>
+    <MklRoot Condition="'$(MklRoot)' == ''">$(OneApiRoot)\mkl\latest</MklRoot>
+    <OneApiCompilerRoot Condition="'$(OneApiCompilerRoot)' == ''">$(OneApiRoot)\compiler\latest</OneApiCompilerRoot>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Platform)' == 'x64'">
+    <IncludePath>$(MySqlRoot)\include;$(SparseMatrixRoot);$(MklRoot)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(MySqlRoot)\lib;$(MklRoot)\lib;$(OneApiCompilerRoot)\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+</Project>

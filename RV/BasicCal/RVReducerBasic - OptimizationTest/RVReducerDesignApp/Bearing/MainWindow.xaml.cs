@@ -232,9 +232,10 @@ namespace WPFBearings
                 //SelectedB = selectedRow["B"].ToString();
                 if (OutAssignDictPtr != null)
                 {
-                    // 数据库 bearings 中 Cr/C0r 单位即为千牛(kN)，与字典/UI 单位一致，直接赋值（不要再 ×1000）
                     OutAssignDictPtr["基本额定动载荷Cr"].Value = double.Parse(selectedRow["Cr"].ToString());
                     OutAssignDictPtr["基本额定静载荷C0r"].Value = double.Parse(selectedRow["C0r"].ToString());
+                    //OutAssignDictPtr["基本额定动载荷Cr"].Value = double.Parse(selectedRow["Cr"].ToString()) * 1000;
+                    //OutAssignDictPtr["基本额定静载荷C0r"].Value = double.Parse(selectedRow["C0r"].ToString()) * 1000;
                     //if (currentTableName == "deepgrooveball"|| currentTableName == "needlerollerbearingtype") //等待数据库完善后再修改
                     if (currentTableName == "deepgrooveball")
                     {

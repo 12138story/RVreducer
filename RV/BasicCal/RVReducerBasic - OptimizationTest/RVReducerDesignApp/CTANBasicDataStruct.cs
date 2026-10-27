@@ -603,43 +603,9 @@ namespace RVReducerDesignApp
 
     public static class AppDataStorage
     {
-        /// <summary>
-        /// 工程存档目录。约定：所有产物都放在项目目录内（便于整个目录直接拷贝迁移），
-        /// 因此优先用「工作区/RVReducerDesignApp/Properties」；找不到工作区（已安装部署）时用应用目录下的 Properties。
-        /// 若历史版本在 %APPDATA%\RVReducerDesignApp\Properties 留有存档，会自动复制过来（不删除原文件）。
-        /// </summary>
-        public static readonly string AppDataPath = ResolveAppDataPath();
-
-        private static string ResolveAppDataPath()
-        {
-            var root = Services.WholeMachineSnapshot.FindWorkspaceRoot() ?? AppContext.BaseDirectory;
-            var projectDir = Path.Combine(root, "RVReducerDesignApp", "Properties");
-            if (!Directory.Exists(Path.Combine(root, "RVReducerDesignApp")))
-                projectDir = Path.Combine(AppContext.BaseDirectory, "Properties"); // 已安装部署：随应用目录
-
-            try
-            {
-                Directory.CreateDirectory(projectDir);
-
-                // 迁移历史存档（仅补齐缺失文件，不覆盖、不删除源文件）
-                var legacy = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                    "RVReducerDesignApp", "Properties");
-                if (Directory.Exists(legacy))
-                {
-                    foreach (var src in Directory.GetFiles(legacy, "*.json"))
-                    {
-                        var dest = Path.Combine(projectDir, Path.GetFileName(src));
-                        if (!File.Exists(dest)) File.Copy(src, dest);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"初始化存档目录失败：{ex.Message}");
-            }
-            return projectDir;
-        }
+        public static readonly string AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RVReducerDesignApp", "Properties");
+        // 根据你的项目环境调整路径
+        //public static readonly string AppDataPath = Path.Combine("D:\\Workspace\\softdevelop\\RV\\BasicCal\\RVReducerBasic - OptimizationTest\\RVReducerDesignApp\\Properties");
 
         public static void SaveAllData(
             Shaft shaft,
@@ -659,19 +625,52 @@ namespace RVReducerDesignApp
                 SaveAllDataToPath(shaft, allPages, filePath);
         }
 
-        private static void SaveAllDataToPath(Shaft shaft, IEnumerable<CTANBasicContentPageObj> allPages, string filePath)
+        // 汇总可持久化页面数据，并对未命名页面和空参数给出可定位的处理结果。
+        private static Dictionary<string, Dictionary<string, double>> CollectPageData(
+            IEnumerable<CTANBasicContentPageObj> allPages)
         {
+            if (allPages == null)
+                throw new ArgumentNullException(nameof(allPages), "待保存的页面集合不能为空。");
+
             var bigDict = new Dictionary<string, Dictionary<string, double>>();
             foreach (var page in allPages)
             {
-                var pageDict = new Dictionary<string, double>();
-                foreach (var item in page.mDataStorageDict)
-                {
-                    pageDict[item.Key] = item.Value.Value;
-                }
+                if (page == null)
+                    continue;
+
+                var dataStorage = page.mDataStorageDict;
                 string pageName = page.GetDataKey();
+
+                // 部分基础页面在初始化时只是无标题占位对象，不属于工程数据。
+                if (string.IsNullOrWhiteSpace(pageName))
+                {
+                    if (dataStorage == null || dataStorage.Count == 0)
+                        continue;
+
+                    throw new InvalidOperationException("存在包含数据但没有名称的页面，无法安全保存工程文件。");
+                }
+
+                var pageDict = new Dictionary<string, double>();
+                if (dataStorage != null)
+                {
+                    foreach (var item in dataStorage)
+                    {
+                        if (item.Value == null)
+                            throw new InvalidOperationException($"页面“{pageName}”中的参数“{item.Key}”尚未初始化。");
+
+                        pageDict[item.Key] = item.Value.Value;
+                    }
+                }
+
                 bigDict[pageName] = pageDict;
             }
+
+            return bigDict;
+        }
+
+        private static void SaveAllDataToPath(Shaft shaft, IEnumerable<CTANBasicContentPageObj> allPages, string filePath)
+        {
+            var bigDict = CollectPageData(allPages);
 
             var saveObj = new AppSavedData
             {
@@ -693,17 +692,7 @@ namespace RVReducerDesignApp
             // Ensure codepage provider is registered (required under .NET Core/.NET 5+ for some font encodings)
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-            var bigDict = new Dictionary<string, Dictionary<string, double>>();
-            foreach (var page in allPages)
-            {
-                var pageDict = new Dictionary<string, double>();
-                foreach (var item in page.mDataStorageDict)
-                {
-                    pageDict[item.Key] = item.Value.Value;
-                }
-                string pageName = page.GetDataKey();
-                bigDict[pageName] = pageDict;
-            }
+            var bigDict = CollectPageData(allPages);
 
             var saveObj = new AppSavedData
             {

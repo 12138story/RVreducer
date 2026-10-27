@@ -209,10 +209,6 @@ namespace WPFBearings
 
             // 4. 根据类型同步到类型特定的维度键
             SyncDimensionKeysForType(typeId);
-
-            // 5. 依据库值刷新 Cr/C0r 可选输入勾选态：
-            //    值>0 → 勾选（手动输入）；值=0 → 不勾选（自动计算，DLL 端据此解算）
-            _customPage.RefreshRatedLoadManualStatesFromDict();
         }
 
         /// <summary>
@@ -296,7 +292,6 @@ namespace WPFBearings
                 ["内径"] = GetDictValueSafe(GetInnerDiaKey(typeId)),
                 ["外径"] = GetDictValueSafe(GetOuterDiaKey(typeId)),
                 ["宽度"] = GetDictValueSafe(GetWidthKey(typeId)),
-                // Cr/C0r 可选输入：未勾选(值=0)为“自动计算”标记，原样入库；勾选时值为手动输入
                 ["Cr"] = _dataDict["基本额定动载荷Cr"].Value,
                 ["C0r"] = _dataDict["基本额定静载荷C0r"].Value,
                 ["接触角"] = _dataDict["接触角"].Value,

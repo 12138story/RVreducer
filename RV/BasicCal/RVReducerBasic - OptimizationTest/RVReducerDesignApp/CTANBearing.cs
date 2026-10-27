@@ -119,22 +119,6 @@ namespace RVReducerDesignApp
         public static int TaperedRollerBearing = 1003;
         public static int AngularContactBallBearing = 1004;
         public static int CustomBearing = 1005;
-#region Cr/C0r 单位约定
-        // 全应用（UI 输入框、mDataStorageDict、轴承库/自定义轴承数据库、保存的 JSON）统一使用【千牛 kN】，
-        // 只有调用 DLL 接口（CalBearingLife / CalCustomBearingLife / CalCrankShaftSystem2 等）时才换算成【牛 N】。
-        // 数据库 bearings 中 Cr/C0r 即为 kN，无需换算。
-        public const double KnToNewtonScale = 1000.0;
-        /// <summary>千牛(kN) → 牛(N)</summary>
-        public static double KnToNewton(double kn)
-        {
-            return kn * KnToNewtonScale;
-        }
-        /// <summary>牛(N) → 千牛(kN)</summary>
-        public static double NewtonToKn(double newton)
-        {
-            return newton / KnToNewtonScale;
-        }
-#endregion
 
         public static int BearingLeftBase = 1;
         public static int BearingMiddleBase = 0;
@@ -404,12 +388,11 @@ namespace RVReducerDesignApp
             tmpRecommendBearingGrid.AssignControlToGrid(0, 1, mBearingRecommendButton);
             // 添加结果标签
             CTANTextBox resultLabel = new CTANTextBox(true, "轴承寿命：");
-            resultLabel.HorizontalAlignment = HorizontalAlignment.Right; // 设置水平对齐方式
             tmpRecommendBearingGrid.AssignControlToGrid(0, 5, resultLabel);
 
             // 添加结果显示框
             mLifeTextBox = new CTANTextBox(true, "未计算");
-            mLifeTextBox.HorizontalAlignment = HorizontalAlignment.Left; // 设置水平对齐方式
+            mLifeTextBox.Width = 80; // 设置宽度
             tmpRecommendBearingGrid.AssignControlToGrid(0, 6, mLifeTextBox);
             Grid.SetRow(tmpRecommendBearingGrid, 2);
             mInputPageGrid.Children.Add(tmpRecommendBearingGrid);
@@ -464,9 +447,8 @@ namespace RVReducerDesignApp
                         d = OutData[baseIndex + 0],
                         D = OutData[baseIndex + 1],
                         B = OutData[baseIndex + 2],
-                        // DLL 返回牛(N)，推荐表格与字典/UI 统一显示千牛(kN)
-                        Cr = NewtonToKn(OutData[baseIndex + 3]),
-                        C0r = NewtonToKn(OutData[baseIndex + 4]),
+                        Cr = OutData[baseIndex + 3],
+                        C0r = OutData[baseIndex + 4],
                         e = OutData[baseIndex + 5],
                         Y = OutData[baseIndex + 6],
                         Yo = OutData[baseIndex + 7],
@@ -482,9 +464,8 @@ namespace RVReducerDesignApp
                         d = OutData[baseIndex + 0],
                         D = OutData[baseIndex + 1],
                         B = OutData[baseIndex + 2],
-                        // DLL 返回牛(N)，推荐表格与字典/UI 统一显示千牛(kN)
-                        Cr = NewtonToKn(OutData[baseIndex + 3]),
-                        C0r = NewtonToKn(OutData[baseIndex + 4]),
+                        Cr = OutData[baseIndex + 3],
+                        C0r = OutData[baseIndex + 4],
                         Life = OutData[baseIndex + 5],
                     });
                 }
@@ -515,8 +496,7 @@ namespace RVReducerDesignApp
 
                 if (result == 0 && OutData[0] > 0)
                 {
-                    //mLifeTextBox.Text = $"L10h: {OutData[10]:F2} h | S0: {OutData[4]:F2}";
-                    mLifeTextBox.Text = $"L10h: {OutData[10]:F2} h ";
+                    mLifeTextBox.Text = $"L10h: {OutData[10]:F2} h | S0: {OutData[4]:F2}";
                 }
                 else
                 {
@@ -527,29 +507,18 @@ namespace RVReducerDesignApp
             }
 
             // 标准轴承分支：使用原有 CalBearingLife
-            // 注意：字典中 Cr/C0r 为千牛(kN)，DLL 接口要求牛(N)，必须 ×1000
             double[] Indata = new double[9]
             {
                 (int)mDataStorageDict["轴承类型"].Value,
                 mDataStorageDict["转速"].Value,
                 mDataStorageDict["轴向力"].Value,
                 mDataStorageDict["径向力"].Value,
-                KnToNewton(mDataStorageDict["基本额定动载荷Cr"].Value),
-                KnToNewton(mDataStorageDict["基本额定静载荷C0r"].Value),
+                mDataStorageDict["基本额定动载荷Cr"].Value,
+                mDataStorageDict["基本额定静载荷C0r"].Value,
                 mDataStorageDict["计算系数e"].Value,
                 mDataStorageDict["计算系数Y"].Value,
                 mDataStorageDict["计算系数Y0"].Value,
             };
-            if(mDataStorageDict["径向力"].Value == 0 && mDataStorageDict["轴向力"].Value == 0)
-            {
-                System.Windows.MessageBox.Show("请先在「载荷」Tab中输入径向力或轴向力！");
-                return;
-            }
-            if(mDataStorageDict["转速"].Value <= 0)
-            {
-                System.Windows.MessageBox.Show("请先在「载荷」Tab中输入转速！");
-                return;
-            }
             if(mDataStorageDict["基本额定动载荷Cr"].Value == 0 || mDataStorageDict["基本额定静载荷C0r"].Value == 0)
             {
                 System.Windows.MessageBox.Show("请先输入轴承强度和结构参数！");
@@ -559,8 +528,7 @@ namespace RVReducerDesignApp
             {
                 double[] OutData = new double[10];//目前只有一个寿命返回值，暂定10，后续根据实际情况调整
                 CalBearingLife(ref Indata[0], ref OutData[0]);
-                //DLL 对无效输入（转速越界等）返回负值；寿命低于曲线下限时按 100h 输出
-                mLifeTextBox.Text = OutData[0] > 0 ? $"{OutData[0]:F2}h" : "计算失败（请检查转速/载荷/额定载荷）";
+                mLifeTextBox.Text = $"{OutData[0]:F2}" + "h";
             }
 
         }
@@ -618,9 +586,8 @@ namespace RVReducerDesignApp
             IODllInputData[InStartIndex + 0] = mDataStorageDict["轴承类型"].Value;         
             int tmpStartIndex = InStartIndex + 1;
             //强度计算参数，0-转速（通过后端计算），1-计算系数e，2-计算系数Y，3-计算系数Y0,4-额定动载荷Cr，5-额定静载荷C0R
-            //字典中 Cr/C0r 为千牛(kN)，DLL 内部统一使用牛(N)
-            IODllInputData[tmpStartIndex + 1] = KnToNewton(mDataStorageDict["基本额定动载荷Cr"].Value);
-            IODllInputData[tmpStartIndex + 2] = KnToNewton(mDataStorageDict["基本额定静载荷C0r"].Value);
+            IODllInputData[tmpStartIndex + 1] = mDataStorageDict["基本额定动载荷Cr"].Value;
+            IODllInputData[tmpStartIndex + 2] = mDataStorageDict["基本额定静载荷C0r"].Value;
             if ((int)mDataStorageDict["轴承类型"].Value == CTANBearing.TaperedRollerBearing)
             {
                 //IODllInputData[InStartIndex + 0] = mDataStorageDict["转速"].Value;
@@ -780,7 +747,7 @@ namespace RVReducerDesignApp
         }
         /// <summary>
         /// 从共享字典构建 CalCustomBearingLife 所需的 37 元素输入数组
-        /// 注意：字典中 Cr/C0r 以千牛(kN)为单位存储，此处转换为牛(N)（×1000）
+        /// 注意：字典中 Cr/C0r 以千牛为单位存储，此处转换为牛（×1000）
         /// </summary>
         public double[] BuildCustomBearingInData()
         {
@@ -802,11 +769,8 @@ namespace RVReducerDesignApp
             }
             data[CBI_LAYOUT] = SafeGetDictValue("布置方式");
             data[CBI_ASSEMBLY_COUNT] = SafeGetDictValue("装配数量");
-            // Cr/C0r 可选输入：值为 0 表示未启用手动输入 → C++ ExecuteUnifiedPipeline
-            // (BearingCalculators.cpp) 以 C/C0>0 为分支自动解算额定动/静载荷
-            // 字典中 Cr/C0r 为千牛(kN)，DLL 接口要求牛(N)，必须 ×1000
-            data[CBI_CR] = KnToNewton(SafeGetDictValue("基本额定动载荷Cr"));
-            data[CBI_C0R] = KnToNewton(SafeGetDictValue("基本额定静载荷C0r"));
+            data[CBI_CR] = SafeGetDictValue("基本额定动载荷Cr") ;
+            data[CBI_C0R] = SafeGetDictValue("基本额定静载荷C0r");
             data[CBI_DPW] = SafeGetDictValue("节圆直径Dpw");
             data[CBI_DW] = SafeGetDictValue("滚动体直径Dw");
             data[CBI_ALPHA] = SafeGetDictValue("接触角");
@@ -1055,9 +1019,8 @@ namespace RVReducerDesignApp
                     tapered.mDataStorageDict["轴承宽度T"].Value = InputParams[10];
                     tapered.mDataStorageDict["轴承宽度B"].Value = InputParams[11];
                     tapered.mDataStorageDict["轴承宽度C"].Value = InputParams[12];
-                    // RecommondMainBearing 输出为牛(N)，字典统一为千牛(kN)
-                    tapered.mDataStorageDict["基本额定动载荷Cr"].Value = CTANBearing.NewtonToKn(InputParams[13]);
-                    tapered.mDataStorageDict["基本额定静载荷C0r"].Value = CTANBearing.NewtonToKn(InputParams[14]);
+                    tapered.mDataStorageDict["基本额定动载荷Cr"].Value = InputParams[13];
+                    tapered.mDataStorageDict["基本额定静载荷C0r"].Value = InputParams[14];
                     tapered.mDataStorageDict["计算系数e"].Value = InputParams[15];
                     tapered.mDataStorageDict["计算系数Y"].Value = InputParams[16];
                     tapered.mDataStorageDict["计算系数Y0"].Value = InputParams[17];
@@ -1114,9 +1077,8 @@ namespace RVReducerDesignApp
                     angularContactBall.mDataStorageDict["轴承外径D"].Value = InputParams[9];
                     angularContactBall.mDataStorageDict["轴承宽度B"].Value = InputParams[10];
                     angularContactBall.mDataStorageDict["接触角"].Value = Math.Round(InputParams[11] * 180 / Math.PI);
-                    // RecommondMainBearing 输出为牛(N)，字典统一为千牛(kN)
-                    angularContactBall.mDataStorageDict["基本额定动载荷Cr"].Value = CTANBearing.NewtonToKn(InputParams[13]);
-                    angularContactBall.mDataStorageDict["基本额定静载荷C0r"].Value = CTANBearing.NewtonToKn(InputParams[14]);
+                    angularContactBall.mDataStorageDict["基本额定动载荷Cr"].Value = InputParams[13];
+                    angularContactBall.mDataStorageDict["基本额定静载荷C0r"].Value = InputParams[14];
                     angularContactBall.mDataStorageDict["作用点距离左端面距离a"].Value = InputParams[18];
                     angularContactBall.mDataStorageDict["轴承类型"].Value = CTANBearing.AngularContactBallBearing;
                 }

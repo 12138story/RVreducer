@@ -70,16 +70,13 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <Import Project="Dependencies.props" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\Workspace\softdevelop\RV\mysql-8.0.37-winx64\mysql-8.0.37-winx64\include;D:\WorkSpace\softdevelop\CAE\DYNAMICS\dynamic\Fortran0.02\Dynamics\SparseMatrix;C:\Program Files (x86)\Intel\oneAPI\2026.1\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)RVReducerDesignApp\bin\Debug\net8.0-windows\</OutDir>
-    <LibraryPath>D:\Workspace\softdevelop\RV\mysql-8.0.37-winx64\mysql-8.0.37-winx64\lib;C:\Program Files (x86)\Intel\oneAPI\2026.1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)RVReducerDesignApp\bin\Release\net8.0-windows\</OutDir>
-    <IncludePath>D:\Workspace\softdevelop\RV\mysql-8.0.37-winx64\mysql-8.0.37-winx64\include;D:\Workspace\softdevelop\CAE\DYNAMICS\dynamic\Fortran0.02\Dynamics\SparseMatrix;C:\Program Files (x86)\Intel\oneAPI\2026.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Workspace\softdevelop\RV\mysql-8.0.37-winx64\mysql-8.0.37-winx64\lib;C:\Program Files (x86)\Intel\oneAPI\2026.1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -159,7 +156,13 @@
     <ClCompile Include="..\..\..\..\CAE\DYNAMICS\dynamic\Fortran0.02\Dynamics\SparseMatrix\NSTanBasicObjOpt.cpp" />
     <ClCompile Include="..\..\..\..\CAE\DYNAMICS\dynamic\Fortran0.02\Dynamics\SparseMatrix\NSTanIOStream.cpp" />
     <ClCompile Include="BearingCalculators.cpp" />
+    <ClCompile Include="BearingCatalogRepository.cpp" />
+    <ClCompile Include="BearingLegacyLookup.cpp" />
     <ClCompile Include="BearingStaticFactors.cpp" />
+    <ClCompile Include="CycloidContactStress.cpp" />
+    <ClCompile Include="CycloidMeasurement.cpp" />
+    <ClCompile Include="CycloidBearingLoad.cpp" />
+    <ClCompile Include="CycloidGeometryRecommendation.cpp" />
     <ClCompile Include="InterfaceForCSharp.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -167,12 +170,21 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="CycloidToleranceRepository.cpp" />
     <ClCompile Include="TANMechanismFunction.cpp" />
     <ClCompile Include="TANShaftSystem.cpp" />
     <ClCompile Include="PreDefine.cpp" />
     <ClCompile Include="TANBearing.cpp" />
     <ClCompile Include="TANCubicSpline.cpp" />
     <ClCompile Include="TANInvoluteGear.cpp" />
+    <ClCompile Include="InvoluteGeometryRecommendation.cpp" />
+    <ClCompile Include="InvoluteLoadFactors.cpp" />
+    <ClCompile Include="InvoluteContactFactors.cpp" />
+    <ClCompile Include="InvoluteSingleGearGeometry.cpp" />
+    <ClCompile Include="InvoluteSingleGearProperties.cpp" />
+    <ClCompile Include="InvoluteSingleGearStrength.cpp" />
+    <ClCompile Include="InvoluteGearPairGeometry.cpp" />
+    <ClCompile Include="InvoluteGearPairGeometryZJ.cpp" />
     <ClCompile Include="TANPinionCycloidGear.cpp" />
     <ClCompile Include="Main_TAN.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -201,6 +213,9 @@
     <ClInclude Include="..\..\..\..\CAE\DYNAMICS\dynamic\Fortran0.02\Dynamics\SparseMatrix\CTanVector.h" />
     <ClInclude Include="..\..\..\..\CAE\DYNAMICS\dynamic\Fortran0.02\Dynamics\SparseMatrix\NSTanBasicObjOpt.h" />
     <ClInclude Include="..\..\..\..\CAE\DYNAMICS\dynamic\Fortran0.02\Dynamics\SparseMatrix\NSTanIOStream.h" />
+    <ClInclude Include="BearingCatalogRepository.h" />
+    <ClInclude Include="InvoluteGearParameterAliases.h" />
+    <ClInclude Include="CycloidToleranceRepository.h" />
     <ClInclude Include="InterfaceForCSharp.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>

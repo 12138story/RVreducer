@@ -3064,22 +3064,6 @@ namespace RVReducerDesignApp
         private Polygon highlightedPolygon = null; // 用于存储当前高亮的多边形
         private Canvas highlightedCanvas = null;// 用于存储当前高亮的画布
         private Shaft.ComponentKey? selectedComponentKey = null;
-
-        // ===== 齿轮“参数变化→画布实时刷新（仅重绘该图元）” =====
-        // 映射：被订阅的 CTANDouble → 对应的画布齿轮；齿轮 → 其所属共享字典
-        private readonly Dictionary<CTANDouble, DrawGear> mGearKeyToFigure = new Dictionary<CTANDouble, DrawGear>();
-        private readonly Dictionary<DrawGear, CTANDict> mGearFigureToDict = new Dictionary<DrawGear, CTANDict>();
-        private readonly HashSet<CTANDouble> mGearSubscribedKeys = new HashSet<CTANDouble>();
-        private DispatcherTimer? mGearRefreshTimer;                     // 防抖定时器，避免连续输入频繁重绘
-        private readonly List<(DrawGear Figure, CTANDict Dict)> mPendingGearRefresh = new List<(DrawGear Figure, CTANDict Dict)>(); // 待刷新项（防抖期间可积累多个齿轮）
-
-        // ===== 画布上拖拽齿轮 =====
-        private bool mDraggingGearMode;
-        private DrawGear? mDraggingGear;
-        private Point mGearDragStartPoint;
-        private double mGearDragStartBaseX;
-        // 拖拽产生的“额外位置偏移”：不改共享字典，避免把拖动位置污染为轴推荐的定位基准
-        private readonly Dictionary<DrawGear, double> mGearDragExtraX = new Dictionary<DrawGear, double>();
         //private double beamCurrentLength { get; set; }// 轴段的当前长度
         //private bool stopAdd = false;
         //private VassalData selectedAxisData;//临时存储鼠标选中的轴段数据
@@ -3099,17 +3083,6 @@ namespace RVReducerDesignApp
             Pcanvas.Children.Add(annotationCanvas);
             // 初始化居中去抖逻辑
             InitCentering();
-
-            // 捕获意外丢失时复位拖拽/平移状态，避免下次误拖
-            Pcanvas.LostMouseCapture += (s, e) =>
-            {
-                mDraggingGearMode = false;
-                mDraggingGear = null;
-                isDragging = false;
-                isUserPanning = false;
-            };
-            // 注意：不要在 Unloaded 中退订齿轮映射——页面会因 Tab/树节点切换而频繁 Unloaded/Loaded，
-            // 退订后无对应重注册会导致“参数→画布实时刷新”静默失效（页面实例由 CTANCrankShaft 常驻持有，不构成泄漏）。
         }
         //private void Psurebutton_Click(object sender, RoutedEventArgs e)//测试角接触球轴承用，后续删除
         //{
@@ -3423,25 +3396,11 @@ namespace RVReducerDesignApp
                     }
                 }
             }
-            // 左键按住齿轮图元 → 进入“拖动该齿轮”模式（否则保持整画布平移）
-            if (found && selectedComponentKey != null && selectedComponentKey.Value.Type == PolygonType.Gear)
-            {
-                var dragGear = currentShaft?.Gears.FirstOrDefault(g => g.BaseIndex == selectedComponentKey.Value.Index);
-                if (dragGear != null)
-                {
-                    isUserPanning = false;   // 拖齿轮不平移画布
-                    mDraggingGearMode = true;
-                    mDraggingGear = dragGear;
-                    mGearDragStartPoint = e.GetPosition(Pcanvas);
-                    mGearDragStartBaseX = dragGear.BaseOffsetX;
-                }
-            }
             if (!found) ClearHighlight();
         }
         //画布的滚轮缩放事件
         private void Pcanvas_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (mDraggingGearMode) return; // 拖拽齿轮期间不缩放，避免坐标突跳
             double scaleFactor = e.Delta > 0 ? 1.1 : 1 / 1.1;
 
             double newScale = canvasScaleTransform.ScaleX * scaleFactor;
@@ -3479,24 +3438,6 @@ namespace RVReducerDesignApp
         {
             if (!isDragging && !isUserPanning) return;
 
-            // 拖拽齿轮：按内容坐标增量更新该齿轮位置，写回共享字典并只重绘该图元
-            if (mDraggingGearMode && mDraggingGear != null)
-            {
-                Point cur = e.GetPosition(Pcanvas);
-                double newX = mGearDragStartBaseX + (cur.X - mGearDragStartPoint.X);
-                mDraggingGear.BaseOffsetX = newX;
-
-                // 拖拽只记录“额外偏移”，不改共享字典——避免把拖动位置污染为轴推荐的定位基准
-                if (mGearFigureToDict.TryGetValue(mDraggingGear, out var ownerDict) &&
-                    ownerDict.ContainsKey("定位面距基准面距离"))
-                {
-                    double dictX = ownerDict["定位面距基准面距离"].Value;
-                    mGearDragExtraX[mDraggingGear] = newX - dictX;
-                }
-                RedrawGearFigure(mDraggingGear);
-                return;
-            }
-
             // 如果在用户拖拽期间，使用屏幕坐标进行 delta 计算并更新 Translate（与原先逻辑一致）
             if (isUserPanning || isDragging)
             {
@@ -3515,18 +3456,6 @@ namespace RVReducerDesignApp
         {
             // 结束用户拖拽交互
             isDragging = false;
-
-            // 结束拖拽齿轮模式
-            if (mDraggingGearMode)
-            {
-                mDraggingGearMode = false;
-                mDraggingGear = null;
-                Pcanvas.ReleaseMouseCapture();
-                if (centerDebounceTimer != null && centerDebounceTimer.IsEnabled)
-                    centerDebounceTimer.Stop();
-                pendingResetScale = false;
-                return;
-            }
 
             if (isUserPanning)
             {
@@ -3551,7 +3480,7 @@ namespace RVReducerDesignApp
                 centerDebounceTimer.Tick += (s, e) =>
                 {
                     // 如果用户正在交互（拖拽），不要重试并直接停止定时器，避免在用户放手后仍然触发居中
-                    if (isUserPanning || mDraggingGearMode)
+                    if (isUserPanning)
                     {
                         centerDebounceTimer.Stop();
                         // 不重启，也不立即居中，等待下一次显式请求或 SizeChanged
@@ -3572,7 +3501,7 @@ namespace RVReducerDesignApp
         }
         private void Pcanvas_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!isUserPanning && !mDraggingGearMode)
+            if (!isUserPanning)
             {
                 ScheduleCenter(resetScale: false);
             }
@@ -3594,8 +3523,8 @@ namespace RVReducerDesignApp
         // 通用居中函数：resetScale=true 表示先把缩放复位为 1 再居中；false 表示保持当前缩放，仅居中
         public void CenterContent(bool resetScale = false)
         {
-            // 如果用户正在交互（平移或拖齿轮），则不自动居中
-            if (isUserPanning || mDraggingGearMode) return;
+            // 如果用户正在交互，则不自动居中
+            if (isUserPanning) return;
 
             if (isCentering) return;
             isCentering = true;
@@ -3755,7 +3684,6 @@ namespace RVReducerDesignApp
                     if (key.Index >= 0 && key.Index < currentShaft.Gears.Count)
                     {
                         var gearToDelete = currentShaft.Gears[key.Index];
-                        UnregisterGearFigure(gearToDelete); // 注销映射，避免删除后“幽灵重绘”
                         currentShaft.Gears.RemoveAt(key.Index);
 
                         // 删除齿轮的后端逻辑节点
@@ -3861,120 +3789,6 @@ namespace RVReducerDesignApp
             currentShaft.DrawShaftWithComponents(annotationCanvas, Pcanvas);
             ScheduleCenter(resetScale: false);
         }
-
-        // ===== 齿轮“参数变化→画布实时刷新（仅重绘该图元）” =====
-        /// <summary>
-        /// 登记“源齿轮共享字典 → 画布齿轮”映射，并订阅几何键，实现改参数实时刷新该图元
-        /// </summary>
-        private void RegisterGearFigure(CTANDict dict, DrawGear gear)
-        {
-            if (dict == null || gear == null) return;
-            if (mGearFigureToDict.ContainsKey(gear)) UnregisterGearFigure(gear); // gear 曾注册到其它字典时先清理
-            // 同一字典重复插入新图元时，先注销旧图元映射，避免旧图元“幽灵刷新”
-            foreach (var oldGear in mGearFigureToDict.Where(kv => kv.Value == dict).Select(kv => kv.Key).ToList())
-            {
-                UnregisterGearFigure(oldGear);
-            }
-            mGearFigureToDict[gear] = dict;
-            foreach (var key in new[] { "齿顶圆直径[da]", "设计齿宽", "定位面距基准面距离", "定位面", "Y方向偏移" })
-            {
-                if (dict.ContainsKey(key))
-                {
-                    var d = dict[key];
-                    if (mGearSubscribedKeys.Add(d))
-                        d.PropertyChanged += OnGearDictChanged;
-                    mGearKeyToFigure[d] = gear;
-                }
-            }
-        }
-
-        /// <summary>注销图元映射；键不再被任何图元引用时退订事件</summary>
-        private void UnregisterGearFigure(DrawGear gear)
-        {
-            if (gear == null || !mGearFigureToDict.Remove(gear)) return;
-            mGearDragExtraX.Remove(gear);
-            foreach (var kv in mGearKeyToFigure.Where(kv => kv.Value == gear).ToList())
-            {
-                mGearKeyToFigure.Remove(kv.Key);
-                if (!mGearKeyToFigure.ContainsKey(kv.Key))
-                {
-                    kv.Key.PropertyChanged -= OnGearDictChanged;
-                    mGearSubscribedKeys.Remove(kv.Key);
-                }
-            }
-        }
-
-        private void OnGearDictChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (sender is CTANDouble d && mGearKeyToFigure.TryGetValue(d, out var fig))
-            {
-                // 已删除/重建的图元不再重绘（防御幽灵复活）
-                if (currentShaft == null || !currentShaft.Gears.Contains(fig)) return;
-                if (!mGearFigureToDict.TryGetValue(fig, out var dict)) return;
-
-                // 防抖：连续输入期间合并为一次重绘；多齿轮按 Figure 去重
-                if (!mPendingGearRefresh.Any(x => x.Figure == fig))
-                    mPendingGearRefresh.Add((fig, dict));
-
-                if (mGearRefreshTimer == null)
-                {
-                    mGearRefreshTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
-                    mGearRefreshTimer.Tick += (s, args) =>
-                    {
-                        mGearRefreshTimer.Stop();
-                        mPendingGearRefresh.RemoveAll(p => currentShaft == null || !currentShaft.Gears.Contains(p.Figure));
-                        foreach (var p in mPendingGearRefresh)
-                        {
-                            SyncGearFigureFromDict(p.Figure, p.Dict);
-                            RedrawGearFigure(p.Figure);
-                        }
-                        mPendingGearRefresh.Clear();
-                    };
-                }
-                mGearRefreshTimer.Stop();
-                mGearRefreshTimer.Start();
-            }
-        }
-
-        /// <summary>
-        /// 把共享字典中的最新几何/定位值同步到该画布齿轮
-        /// </summary>
-        private void SyncGearFigureFromDict(DrawGear fig, CTANDict dict)
-        {
-            if (dict.ContainsKey("齿顶圆直径[da]")) fig.BaseOuterDiameter = dict["齿顶圆直径[da]"].Value;
-            if (dict.ContainsKey("设计齿宽")) fig.BaseWidth = dict["设计齿宽"].Value;
-            if (dict.ContainsKey("定位面距基准面距离"))
-                fig.BaseOffsetX = dict["定位面距基准面距离"].Value
-                                  + (mGearDragExtraX.TryGetValue(fig, out var extraX) ? extraX : 0);
-            if (dict.ContainsKey("Y方向偏移")) fig.BaseOffsetY = dict["Y方向偏移"].Value;
-            if (dict.ContainsKey("定位面")) fig.BaseFace = (int)Math.Round(dict["定位面"].Value);
-        }
-
-        /// <summary>
-        /// 只重绘指定齿轮图元（移除旧容器后重新绘制），不动其它零件
-        /// </summary>
-        private void RedrawGearFigure(DrawGear fig)
-        {
-            if (currentShaft == null || !currentShaft.Gears.Contains(fig)) return; // 防御幽灵重绘
-            if (Pcanvas == null || Pcanvas.ActualWidth <= 0) return;
-            var old = Pcanvas.Children.OfType<Canvas>()
-                .Where(c => c.Tag is Shaft.ComponentKey k && k.Type == PolygonType.Gear && k.Index == fig.BaseIndex)
-                .ToList();
-            if (old.Count == 0) return; // 图元尚未绘制，无需重绘
-            int oldIndex = Pcanvas.Children.IndexOf(old[0]); // 记录 z 序，重绘后恢复
-            foreach (var c in old) Pcanvas.Children.Remove(c);
-            fig.BasicDrawing(Pcanvas);
-            var added = Pcanvas.Children.OfType<Canvas>()
-                .FirstOrDefault(x => x.Tag is Shaft.ComponentKey k2
-                                     && k2.Type == PolygonType.Gear
-                                     && k2.Index == fig.BaseIndex
-                                     && !old.Contains(x));
-            if (added != null)
-            {
-                Pcanvas.Children.Remove(added);
-                Pcanvas.Children.Insert(Math.Min(oldIndex, Pcanvas.Children.Count), added);
-            }
-        }
         //右键齿轮功能实现
         private void AddGearBeam()
         {
@@ -4011,35 +3825,27 @@ namespace RVReducerDesignApp
                     gear.BasicDrawing(Pcanvas);
                     Shaft.componentDict[new ComponentKey(PolygonType.Gear, gear.BaseIndex)] = gear;// 必须在BasicDrawing之后，否则BaseIndex不正确
 
-                    // ===== 2. 在曲轴系新建/复用逻辑节点，并与源齿轮共享同一数据字典/页面 =====
-                    // 显示名(Header)与减速器齿轮同名(“太阳轮/行星轮”)，数据与源齿轮
-                    // (mInvGearPair.mGears[太阳轮/行星轮]) 完全共享同一 mDataStorageDict 与
-                    // mInputPageGrid → 无论在哪一侧改参数，另一侧都会实时同步。
-                    // mDataKey 为稳定存档键(仍用“曲轴太阳轮/曲轴行星轮”)，保证 JSON 键唯一不冲突。
-                    string gearName = tmpUISymmetryComponentInsert.mComponentListComboBox.Text == "太阳轮" ? "太阳轮" : "行星轮";
-                    string gearDataKey = tmpUISymmetryComponentInsert.mComponentListComboBox.Text == "太阳轮" ? "曲轴太阳轮" : "曲轴行星轮";
-                    var sourceGear = ParentCrankShaft.mBelongedSet.mInvGearPair.mGears[selectedIdx];
+                    // ===== 2. 在曲轴系新建逻辑节点并在树视图显示（复制数据） =====
+                    string gearName = tmpUISymmetryComponentInsert.mComponentListComboBox.Text == "太阳轮" ? "曲轴太阳轮" : "曲轴行星轮";
+                    CTANInvGear logicGear = new CTANInvGear();
+                    logicGear.mTreeViewItem.Header = gearName;
+                    logicGear.mTreeViewItem.Name = gearName;
+                    logicGear.CanvasGraphic = gear; // 绑定前端图形引用
 
-                    // 已存在对应曲轴齿轮逻辑节点则复用，避免重复建节点
-                    CTANInvGear logicGear = sys.mCrankShaftSystemGearList.FirstOrDefault(g => g.GetDataKey() == gearDataKey);
-                    if (logicGear == null)
+                    // 复制源齿轮的数据（深拷贝，不互相干扰也不破坏原有的树视图）
+                    var sourceGear = ParentCrankShaft.mBelongedSet.mInvGearPair.mGears[selectedIdx];
+                    foreach (var key in sourceGear.mDataStorageDict.Keys)
                     {
-                        logicGear = new CTANInvGear();
-                        logicGear.mTreeViewItem.Header = gearName;
-                        logicGear.mTreeViewItem.Name = gearName;
-                        logicGear.mDataKey = gearDataKey;
-                        logicGear.mInputPageGrid = sourceGear.mInputPageGrid;     // 共享同一输入页面
-                        logicGear.mDataStorageDict = sourceGear.mDataStorageDict; // 共享同一数据字典
-                        MainWindow.sPageIDDict[logicGear.mID] = logicGear;
-                        sys.mCrankShaftSystemGearList.Add(logicGear);
-                        sys.mTreeViewItem.Items.Add(logicGear.mTreeViewItem);
+                        if (logicGear.mDataStorageDict.ContainsKey(key))
+                            logicGear.mDataStorageDict[key].Value = sourceGear.mDataStorageDict[key].Value;
+                        else
+                            logicGear.mDataStorageDict.Add(key, new CTANDouble() { Value = sourceGear.mDataStorageDict[key].Value });
                     }
-                    // 无论新建还是复用，都重刷为源齿轮的页面/字典引用，与 Assembly 保持一致
-                    logicGear.mInputPageGrid = sourceGear.mInputPageGrid;
-                    logicGear.mDataStorageDict = sourceGear.mDataStorageDict;
-                    logicGear.CanvasGraphic = gear; // 绑定（最新）前端图形引用
-                    // 登记“源字典→画布齿轮”映射：改参数时实时刷新该图元
-                    RegisterGearFigure(sourceGear.mDataStorageDict, gear);
+
+                    MainWindow.sPageIDDict[logicGear.mID] = logicGear;
+                    sys.mCrankShaftSystemGearList.Add(logicGear);
+                    sys.mTreeViewItem.Items.Add(logicGear.mTreeViewItem);
+                   
                 }
             
                 else //摆线轮（绘制的同时添加滚针轴承！）
@@ -4220,13 +4026,6 @@ namespace RVReducerDesignApp
                 return;
             }
 
-            // RecommondShaftPara 输出的 Cr/C0r 为牛(N)，而字典/UI 统一使用千牛(kN)，
-            // 先在此换算（70/71=圆锥滚子轴承，80/81=滚针轴承），供下方写入 mDataStorageDict 使用
-            InputParams[70] = CTANBearing.NewtonToKn(InputParams[70]);
-            InputParams[71] = CTANBearing.NewtonToKn(InputParams[71]);
-            InputParams[80] = CTANBearing.NewtonToKn(InputParams[80]);
-            InputParams[81] = CTANBearing.NewtonToKn(InputParams[81]);
-
             if (currentShaft == null)
             {
                 currentShaft = new Shaft(shaftIdCounter++);
@@ -4238,7 +4037,6 @@ namespace RVReducerDesignApp
             currentShaft.AxisSections.Clear();
             currentShaft.Bearings.Clear();
             currentShaft.CycloidWheels.Clear();
-            foreach (var g in currentShaft.Gears.ToList()) UnregisterGearFigure(g); // 装配重建前注销旧映射
             currentShaft.Gears.Clear();
 
             currentShaft.OriginalAxisSections.Clear();
@@ -4515,20 +4313,17 @@ namespace RVReducerDesignApp
                 ParentCrankShaft.ParentCrankShaftSystem.mCrankShaftSystemSlewingBearingList.Add(cycloidWheel1BearingItem);
             }
 
-            CTANInvGear gearItem = crankShaftSystemGearList.FirstOrDefault(b => b.GetDataKey() == "曲轴行星轮");
+            CTANInvGear gearItem = crankShaftSystemGearList.FirstOrDefault(b => b.mTreeViewItem.Header.ToString() == "曲轴行星轮");
             if (gearItem == null)
             {
                 gearItem = new CTANInvGear();
-                // 显示名(Header)与减速器齿轮同名；mDataKey 作稳定存档键，保证 JSON 键唯一不冲突
-                gearItem.mTreeViewItem.Header = "行星轮";
-                gearItem.mTreeViewItem.Name = "行星轮";
-                gearItem.mDataKey = "曲轴行星轮";
+                gearItem.mTreeViewItem.Header = "曲轴行星轮";
+                gearItem.mTreeViewItem.Name = "曲轴行星轮";
                 gearItem.mInputPageGrid = invPlanetaryGear.mInputPageGrid;
                 gearItem.mDataStorageDict = invPlanetaryGear.mDataStorageDict;
-                // crankShaftSystemGearList 与 ParentCrankShaft.ParentCrankShaftSystem.mCrankShaftSystemGearList
-                // 是同一列表，只需 Add 一次，避免曲轴齿轮列表出现重复节点
                 crankShaftSystemGearList.Add(gearItem);
                 treeViewItem.Items.Add(gearItem.mTreeViewItem);
+                ParentCrankShaft.ParentCrankShaftSystem.mCrankShaftSystemGearList.Add(gearItem);
             }
 
             //无论是否存在，都要更新参数
@@ -4550,8 +4345,6 @@ namespace RVReducerDesignApp
             cycloidWheel0BearingItem.CanvasGraphic = needleRoller1;
             cycloidWheel1BearingItem.CanvasGraphic = needleRoller2;
             gearItem.CanvasGraphic = gear1;
-            // 登记“行星轮共享字典→画布齿轮”映射：改参数/拖拽时实时刷新该图元
-            RegisterGearFigure(invPlanetaryGear.mDataStorageDict, gear1);
             //OutputRecommendBearingPara(InputParams);//输出推荐轴承到树形列表下
 
         }
@@ -4568,12 +4361,6 @@ namespace RVReducerDesignApp
         }
         private void OutputRecommendBearingPara(double[] InputParams)
         {
-            // 与 Assembly 保持一致：DLL 输出为牛(N)，先换算为字典使用的千牛(kN)
-            InputParams[70] = CTANBearing.NewtonToKn(InputParams[70]);
-            InputParams[71] = CTANBearing.NewtonToKn(InputParams[71]);
-            InputParams[80] = CTANBearing.NewtonToKn(InputParams[80]);
-            InputParams[81] = CTANBearing.NewtonToKn(InputParams[81]);
-
             var treeViewItem = ParentCrankShaft.mBelongedSet.mCrankShaftSystem.mTreeViewItem;
 
             var bearingList = ParentCrankShaft.mBelongedSet.mCrankShaftSystem.mBearingList;
@@ -4761,20 +4548,17 @@ namespace RVReducerDesignApp
                 ParentCrankShaft.ParentCrankShaftSystem.mCrankShaftSystemSlewingBearingList.Add(cycloidWheel1BearingItem);
             }
 
-            CTANInvGear gearItem = crankShaftSystemGearList.FirstOrDefault(b => b.GetDataKey() == "曲轴行星轮");
+            CTANInvGear gearItem = crankShaftSystemGearList.FirstOrDefault(b => b.mTreeViewItem.Header.ToString() == "曲轴行星轮");
             if (gearItem == null)
             {
                 gearItem = new CTANInvGear();
-                // 显示名(Header)与减速器齿轮同名；mDataKey 作稳定存档键，保证 JSON 键唯一不冲突
-                gearItem.mTreeViewItem.Header = "行星轮";
-                gearItem.mTreeViewItem.Name = "行星轮";
-                gearItem.mDataKey = "曲轴行星轮";
+                gearItem.mTreeViewItem.Header = "曲轴行星轮";
+                gearItem.mTreeViewItem.Name = "曲轴行星轮";
                 gearItem.mInputPageGrid = invPlanetaryGear.mInputPageGrid;
                 gearItem.mDataStorageDict = invPlanetaryGear.mDataStorageDict;
-                // crankShaftSystemGearList 与 ParentCrankShaft.ParentCrankShaftSystem.mCrankShaftSystemGearList
-                // 是同一列表，只需 Add 一次，避免曲轴齿轮列表出现重复节点
                 crankShaftSystemGearList.Add(gearItem);
                 treeViewItem.Items.Add(gearItem.mTreeViewItem);
+                ParentCrankShaft.ParentCrankShaftSystem.mCrankShaftSystemGearList.Add(gearItem);
             }
 
             //无论是否存在，都要更新参数

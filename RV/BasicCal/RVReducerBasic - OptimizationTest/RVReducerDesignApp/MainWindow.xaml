@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RVReducerDesignApp"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="摆线针轮行星减速器设计系统" Height="630" Width="1120">
+        Title="摆线针轮行星减速器设计系统" Height="450" Width="800">
     <Grid Name="MainWindowGridTop" >
         <Grid.RowDefinitions>
             <RowDefinition Height="26">

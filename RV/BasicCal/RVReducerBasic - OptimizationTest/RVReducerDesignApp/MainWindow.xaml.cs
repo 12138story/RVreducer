@@ -69,7 +69,6 @@ namespace RVReducerDesignApp
             m3DTab.Content = m3DPage;
             mAITab.Content = mAIChatPanel;
             m3DTab.Visibility = Visibility.Collapsed; // 不启用3D页面
-            //mAITab.Visibility = Visibility.Collapsed;
             ////测试代码
             //CTANBasicControl TestTANControl = new CTANBasicControl();
             //TestTANControl.mControlObj = new Button();
@@ -317,7 +316,7 @@ namespace RVReducerDesignApp
 
                         // 绑定齿轮(如有行星轮)
                         var gears = page.currentShaft.Gears.OrderBy(g => g.BaseOffsetX).ToList();
-                        var logicGear = sys.mCrankShaftSystemGearList.FirstOrDefault(g => g.GetDataKey() == "曲轴行星轮");
+                        var logicGear = sys.mCrankShaftSystemGearList.FirstOrDefault(g => g.mTreeViewItem.Header.ToString() == "曲轴行星轮");
                         if (logicGear != null && gears.Count > 0) logicGear.CanvasGraphic = gears[0];
                     }
                     else
@@ -371,14 +370,12 @@ namespace RVReducerDesignApp
 
                 // --- 恢复齿轮 ---
                 var crankShaftSystemGearList = sys.mCrankShaftSystemGearList;
-                CTANInvGear gearItem = crankShaftSystemGearList.FirstOrDefault(b => b?.GetDataKey() == "曲轴行星轮");
+                CTANInvGear gearItem = crankShaftSystemGearList.FirstOrDefault(b => b?.mTreeViewItem?.Header?.ToString() == "曲轴行星轮");
                 if (gearItem == null)
                 {
                     gearItem = new CTANInvGear();
-                    // 显示名(Header)与减速器齿轮同名；mDataKey 作稳定存档键，保证 JSON 键唯一不冲突
-                    gearItem.mTreeViewItem.Header = "行星轮";
-                    gearItem.mTreeViewItem.Name = "行星轮";
-                    gearItem.mDataKey = "曲轴行星轮";
+                    gearItem.mTreeViewItem.Header = "曲轴行星轮";
+                    gearItem.mTreeViewItem.Name = "曲轴行星轮";
                     MainWindow.sPageIDDict[gearItem.mID] = gearItem;
 
                     // 【关键修复】：必须绑定主界面的UI和数据字典
@@ -484,7 +481,8 @@ namespace RVReducerDesignApp
                 string pageName = kv.Key;
                 var dataDict = kv.Value;
 
-                var pageObj = MainWindow.sPageIDDict.Values.FirstOrDefault(p => p?.GetDataKey() == pageName || p?.mTreeViewItem?.Header?.ToString() == pageName);
+                var pageObj = MainWindow.sPageIDDict.Values.FirstOrDefault(p =>
+                    p?.GetDataKey() == pageName || p?.mTreeViewItem?.Header?.ToString() == pageName);
                 if (pageObj != null)
                 {
                     foreach (var dkv in dataDict)
@@ -563,6 +561,7 @@ namespace RVReducerDesignApp
             DrawerTopInContainerShaft.IsOpen = false;
         }
 
+        // 切换到内置 AI 助手页面。
         private void AIButton_Click(object sender, RoutedEventArgs e)
         {
             mContentTab.SelectedItem = mAITab;

@@ -102,8 +102,7 @@ namespace RVReducerDesignApp
             {
                 try
                 {
-                    // 推荐表格中的 Cr/C0r 已是千牛(kN)，与字典单位一致，直接赋值
-                    OutAssignDictPtr["基本额定动载荷Cr"].Value = selectedBearing.Cr;
+                    OutAssignDictPtr["基本额定动载荷Cr"].Value = selectedBearing.Cr; // 转换为牛
                     OutAssignDictPtr["基本额定静载荷C0r"].Value = selectedBearing.C0r;
 
                     OutAssignDictPtr["轴承内径d"].Value = selectedBearing.d;

@@ -1,20 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace RVReducerDesignApp
 {
     public class CustomBearingPage : CTANBasicContentPageObj
     {
-        // ============ Cr/C0r 可选输入（勾选=手动输入；不勾选=0自动计算）============
-        // 语义：字典值 0 表示“未手动给定”，C++ 端 ExecuteUnifiedPipeline
-        //       (RVReducerBasic/BearingCalculators.cpp) 以 bearing.C/C0 是否 >0 为分支
-        //       自动解算额定动/静载荷 —— 故此处 UI 的“不启用”即通过置 0 触发自动计算。
-        private const string RatedDynamicLoadKey = "基本额定动载荷Cr";
-        private const string RatedStaticLoadKey = "基本额定静载荷C0r";
-        private static readonly string[] RatedLoadOptionalKeys = { RatedDynamicLoadKey, RatedStaticLoadKey };
-        private readonly Dictionary<string, OptionalRatedLoadRow> mOptionalRatedLoadRows = new Dictionary<string, OptionalRatedLoadRow>();
-
         private CTANComboBox mSelectBearingComboBox;
         private TabControl mInnerAllTab;
 
@@ -94,7 +84,7 @@ namespace RVReducerDesignApp
         private TabItem mLayoutTab;
         private TabItem mModifiedLifeTab;
 
-        public CustomBearingPage(CTANDict sharedDict)
+        public CustomBearingPage(CTANDict sharedDict) : base(InRegisterToPageDictionary: false)
         {
             // 替换为外部参数字典
             this.mDataStorageDict = sharedDict;
@@ -248,146 +238,11 @@ namespace RVReducerDesignApp
                 loadCombinedParams, 2, mDataStorageDict);
             mLoadTab.Content = loadGrid;
 
-            // Cr/C0r 改为可选输入：勾选=手动输入；不勾选(值=0)=引擎自动计算
-            InstallOptionalRatedLoadRow(loadGrid, RatedDynamicLoadKey);
-            InstallOptionalRatedLoadRow(loadGrid, RatedStaticLoadKey);
-
             // --- Tab 3: 定位参数 ---
             BuildLayoutTab();
 
             // --- Tab 4: 修正参数（原修正参数 + 结构内容）---
             BuildModifiedLifeTab();
-        }
-
-        /// <summary>
-        /// Cr/C0r 可选输入行的 UI 状态：启用复选框、输入框、记忆的手动值
-        /// </summary>
-        private sealed class OptionalRatedLoadRow
-        {
-            public CheckBox CheckBox;
-            public TextBox TextBox;
-            public double LastManualValue;
-        }
-
-        /// <summary>
-        /// 将载荷Tab中指定行（Cr/C0r）的原输入框替换为"启用CheckBox + 输入框"复合控件。
-        /// 可选输入语义：
-        ///   未勾选（默认）→ 输入框禁用、值强制为 0（= 未手动给定）→ DLL 按几何自动解算额定载荷；
-        ///   勾选          → 输入框可编辑，值即用户手动输入的额定载荷；
-        ///   取消勾选时记忆手动值，再次勾选自动恢复。
-        /// </summary>
-        private void InstallOptionalRatedLoadRow(CTANGridWithControl grid, string paramKey)
-        {
-            if (!mDataStorageDict.ContainsKey(paramKey)) return;
-            if (!grid.mRowNameToIndex.ContainsKey(paramKey)) return;
-
-            int rowIndex = grid.mRowNameToIndex[paramKey];
-            const int inputColumn = 2;
-
-            // 移除原有输入框（与 ReplaceWithComboBox 相同策略）
-            if (grid.mControlTable[rowIndex][inputColumn] != null)
-            {
-                var oldControl = grid.mControlTable[rowIndex][inputColumn].mObject as UIElement;
-                if (oldControl != null)
-                {
-                    grid.Children.Remove(oldControl);
-                }
-                grid.mControlTable[rowIndex][inputColumn] = null;
-            }
-
-            // 构造 复选框 + 输入框 的水平复合容器
-            // 复选框不带文字标签（避免冗余的"启用"字样），仅作"是否手动输入额定载荷"的开关
-            var enableCheckBox = new CheckBox
-            {
-                VerticalAlignment = VerticalAlignment.Center,
-                VerticalContentAlignment = VerticalAlignment.Center,
-                Margin = new Thickness(0, 0, 6, 0),
-                ToolTip = "勾选后手动输入额定载荷；不勾选(值为0)时由引擎按几何自动计算"
-            };
-            var valueTextBox = new CTANTextBox
-            {
-                Width = 90,
-                IsEnabled = false,
-                ToolTip = "勾选后手动输入额定载荷；不勾选时该值恒为0，表示自动计算"
-            };
-            var rowPanel = new StackPanel { Orientation = Orientation.Horizontal };
-            rowPanel.Children.Add(enableCheckBox);
-            rowPanel.Children.Add(valueTextBox);
-            Grid.SetRow(rowPanel, rowIndex);
-            Grid.SetColumn(rowPanel, inputColumn);
-            grid.Children.Add(rowPanel);
-
-            // 记录状态供后续回填刷新
-            mOptionalRatedLoadRows[paramKey] = new OptionalRatedLoadRow
-            {
-                CheckBox = enableCheckBox,
-                TextBox = valueTextBox,
-                LastManualValue = 0
-            };
-
-            // 手工双向绑定（复合控件不进入 mControlTable，故不走框架标准绑定）
-            mDataStorageDict[paramKey].SetDataBingingToTextBox(valueTextBox);
-
-            enableCheckBox.Checked += (s, e) => OnRatedLoadChecked(paramKey);
-            enableCheckBox.Unchecked += (s, e) => OnRatedLoadUnchecked(paramKey);
-
-            // 依据当前字典值初始化勾选态（外部已回填时一并生效）
-            SyncRatedLoadRowUi(paramKey);
-        }
-
-        private void OnRatedLoadChecked(string paramKey)
-        {
-            if (!mOptionalRatedLoadRows.TryGetValue(paramKey, out var row)) return;
-            row.TextBox.IsEnabled = true;
-            // 重新勾选时：若记忆了手动值则恢复，否则保持 0 等待输入
-            if (row.LastManualValue > 0 && mDataStorageDict[paramKey].Value <= 0)
-            {
-                mDataStorageDict[paramKey].Value = row.LastManualValue;
-            }
-        }
-
-        private void OnRatedLoadUnchecked(string paramKey)
-        {
-            if (!mOptionalRatedLoadRows.TryGetValue(paramKey, out var row)) return;
-            row.LastManualValue = mDataStorageDict[paramKey].Value; // 记忆当前手动值
-            mDataStorageDict[paramKey].Value = 0;                   // 不启用 → 0 = 自动计算
-            row.TextBox.IsEnabled = false;
-        }
-
-        /// <summary>
-        /// 依据字典现值同步指定可选输入行的 UI 状态：
-        /// 值>0 → 勾选且可编辑；值<=0 → 不勾选、禁用且保证值为0（自动计算）。
-        /// </summary>
-        private void SyncRatedLoadRowUi(string paramKey)
-        {
-            if (!mOptionalRatedLoadRows.TryGetValue(paramKey, out var row)) return;
-            bool manual = mDataStorageDict[paramKey].Value > 0;
-            bool isChecked = row.CheckBox.IsChecked == true;
-            if (manual != isChecked)
-            {
-                row.CheckBox.IsChecked = manual; // 触发 Checked/Unchecked 事件以统一内部逻辑
-            }
-            row.TextBox.IsEnabled = manual;
-            if (!manual && mDataStorageDict[paramKey].Value > 0)
-            {
-                mDataStorageDict[paramKey].Value = 0; // 不启用时保证值恒为0（自动计算标记）
-            }
-            if (!manual)
-            {
-                row.LastManualValue = 0; // 无手动值时无需记忆
-            }
-        }
-
-        /// <summary>
-        /// 从字典当前值刷新 Cr/C0r 可选输入的勾选态。
-        /// 供外部在回填字典后调用（如编辑窗口 Revise 从库读值、主应用从库导入）。
-        /// </summary>
-        public void RefreshRatedLoadManualStatesFromDict()
-        {
-            foreach (var key in RatedLoadOptionalKeys)
-            {
-                SyncRatedLoadRowUi(key);
-            }
         }
 
         /// <summary>

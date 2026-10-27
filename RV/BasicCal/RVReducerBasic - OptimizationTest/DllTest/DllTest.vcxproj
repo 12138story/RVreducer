@@ -73,13 +73,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)RVReducerBasic\;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files (x86)\Intel\oneAPI\mkl\2025.0\lib;$(SolutionDir)RVReducerDesignApp\bin\Debug\net8.0-windows;C:\Program Files (x86)\Intel\oneAPI\mkl\2025.0\bin;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)RVReducerDesignApp\bin\Debug\net8.0-windows\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)RVReducerDesignApp\bin\Release\net8.0-windows\</OutDir>
     <IncludePath>$(SolutionDir)RVReducerBasic\;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files (x86)\Intel\oneAPI\mkl\2025.0\lib;$(SolutionDir)RVReducerDesignApp\bin\Debug\net8.0-windows;C:\Program Files (x86)\Intel\oneAPI\mkl\2025.0\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -140,6 +138,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="源.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RVReducerBasic\RVReducerBasic.vcxproj">
+      <Project>{e59fd0ed-04bb-45e1-b67c-675066bb6814}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

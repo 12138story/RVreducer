@@ -322,9 +322,6 @@ namespace RVReducerDesignApp
             mBelongedSet.UpdateAllPartsDllOutputData();
 
             PlottingAxialStresses();//绘制轴应力图(目前只针对通轴进行应力分析）
-            // 可选钩子：设环境变量 RV_SNAPSHOT_DIR 后，每次完成曲轴系计算都导出一份「整机快照」，
-            // 供 RvCalcCli 在无界面下复现同一算例（CalCrankShaftSystem2 / RecommondShaftPara）。
-            Services.WholeMachineSnapshot.TryAutoExport("CalCrankShaftSystem2");
         }
         private void SetInputPage()
         {
@@ -362,9 +359,6 @@ namespace RVReducerDesignApp
                     ref mBelongedSet.mInputDoubleDataStorage[0],
                     ref mBelongedSet.mOutputDoubleDataStorage[0],
                     ref tmpShaftData[0]);
-            // 可选钩子：设 RV_SNAPSHOT_DIR 后，把「DLL 实际收到的数组」原样导出（不复算），
-            // 便于 RvCalcCli 在无界面下复现本次轴推荐。
-            Services.WholeMachineSnapshot.TryAutoExport("RecommondShaftPara");
 
             mDataStorageDict["轴直径"].Value = tmpShaftData[0];//输出直径
             mDataStorageDict["轴长度"].Value = tmpShaftData[1];//输出长度
@@ -384,10 +378,6 @@ namespace RVReducerDesignApp
             ////更新参数使得曲轴得以计算
             //mBelongedSet.mInputDoubleDataStorage[39] =
             mBelongedSet.isRecommendShaft = false;
-            // 可选钩子：设环境变量 RV_SNAPSHOT_DIR 后，轴推荐完成即导出整机快照（含轴径/轴长）
-            Services.WholeMachineSnapshot.TryAutoExport("RecommondShaftPara");
-            // 同时导出曲轴系计算结果（最大应力/安全系数/各节点应力），便于外部核对
-            Services.CurrentMachineCalc.TryAutoDump();
         }
         private void PlottingAxialStresses()
         {

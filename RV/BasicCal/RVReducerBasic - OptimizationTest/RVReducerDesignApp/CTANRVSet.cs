@@ -110,8 +110,6 @@ namespace RVReducerDesignApp
             mInputDoubleDataStorage = new double[2000];
             mOutputDoubleDataStorage = new double[1000];
             UpdataRVSetDataDivisionIndex();
-            // 登记当前整机实例：供 Agent / 启动参数导出「整机快照」（RvCalc 通用调用用）
-            Services.WholeMachineSnapshot.Register(this);
             //mOutputDoubleDataStorage = new double[mOutPutHeadName.Count()/2];
 
             //UpdataRVSetDataDivisionIndex();

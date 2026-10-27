@@ -60,35 +60,45 @@ namespace RVReducerDesignApp
         public TreeViewItem mTreeViewItem = new TreeViewItem();
         //进行轴组装所需的数据
         //Id
-        public int mID;
-        //数据持久化唯一键：缺省用 Header；当页面需要“显示同名、存档键仍唯一”时显式赋 mDataKey
+        public int mID = -1;
+        // 数据持久化唯一键；未显式设置时使用树节点显示名称。
         public string? mDataKey;
-        // 返回存档/查找使用的稳定键（mDataKey 优先，其次 Header）
+
+        // 获取保存和加载时使用的稳定键，避免空标题触发空引用。
         public string GetDataKey()
         {
-            if (!string.IsNullOrEmpty(mDataKey)) return mDataKey;
-            return mTreeViewItem.Header?.ToString() ?? string.Empty;
+            if (!string.IsNullOrWhiteSpace(mDataKey))
+                return mDataKey;
+
+            return mTreeViewItem?.Header?.ToString() ?? string.Empty;
         }
         //所属的轴page
         public CTANBasicContentPageObj mBelongedShaftPage;
         public Image mImage = new Image();
         ////测试
         //public CTANGrid mPageGrid = new CTANGrid();
-        private void Initializing()
+        private void Initializing(bool InRegisterToPageDictionary)
         {
             mTreeViewItem.DataContext = this;
             mInputPageGrid.DataContext = this;
-            AssignPageToIDDict(MainWindow.sPageIDDict);
+            if (InRegisterToPageDictionary)
+                AssignPageToIDDict(MainWindow.sPageIDDict);
             mBelongedShaftPage = null;
         }
         public CTANBasicContentPageObj()
         {
-            Initializing();
+            Initializing(true);
         }
         public CTANBasicContentPageObj(string InTreeViewItemHead)
         {
-            Initializing();
+            Initializing(true);
             mTreeViewItem.Header = InTreeViewItemHead;
+        }
+
+        // 嵌套编辑页面可复用页面布局，但不进入工程页面注册表。
+        protected CTANBasicContentPageObj(bool InRegisterToPageDictionary)
+        {
+            Initializing(InRegisterToPageDictionary);
         }
 
         //将页面放入ID字典

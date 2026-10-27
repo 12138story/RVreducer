@@ -27,10 +27,55 @@
     <ClCompile Include="TANBearing.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="BearingCatalogRepository.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BearingLegacyLookup.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CycloidToleranceRepository.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CycloidContactStress.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CycloidMeasurement.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CycloidBearingLoad.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CycloidGeometryRecommendation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
     <ClCompile Include="TANCubicSpline.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="TANInvoluteGear.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InvoluteGeometryRecommendation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InvoluteLoadFactors.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InvoluteContactFactors.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InvoluteSingleGearGeometry.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InvoluteSingleGearProperties.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InvoluteSingleGearStrength.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InvoluteGearPairGeometry.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InvoluteGearPairGeometryZJ.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="TANPinionCycloidGear.cpp">
@@ -117,6 +162,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="TANBearing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BearingCatalogRepository.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InvoluteGearParameterAliases.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CycloidToleranceRepository.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="TANCubicSpline.h">

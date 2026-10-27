@@ -2,7 +2,6 @@
 #include "PreDefine.h"
 #include "TANCubicSpline.h"
 #include <iostream>
-#include <mysql.h>
 #include <vector>
 #include <string>
 #include <cmath>  

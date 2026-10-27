@@ -204,10 +204,7 @@ namespace RVReducerDesignApp
                                "</pre></body></html>";
                     }
 
-                    // 渲染后的 HTML 写到应用目录下的 temp 子目录（保持在项目内，便于整个目录拷贝迁移）
-                    string tempDir = Path.Combine(AppContext.BaseDirectory, "temp");
-                    Directory.CreateDirectory(tempDir);
-                    string temp = Path.Combine(tempDir, $"rvhelp_{Guid.NewGuid():N}.html");
+                    string temp = Path.Combine(Path.GetTempPath(), $"rvhelp_{Guid.NewGuid():N}.html");
                     File.WriteAllText(temp, html, Encoding.UTF8);
                     Debug.WriteLine($"Navigating WebBrowser to temp file: {temp}");
                     HelpBrowser.Navigate(new Uri(temp, UriKind.Absolute));

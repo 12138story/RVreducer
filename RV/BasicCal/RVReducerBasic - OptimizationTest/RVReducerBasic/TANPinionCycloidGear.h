@@ -6,7 +6,6 @@
 #include <functional>
 #include <limits>
 #include <iostream>
-#include <mysql.h>
 #include <vector>
 #include <string> 
 //double pi = 3.14159;
@@ -386,10 +385,6 @@ public:
 		double F_r;//径向跳动F_r
 	}mFourCycloidPara;
 	void ObtainFourCycloidPara(int level, double d, double mn, double b);
-	// 工具函数1：执行单值查询（封装重复逻辑）
-	double querySingleValue(MYSQL* mysql, const std::string& tableName, int level, double d, double mn, double b);
-	// 工具函数2：根据Fp值+同一d范围反查精度等级（核心新增逻辑）
-	int reverseQueryLevel(MYSQL* mysql, double targetFp, double d, double mn);
 #pragma endregion 摆线轮四个参数选择
 #pragma region 参数推荐
 	//InNp摆线轮数目

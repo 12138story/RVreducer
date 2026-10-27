@@ -2,10 +2,7 @@
   "profiles": {
     "RVReducerDesignApp": {
       "commandName": "Project",
-      "nativeDebugging": true,
-      "environmentVariables": {
-        "DEEPSEEK_API_KEY": ""
-      }
+      "nativeDebugging": true
     }
   }
 }
